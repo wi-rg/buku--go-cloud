@@ -54,7 +54,7 @@ Bagian ini membahas tentang penggunaan Go sebagai peranti pengembang untuk backe
 * [Bab 11: Serialisasi](bab-11.md)
 * [Bab 12: Akses Basis Data](bab-12.md)
 * [Bab 13: RESTful Service](bab-13.md)
-* [Bab 14: Go dan Microservices][bab-14.md]
+* [Bab 14: Go dan Microservices](bab-14.md)
 
 ## Frontend Programming dan Go
 

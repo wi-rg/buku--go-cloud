@@ -9,6 +9,8 @@ Buku ini ditulis bersama-sama oleh dosen dan mahasiswa [STMIK AKAKOM Yogyakarta]
 * [Bambang Purnomosidi D. P.](http://bpdp.xyz): penulis utama, editor, maintainer, all hands person.
 * ... tambahkan ...
 
+## Ingin Berkontribusi?
+
 # Menggunakan Buku
 
 Meskipun bisa langsung membaca dari repo Github ini melalui file README.md, ada beberapa cara lainnya yang bisa digunakan:

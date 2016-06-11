@@ -11,6 +11,8 @@ Buku ini ditulis bersama-sama oleh dosen dan mahasiswa [STMIK AKAKOM Yogyakarta]
 
 ## Ingin Berkontribusi?
 
+Cara berkontribusi dijelaskan dalam suatu [dokumen tersendiri tentang berkontribusi](berkontribusi.md)
+
 # Menggunakan Buku
 
 Meskipun bisa langsung membaca dari repo Github ini melalui file README.md, ada beberapa cara lainnya yang bisa digunakan:

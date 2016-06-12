@@ -220,6 +220,12 @@ Bagian ini bukan merupakan bagian kontributor tetapi diuraikan disini supaya mem
 
 ![Hasil merge PR](images/bukan-buku/open-PR9-1.png)
 
+* Pemilik proyek melakukan sync dengan repo lokal:
+
+```
+$ git pull origin master
+```
+
 # Menanti Hasil Merge
 
 Setelah selesai mengirimkan PR, kontributor menunggu proses penggabungan (merge). Jika disetujui, maka pada saat login, akan muncul notifikasi:

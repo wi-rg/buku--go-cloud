@@ -1,13 +1,13 @@
 # Membangun Aplikasi Cloud Menggunakan Go
 
-Buku ini merupakan buku pemrograman Go yang ditujukan untuk pengembangan aplikasi SaaS di Cloud. Meskipun titik berat dari buku ini ada pada pemrograman aplikasi di Cloud, buku ini juga meliputi dasar-dasar Go serta penggunaan Go untuk backend dan frontend. 
+Buku ini merupakan buku pemrograman Go yang ditujukan untuk pengembangan aplikasi SaaS di Cloud. Meskipun titik berat dari buku ini ada pada pemrograman aplikasi di Cloud, buku ini juga meliputi dasar-dasar Go serta penggunaan Go untuk backend dan frontend.
 
 # Penulis
 
 Buku ini ditulis bersama-sama oleh dosen dan mahasiswa [STMIK AKAKOM Yogyakarta](http://www.akakom.ac.id). Meskipun demikian, kontribusi dari siapapun itu akan diterima dengan senang hati. Untuk saat ini, beberapa nama ini berperan dalam penulisan:
 
 * [Bambang Purnomosidi D. P.](http://bpdp.xyz): penulis utama, editor, maintainer, all hands person.
-* ... tambahkan ...
+* Freddy Aprilliyanto
 
 ## Ingin Berkontribusi?
 
@@ -50,7 +50,7 @@ Bagian ini membahas tentang komponen dasar dan inti dari bahasa pemrograman Go. 
 * [Bab 8: Testing](bab-08.md)
 * [Bab 9: Konkurensi](bab-09.md)
 
-## Go untuk Backend 
+## Go untuk Backend
 
 Bagian ini membahas tentang penggunaan Go sebagai peranti pengembang untuk backend. Beberapa bagian dari pembahasan ini menggunakan pustaka standar dari Go dan juga beberapa software atau pustaka pihak ketiga. Setiap pembahasan akan dimulai dengan peranti pustaka standar serta peranti pustaka pihak ketiga yang akan digunakan.
 

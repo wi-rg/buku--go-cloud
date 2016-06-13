@@ -114,10 +114,36 @@ Kondisi dapat dihubungkan dengan operator logika, misalnya AND, OR, dan sebagain
 
 
 ### Basis Data NoSQL
+Mari Mengenal Database NoSQL (Not Only SQL) - Pada kesempatan kali ini, kita akan membahas tentang sebuah teknologi yang sangat menarik dalam dunia pengolahan database yaitu NoSQL. Jika sebelumnya kita mengenal berbagai macam jenis database sebagai RDBMS (Relational Database Management System) dengan teknologi utamanya adalah SQL (Structured Query Language). Database NoSQL merupakan lawan dari SQL ini. NoSQL merupakan singkatan dari Not Only SQL, dan menurut beberapa sumber NoSQL adalah sebuah konsep mengenai penyimpanan data non-relasional yang berbeda dengan model basis data relasional yang selama ini digunakan. NoSQL menggunakan beberapa metode yang berbeda-beda. Metode ini bergantung dari jenis database yang digunakan. Karena NoSQL sendiri merupakan konsep database dan pada implementasinya, banyak jenis-jenis dari NoSQL ini. 
 
+Kelebihan utama dari NoSQL adalah untuk menangani Big Data (data dengan jumlah besar yang melebihi proses kapasitas konversi dari sistem database yang ada) dimana data terus-menerus berkembang dan dimana data tersebut sangat kompleks sehingga sebuah database relational tidak lagi bisa mengakomodir. Salah satu bentuknya adalah ketika suatu data saling berhubungan satu sama lain, maka akan muncul proses duplikasi data. Dimana data saling memanggil ke beberapa permintaan, tambahan data baru, perubahan data dan lain-lain dengan key yang sama. 
+
+Karena faktor hubungan antar data yang sama terjadi terus-menerus, mendorong faktor redudansi/duplikasi data, data menjadi berlipat-lipat, dan pada akhirnya akan menyebabkan crash pada database yang berkonsep RDBMS itu, maka harus ada cara lain untuk menanggulangi masalah ini, dan NoSQL inilah solusinya. NoSQL menyederhanakan proses yang terjadi dalam sistem basis data relasional. Dimana hal-hal yang menyebabkan redudansi/duplikasi dihilangkan sehingga trafik server akan seimbang. Penyederhanaan proses ini memungkinkan data direplikasi di banyak server secara mudah dan menjamin ketersediaan data. 
+
+Kelebihan lain yang dimiliki oleh database NoSQL ini adalah kecepatan dalam hal pencarian data. Sebagai contoh Google, salah satu perusahaan yang telah mengaplikasikan NoSQL dalam database pencariannya. Pencarian yang ada di Google sangatlah cepat. Hanya dalam beberapa detik saja, data yang ingin kita cari sesuai keyword akan muncul, padahal kita tahu sendiri database Google sangatlah besar. 
 
 ### Basis Data NewSQL
 
+Lanskap untuk sistem manajemen database berubah lebih cepat hari ini daripada sejak hari-hari awal DBMS relasional. Kita tidak hanya memiliki serangan sistem database NoSQL dari berbagai bentuk yang berbeda (kolom, dokumen, kunci / nilai, dan database grafik), tapi kami juga melihat pasar yang sedang berkembang untuk manajemen database di memori, di mana DBMS bergantung pada memori utama bukannya disk untuk penyimpanan data, manajemen, dan manipulasi. Tapi ada yang lain "kategori" dari DBMS berkembang yang dikenal sebagai "NewSQL."
+
+The NewSQL jangka membingungkan dan tidak sangat baik didefinisikan. Pada dasarnya, NewSQL DBMSs ditandai oleh relasional, sistem database SQL dengan terdistribusi, arsitektur kesalahan-toleran. Di memori kemampuan adalah fitur tambahan khas persembahan NewSQL, seperti yang berkerumun layanan database dengan kemampuan akan dikerahkan di awan. produk NewSQL DBMS mungkin memiliki fitur yang lebih sedikit dan komponen, dengan jejak yang ringan, membuat mereka lebih mudah untuk mendukung dan belajar dari warisan persembahan relasional.
+
+Tentu saja, fitur yang disebutkan di sini tidak eksklusif untuk sistem database NewSQL, juga tidak semua dari mereka diperlukan untuk dianggap sebagai produk NewSQL. Banyak produk RDBMS yang ada mendukung banyak fitur ini.
+
+Secara umum, sistem database NewSQL dirancang untuk memerangi serangan NoSQL menggunakan teknologi relasional. Jenis aplikasi yang dirancang untuk mendapatkan keuntungan dari NewSQL DBMS biasanya akan memiliki sejumlah besar transaksi pendek yang mengakses sejumlah kecil data diindeks dan melaksanakan berulang-ulang. Jelas, yang merupakan bagian besar dari aplikasi (tetapi tidak berarti semua aplikasi). Tujuan dari NewSQL adalah untuk memberikan ketersediaan tinggi dan kinerja untuk data modern tanpa mengorbankan persyaratan konsistensi yang kuat dan kemampuan transaksi yang NoSQL sering skimps pada.
+Dengan kata lain, NewSQL DBMSs memberikan transaksi ACID. ACID adalah akronim untuk atomicity, konsistensi, isolasi, dan daya tahan. Masing-masing dari empat kualitas ini diperlukan untuk transaksi untuk dapat memastikan integritas data:
+
+Atomicity berarti bahwa transaksi harus menunjukkan "semua atau tidak" perilaku. Baik semua petunjuk dalam transaksi terjadi, atau tidak satupun dari mereka terjadi. Atomicity mempertahankan "kelengkapan" dari proses bisnis.
+Konsistensi mengacu pada keadaan data sebelum dan setelah transaksi dijalankan. Sebuah transaksi mempertahankan konsistensi keadaan data. Dengan kata lain, setelah transaksi dijalankan, semua data dalam database adalah "benar."
+Isolasi berarti bahwa transaksi dapat berjalan pada waktu yang sama. Transaksi berjalan secara paralel memiliki ilusi bahwa tidak ada concurrency. Dengan kata lain, tampak bahwa sistem berjalan hanya satu transaksi pada suatu waktu. Tidak ada transaksi konkuren lainnya memiliki visibilitas ke database modifikasi uncommitted dibuat oleh transaksi lainnya. Untuk mencapai isolasi, mekanisme penguncian diperlukan.
+Daya tahan mengacu pada dampak pemadaman atau kegagalan pada transaksi berjalan. Sebuah transaksi tahan lama tidak akan mempengaruhi keadaan data jika transaksi berakhir tidak normal. Data akan bertahan kegagalan apapun.
+Jadi, NewSQL DBMS relasional, memberikan ACID, dan menawarkan kemampuan modern dan arsitektur modern. Dan, tentu saja, menggunakan SQL untuk mengakses dan memodifikasi data.
+
+Meskipun tidak ada buku aturan untuk apa yang merupakan NewSQL, ada beberapa jenis yang berbeda dari sistem yang memanfaatkan moniker NewSQL. Paling umum, NewSQL mengacu pada produk RDBMS yang sama sekali baru yang beroperasi di cluster didistribusikan shared-
+
+tidak ada node, dengan setiap node memiliki subset dari data. Dengan merancang NewSQL RDBMS dari awal, kode dapat tegas ditulis untuk arsitektur terdistribusi dan menghindari beberapa overhead dari RDBMS tradisional. Contoh produk NewSQL termasuk VoltDB, Clustrix, MemSQL, dan Translattice.
+
+Istilah NewSQL juga dapat berlaku untuk mesin penyimpanan SQL seperti Infobright dan sistem sharding transparan seperti Scalebase.
 
 
 ## Paket Standar Go untuk Akses Basis Data

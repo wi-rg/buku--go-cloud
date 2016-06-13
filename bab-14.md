@@ -8,7 +8,7 @@
 ## Arsitektur Microservices
 Secara sederhana, arsitektur aplikasi Microservice ini menggunakan desain yang memecah aplikasi berdasarkan fungsinya secara spesifik. Tidak sekedar dengan memisahkan berdasarkan user-role atau subdomain saja, tetapi aplikasi akan di breakdown lebih rinci lagi dari sisi fungsionalitasnya. Aplikasi akan dirancang agar setiap fungsi bekerja secara independent. Dan setiap fungsi dapat menggunakan teknologi stack yang sesuai dengan kebutuhan, walaupun itu artinya akan terdapat teknologi yang berbeda-beda dalam satu aplikasi besar
 
-(images/Graph.png)
+![Repository arsitektur microservices](images/Graph.png)
 
 source: https://www.nginx.com/blog/introduction-to-microservices/
 

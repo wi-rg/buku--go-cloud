@@ -7,6 +7,7 @@ Buku ini merupakan buku pemrograman Go yang ditujukan untuk pengembangan aplikas
 Buku ini ditulis bersama-sama oleh dosen dan mahasiswa [STMIK AKAKOM Yogyakarta](http://www.akakom.ac.id). Meskipun demikian, kontribusi dari siapapun itu akan diterima dengan senang hati. Untuk saat ini, beberapa nama ini berperan dalam penulisan:
 
 * [Bambang Purnomosidi D. P.](http://bpdp.xyz): penulis utama, editor, maintainer, all hands person.
+* [Agita Prianggi Gutami] : Kontribusi bab-12
 * ... tambahkan ...
 
 ## Ingin Berkontribusi?

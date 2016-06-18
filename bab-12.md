@@ -480,24 +480,518 @@ Cassandra ditulis dalam bahasa Java dengan lisensi dari Apache. Cassandra menggu
 
 ### Basis Data NewSQL
 
+Artikel utama: NoSQL dan NewSQL. Generasi berikutnya dari database pasca-relasional di tahun 2000-an dikenal sebagai database NoSQL, termasuk kunci-nilai yang cepat toko dan database berorientasi dokumen. Database XML adalah jenis database berorientasi dokumen terstruktur yang memungkinkan query berdasarkan atribut dokumen XML. Database XML sebagian besar digunakan dalam manajemen basis data perusahaan, di mana XML digunakan sebagai standar interoperabilitas data yang mesin-ke-mesin. Database XML sebagian besar sistem perangkat lunak komersial, yang mencakup Clusterpoint, MarkLogic dan Oracle XML DB. Database NoSQL sering sangat cepat, tidak memerlukan skema tabel tetap, menghindari bergabung dengan operasi dengan menyimpan data denormalized, dan dirancang untuk skala horizontal. Sistem NoSQL paling populer termasuk MongoDB, Couchbase, Riak, memcached, Redis, CouchDB, Hazelcast, Apache Cassandra dan HBase, yang semua produk perangkat lunak open-source.
 
+Dalam beberapa tahun terakhir ada permintaan yang tinggi untuk database terdistribusi secara besar-besaran dengan toleransi partisi yang tinggi tetapi menurut teorema CAP adalah mustahil untuk sistem terdistribusi untuk secara bersamaan memberikan konsistensi, ketersediaan dan toleransi partisi jaminan. Sebuah sistem terdistribusi dapat memenuhi dua dari jaminan tersebut pada saat yang sama, tetapi tidak semua tiga. Untuk itu banyak database NoSQL menggunakan apa yang disebut konsistensi akhirnya untuk menyediakan ketersediaan dan toleransi partisi jaminan dengan penurunan tingkat konsistensi data.
+
+NewSQL adalah kelas database relasional modern yang bertujuan untuk memberikan performa yang sama sistem NoSQL untuk proses transaksi online (baca-tulis) beban kerja saat masih menggunakan SQL dan mempertahankan jaminan ACID sistem database tradisional. Database tersebut termasuk Scalebase, Clustrix, EnterpriseDB, MemSQL, NuoDB dan VoltDB.
 
 ## Paket Standar Go untuk Akses Basis Data
+Instalasi Package Control
 
+Package control merupakan aplikasi 3rd party untuk Sublime, digunakan untuk mempermudah instalasi plugin. Default-nya Sublime tidak menyediakan aplikas ini, kita perlu menginstalnya sendiri. Silakan ikuti petunjuk berikut untuk cara instalasinya.
+Buka situs https://packagecontrol.io/installation, copy script yang ada di tab Sublime Text 3 (tab bagian kiri).
+Copy script instalasi plugin
+
+Selanjutnya, jalankan aplikasi Sublime, klik menu View > Show Console, lalu paste script yang sudah di-copy tadi, ke inputan kecil di bagian bawah editor. Lalu tekan Enter.
+Show console, paste script instalasi package control
+
+Tunggu hingga proses instalasi selesai. Perhatikan karakter sama dengan (=) di bagian kiri bawah editor yang bergerak-gerak. Jika karakter tersebut menghilang, menandakan bahwa proses instalasi sudah selesai.
+Setelah selesai, tutup aplikasi, lalu buka kembali. Package control sudah berhasil di-install.
+
+	Paket sql menyediakan antarmuka generik sekitar SQL (atau seperti SQL) database.
+sopir	Sopir paket mendefinisikan interface yang harus dilaksanakan oleh database driver seperti yang digunakan oleh paket sql.
 
 
 
 ## Driver Go untuk Akses Basis Data
 
+SQL database drivers
+The database/sql and database/sql/driver packages are designed for using databases from Go and implementing database drivers, respectively.
 
+See the design goals doc:
+
+http://golang.org/src/pkg/database/sql/doc.txt
+Drivers
+Drivers for Go's sql package include:
+
+Apache Phoenix/Avatica: https://github.com/Boostport/avatica
+Couchbase N1QL: https://github.com/couchbase/go_n1ql
+DB2: https://bitbucket.org/phiggins/db2cli
+Firebird SQL: https://github.com/nakagami/firebirdsql
+MS ADODB: https://github.com/mattn/go-adodb
+MS SQL Server (pure go): https://github.com/denisenkom/go-mssqldb
+MS SQL Server (uses cgo): https://github.com/minus5/gofreetds
+MySQL: https://github.com/ziutek/mymysql [*]
+MySQL: https://github.com/go-sql-driver/mysql/ [*]
+ODBC: https://bitbucket.org/miquella/mgodbc
+ODBC: https://github.com/alexbrainman/odbc
+Oracle: https://github.com/mattn/go-oci8
+Oracle: https://github.com/rana/ora
+QL: http://godoc.org/github.com/cznic/ql/driver
+Postgres (pure Go): https://github.com/lib/pq [*]
+Postgres (uses cgo): https://github.com/jbarham/gopgsqldriver
+Postgres (pure Go): https://github.com/jackc/pgx
+SAP HANA (pure go): https://github.com/SAP/go-hdb
+SQLite: https://github.com/mattn/go-sqlite3 [*]
+SQLite: https://github.com/mxk/go-sqlite
+Sybase SQL Anywhere: https://github.com/a-palchikov/sqlago
+Vitess: https://godoc.org/github.com/youtube/vitess/go/vt/vitessdriver
+YQL (Yahoo! Query Language): https://github.com/mattn/go-yql
+Drivers marked with a [*] are both included in and pass the compatibility test suite at https://github.com/bradfitz/go-sql-test
 
 
 ## Go dan SQL: PostgreSQL
 
+Memasang
 
+go get github.com/lib/pq 
+ Docs
+
+Untuk dokumentasi rinci dan contoh penggunaan dasar, silakan lihat dokumentasi paket di http://godoc.org/github.com/lib/pq .
+
+ tes
+
+go test digunakan untuk pengujian. Sebuah server PostgreSQL berjalan diperlukan, dengan kemampuan untuk log in. The database default untuk terhubung untuk menguji dengan adalah "pqgotest," tapi dapat diganti menggunakan variabel lingkungan.
+
+Contoh:
+
+ PGHOST=/run/postgresql go test github.com/lib/pq 
+Opsional, suite benchmark dapat dijalankan sebagai bagian dari tes:
+
+ PGHOST=/run/postgresql go test -bench . 
+ fitur
+
+SSL
+Menangani koneksi buruk bagi database/sql
+Scan time.Time benar (yaitu timestamp[tz] , time[tz] , date )
+Memindai gumpalan biner dengan benar (yaitu bytea )
+Paket untuk hstore dukungan
+COPY FROM dukungan
+pq.ParseURL untuk mengkonversi url untuk koneksi string untuk sql.Open.
+Banyak libpq variabel lingkungan yang kompatibel
+dukungan socket Unix
+Pemberitahuan: LISTEN / NOTIFY
+dukungan pgpass
 
 ## Go dan NoSQL: RethinkDB
 
+GoRethink - RethinkDB driver untuk Go
+tag GitHub GoDoc build status
+
+Pergi driver RethinkDB
+
+GoRethink Logo
+
+Versi saat ini: v2.0.4 (RethinkDB v2.3)
+
+Harap dicatat bahwa versi ini pengemudi hanya mendukung versi RethinkDB menggunakan protokol v0.4 (setiap versi driver lebih tua dari RethinkDB 2.0 tidak akan bekerja).
+
+Jika Anda memerlukan bantuan Anda dapat menemukan saya di slack RethinkDB dalam saluran #gorethink.
+
+ Instalasi
+
+go get gopkg.in/dancannon/gorethink.v2 
+(Atau v1)
+
+  pergi mendapatkan gopkg. di /dancannon/gorethink.v1 
+ Koneksi
+
+ dasar Connection
+
+Pengaturan koneksi dasar dengan RethinkDB sederhana:
+
+  impor (
+     r "github.com/dancannon/gorethink"
+     "Log"
+ )
+
+ sesi var * Sesi r.
+
+ sesi, err:.. = r Connect (r ConnectOpts {
+     Alamat: "localhost: 28015",
+ })
+ jika berbuat salah! = nil {
+     log. Fatalln (err. Kesalahan ())
+ }
+Lihat dokumentasi untuk daftar argumen didukung untuk Hubungkan ().
+
+ koneksi Renang
+
+Sopir menggunakan kolam koneksi setiap saat, secara default menciptakan dan membebaskan koneksi otomatis. Ini aman untuk digunakan bersamaan oleh beberapa goroutines.
+
+Untuk mengkonfigurasi kolam koneksi MaxIdle , MaxOpen dan Timeout dapat ditentukan saat sambungan. Jika Anda ingin mengubah nilai MaxIdle atau MaxOpen selama runtime maka fungsi SetMaxIdleConns dan SetMaxOpenConns dapat digunakan.
+
+  sesi var * Sesi r.
+
+ sesi, err:.. = r Connect (r ConnectOpts {
+     Alamat: "localhost: 28015",
+     Database: "test",
+     MaxIdle: 10,
+     MaxOpen: 10,
+ })
+ jika berbuat salah! = nil {
+     log. Fatalln (err. Kesalahan ())
+ }
+
+ sesi. SetMaxOpenConns (5) 
+ Terhubung ke cluster
+
+Untuk menyambung ke cluster RethinkDB yang memiliki beberapa node Anda dapat menggunakan sintaks berikut. Saat menghubungkan ke cluster dengan beberapa node permintaan akan didistribusikan antara node tersebut.
+
+  sesi var * Sesi r.
+
+ sesi, err:.. = r Connect (r ConnectOpts {
+     Alamat: [] String { "localhost: 28015", "localhost: 28016"},
+     Database: "test",
+     AuthKey: "14daak1cad13dj",
+     DiscoverHosts: benar,
+ })
+ jika berbuat salah! = nil {
+     log. Fatalln (err. Kesalahan ())
+ } 
+Ketika DiscoverHosts benar setiap node ditambahkan ke cluster setelah koneksi awal maka node baru akan ditambahkan ke kolam node yang tersedia digunakan oleh GoRethink. Sayangnya alamat kanonik setiap server di cluster HARUS ditetapkan sebagai dinyatakan klien akan mencoba untuk menyambung ke node basis data lokal. Untuk informasi lebih lanjut tentang cara mengatur server RethinkDB alamat kanonik mengatur halaman ini http://www.rethinkdb.com/docs/config-file/ .
+
+ Otentikasi pengguna
+
+Login dengan username dan password pertama Anda harus membuat pengguna, ini bisa dilakukan dengan menulis kepada users tabel sistem dan kemudian memberikan bahwa akses pengguna ke setiap meja atau database mereka memerlukan akses ke. pertanyaan ini juga dapat dijalankan di RethinkDB admin konsol.
+
+  err:. = r DB ( "rethinkdb") Tabel ( "pengguna") Sisipkan (peta [string] String {..
+     "Id": "john",
+     "Password": "p455w0rd",
+ }). Exec (sesi)
+ ...
+ err = r. DB ( "blog"). Tabel ( "posting"). Hibah ( "john", peta [string] bool {
+     "Membaca": true,
+     "Menulis": true,
+ }). Exec (sesi)
+ ... 
+Akhirnya username dan password harus diteruskan ke Connect saat membuat sesi Anda, misalnya:
+
+  sesi, err:.. = r Connect (r ConnectOpts {
+     Alamat: "localhost: 28015",
+     Database: "blog",
+     Username: "john",
+     Password: "p455w0rd",
+ }) 
+Harap dicatat bahwa DiscoverHosts tidak akan bekerja dengan otentikasi pengguna saat ini karena fakta bahwa RethinkDB membatasi akses ke tabel sistem yang diperlukan.
+
+ Fungsi Query
+
+Perpustakaan ini didasarkan pada driver resmi sehingga kode pada API halaman harus memerlukan sedikit perubahan untuk bekerja.
+
+Untuk melihat dokumentasi lengkap untuk fungsi query memeriksa referensi API atau GoDoc
+
+Slice Expr Contoh
+
+  r. Expr ([] antarmuka {} {1, 2, 3, 4, 5}) Run (sesi). 
+Peta Expr Contoh
+
+  r Expr (peta [string] antarmuka {} { "a": 1, "b": 2, "c": 3}).. Run (sesi) 
+Dapatkan Contoh
+
+  r. DB ( "database"). Tabel ( "meja"). Dapatkan ( "GUID"). Run (sesi) 
+Peta Contoh (Func)
+
+  r. Expr ([] antarmuka {} {1, 2, 3, 4, 5}). Peta (func (baris Term) antarmuka {} {
+     kembali baris. Tambahkan (1)
+ }). Run (sesi) 
+Peta Contoh (implisit)
+
+  r. Expr ([] antarmuka {} {1, 2, 3, 4, 5}). Peta (r. Row. Tambahkan (1)). Run (sesi) 
+Antara (Opsional Args) Contoh
+
+  r. DB ( "database"). Tabel ( "meja"). Antara (1, 10, r. BetweenOpts {
+     Indeks: "num",
+     RightBound: "tertutup",
+ }). Run (sesi) 
+ Argumen opsional
+
+Seperti yang ditunjukkan di atas dalam contoh Antara argumen opsional dilewatkan ke fungsi sebagai struct. Setiap fungsi yang memiliki argumen opsional sebagai struct terkait. struct ini diberi nama dengan FunctionNameOpts Format, misalnya BetweenOpts adalah struct terkait untuk Antara.
+
+ hasil
+
+jenis hasil yang berbeda dikembalikan tergantung pada apa fungsi yang digunakan untuk mengeksekusi query.
+
+Run mengembalikan kursor yang dapat digunakan untuk melihat semua baris yang dikembalikan.
+RunWrite mengembalikan WriteResponse dan harus digunakan untuk query seperti Insert, Update, dll ...
+Exec mengirimkan permintaan ke server dan menutup koneksi setelah membaca respon dari database. Jika Anda tidak ingin menunggu respon maka Anda dapat mengatur NoReply bendera.
+Contoh:
+
+  res, err:... = r DB ( "database") Tabel ( "tablename") Dapatkan (kunci) Run (sesi).
+ jika berbuat salah! = nil {
+     // error
+ }
+ menunda res. Tutup () // Selalu pastikan Anda menutup kursor untuk memastikan koneksi tidak bocor 
+Kursor memiliki sejumlah metode yang tersedia untuk mengakses hasil query
+
+Next mengambil dokumen berikutnya dari hasil set, menghalangi jika perlu.
+All mengambil semua dokumen dari hasil set ke slice yang disediakan.
+One mengambil dokumen pertama dari hasil set.
+contoh:
+
+  baris var antarmuka {}
+ untuk res. Berikutnya (& row) {
+     // Lakukan sesuatu dengan baris
+ }
+ jika res. Err ()! = nil {
+     // error
+ } 
+  var baris [] antarmuka {}
+ err:. = res Semua (& baris)
+ jika berbuat salah! = nil {
+     // error
+ } 
+  baris var antarmuka {}
+ err: = res One (& baris).
+ jika err == r. ErrEmptyResult {
+     // Baris tidak ditemukan
+ }
+ jika berbuat salah! = nil {
+     // error
+ } 
+ Encoding / Decoding
+
+Ketika melewati struct ke Expr (Dan fungsi yang menggunakan Expr seperti Insert, Update) struct dikodekan ke dalam peta sebelum dikirim ke server. Setiap bidang diekspor ditambahkan ke peta kecuali
+
+tag bidang ini adalah "-", atau
+lapangan kosong dan tag yang menentukan "omitempty" pilihan.
+Setiap bidang nama default pada peta adalah nama field tetapi dapat ditentukan dalam nilai tag struct lapangan. The "gorethink" kunci dalam nilai tag struct lapangan adalah nama kunci, diikuti oleh koma opsional dan pilihan. contoh:
+
+  // Lapangan diabaikan oleh paket ini.
+ Bidang int `gorethink:" - "`
+ // Bidang muncul sebagai kunci "MYNAME".
+ Bidang int `gorethink:" MYNAME "`
+ // Bidang muncul sebagai kunci "MYNAME" dan
+ // Lapangan dihilangkan dari objek jika nilainya kosong,
+ // Seperti dijelaskan di atas.
+ Bidang int `gorethink:" MYNAME, omitempty "`
+ // Bidang muncul sebagai kunci "Field" (default), tetapi
+ // Lapangan dilewati jika kosong.
+ // Catatan terkemuka koma.
+ Bidang int `gorethink:", omitempty "` 
+CATATAN: Sangat disarankan bahwa tag struct digunakan secara eksplisit menentukan pemetaan antara tipe Go Anda dan bagaimana data disimpan oleh RethinkDB. Hal ini sangat penting ketika menggunakan Id lapangan sebagai default RethinkDB akan menciptakan lapangan bernama id sebagai kunci utama (perhatikan bahwa bidang RethinkDB adalah huruf kecil tapi versi Go dimulai dengan huruf kapital).
+
+Ketika pengkodean peta dengan tombol non-string nilai kunci secara otomatis dikonversi ke string mana mungkin, namun disarankan agar Anda menggunakan string mana mungkin (misalnya map[string]T ).
+
+Jika Anda ingin menggunakan json tag untuk GoRethink maka Anda dapat menghubungi SetTags("gorethink", "json") ketika memulai program Anda, ini akan menyebabkan GoRethink untuk memeriksa json tag setelah memeriksa gorethink tag. Secara default fitur ini dinonaktifkan. Fungsi ini juga akan membiarkan Anda mendukung setiap tag lain, pengemudi akan memeriksa tag di urutan yang sama seperti parameter.
+
+ Referensi
+
+Kadang-kadang Anda mungkin ingin menggunakan struct Go yang referensi dokumen di meja lain, bukan menciptakan struct baru yang hanya digunakan saat menulis untuk RethinkDB Anda dapat membubuhi keterangan struct Anda dengan pilihan tag referensi. Ini akan memberitahu GoRethink bahwa ketika pengkodean data Anda harus "memetik" ID bidang dari dokumen bersarang dan menggunakannya.
+
+Ini semua cukup rumit jadi mudah-mudahan contoh ini akan membantu. Pertama mari kita asumsikan Anda memiliki dua jenis Author dan Book dan Anda ingin memasukkan buku baru ke dalam database Anda namun Anda tidak ingin menyertakan seluruh struct penulis dalam tabel buku. Seperti yang Anda lihat Author lapangan di Book struct memiliki beberapa tag tambahan, pertama kita telah menambahkan reference tag opsi yang memberitahu GoRethink untuk memetik lapangan dari Author struct bukannya memasukkan dokumen penulis seluruh. Kami juga memiliki gorethink_ref tag yang memberitahu GoRethink untuk mencari id lapangan di Author dokumen, tanpa tag ini GoRethink bukannya akan mencari author_id lapangan.
+
+  Jenis Penulis struct {
+     ID tali `gorethink:" id, omitempty "`
+     String name `gorethink:" Nama "`
+ }
+
+ ketik Book struct {
+     ID tali `gorethink:" id, omitempty "`
+     Judul tali `gorethink:" title "`
+     Penulis Penulis `gorethink:" author_id, referensi "gorethink_ref:" id "`
+ } 
+Data yang dihasilkan di RethinkDB harus terlihat seperti ini:
+
+  {
+     "Author_id": "c2182a10-6b9d-4ea1-a70c-d6649bb5f8d7",
+     "Id": "eeb006d6-7fec-46c8-9d29-45b83f07ca14",
+     "Title": "The Hobbit"
+ } 
+Jika Anda ingin membaca kembali buku dengan penulis termasuk maka Anda bisa menjalankan GoRethink query berikut:
+
+  r. Tabel ( "buku"). Dapatkan ( "1"). Merge (func (p r. Term) antarmuka {} {
+     Peta pulang [string] antarmuka {} {
+         "Author_id":.. (. P Lapangan ( "author_id")) r Tabel ( "penulis") Dapatkan,
+     }
+ }). Run (sesi) 
+ logging
+
+Secara default pengemudi log kesalahan ketika gagal untuk terhubung ke database. Jika Anda ingin lebih verbose logging kesalahan Anda dapat menghubungi r.SetVerbose(true) .
+
+Atau jika Anda ingin mengubah perilaku penebangan Anda dapat memodifikasi logger disediakan oleh github.com/Sirupsen/logrus . Misalnya kode berikut sepenuhnya menonaktifkan logger:
+
+  r. Log. Out = ioutil. Buang 
+ benchmark
+
+Semua orang ingin benchmark proyek mereka untuk menjadi cepat. Dan sementara kita tahu bahwa rethinkDb dan driver gorethink cukup cepat, tujuan utama kami adalah untuk benchmark kami untuk menjadi benar. Mereka dirancang untuk memberikan Anda, pengguna, gambaran yang akurat dari menulis per detik (w / s). Jika Anda datang dengan tes yang akurat yang memenuhi tujuan ini, kirimkan permintaan tarik silakan.
+
+Berkat @jaredfolkins untuk kontribusi.
+
+Mengetik	Nilai
+Nama model	MacBook Pro
+Model Identifier	MacBookPro11,3
+processor Nama	Intel Core i7
+processor Kecepatan	2,3 GHz
+Jumlah Prosesor	1
+Total Jumlah Cores	4
+L2 Cache (per Core)	256 KB
+L3 Cache	6 MB
+Ingatan	16 GB
+  BenchmarkBatch200RandomWrites 20 557227775 ns / op
+ BenchmarkBatch200RandomWritesParallel10 30 354465417 ns / op
+ BenchmarkBatch200SoftRandomWritesParallel10 100 761639276 ns / op
+ BenchmarkRandomWrites 100 10456580 ns / op
+ BenchmarkRandomWritesParallel10 1000 1614175 ns / op
+ BenchmarkRandomSoftWrites 3000 589660 ns / op
+ BenchmarkRandomSoftWritesParallel10 10000 247588 ns / op
+ BenchmarkSequentialWrites 50 24408285 ns / op
+ BenchmarkSequentialWritesParallel10 1000 1755373 ns / op
+ BenchmarkSequentialSoftWrites 3000 631211 ns / op
+ BenchmarkSequentialSoftWritesParallel10 10000 263481 ns / op 
+ contoh
+
+Banyak fungsi memiliki contoh dan dapat dilihat di godoc itu, alternatif melihat beberapa fitur yang lebih lengkap contoh di wiki .
+
+ Bacaan lebih lanjut
+
+GoRethink Goes 1.0
+Go, RethinkDB & Changefeeds
+Membangun bot IRC di Go dengan changefeeds RethinkDB
+ Lisensi
+
+Hak Cipta 2013 Daniel Cannon
+
+Berlisensi di bawah Apache, Versi 2.0 ( "Lisensi"); Anda mungkin tidak menggunakan file ini kecuali sesuai dengan Lisensi. Anda dapat memperoleh salinan Lisensi di
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Kecuali diwajibkan oleh hukum yang berlaku atau disetujui secara tertulis, perangkat lunak yang didistribusikan di bawah Lisensi didistribusikan pada "APA ADANYA", TANPA JAMINAN ATAU KONDISI APAPUN, baik tersurat maupun tersirat. Lihat Lisensi untuk izin bahasa tertentu dan keterbatasan di bawah Lisensi.
+
+###NoSQL MongoDB
+
+Golang tidak menyediakan interface generic untuk NoSQL, hal ini menjadikan driver tiap brand NoSQL untuk Golang bisa berbeda satu dengan lainnya.
+Dari sekian banyak teknologi NoSQL yang ada, yang terpilih untuk dibahas di buku ini adalah MongoDB. Dan pada bab ini kita akan belajar cara berkomunikasi dengan MongoDB menggunakan driver mgo.
+Persiapan
+
+Ada beberapa hal yang perlu disiapkan sebelum mulai masuk ke bagian coding.
+Instal mgo menggunakan go get.
+go get gopkg.in/mgo.v2
+Download driver mgo
+
+Pastikan sudah terinstal MongoDB di komputer anda, dan jangan lupa untuk menjalankan daemon-nya. Jika belum, download dan install terlebih dahulu.
+Instal juga MongoDB GUI untuk mempermudah browsing data. Bisa menggunakan MongoChef, Robomongo, atau lainnya.
+Insert Data
+
+Cara insert data lewat mongo tidak terlalu sulit. Yang pertama perlu dilakukan adalah import package yang dibutuhkan, dan juga menyiapkan struct model.
+package main
+
+import "fmt"
+import "gopkg.in/mgo.v2"
+import "os"
+
+type student struct {
+    Name  string `bson:"name"`
+    Grade int    `bson:"Grade"`
+}
+Tag bson pada property struct dalam konteks mgo, digunakan sebagai penentu nama field ketika data disimpan kedalam collection. Jika sebuah property tidak memiliki tag bson, secara default nama field adalah sama dengan nama property hanya saja lowercase. Untuk customize nama field, gunakan tag bson.
+Pada contoh di atas, property Name ditentukan nama field nya sebagai name, dan Grade sebagai Grade.
+Selanjutnya siapkan fungsi untuk membuat session baru.
+func connect() *mgo.Session {
+    var session, err = mgo.Dial("localhost")
+    if err != nil {
+        os.Exit(0)
+    }
+    return session
+}
+Fungsi mgo.Dial() digunakan untuk membuat session baru (bertipe *mgo.Session). Fungsi tersebut memiliki sebuah parameter yang harus diisi, yaitu connection string dari server mongo yang akan diakses.
+Secara default jenis konsistensi session yang digunakan adalah mgo.Primary. Anda bisa mengubahnya lewat method SetMode() milik struct mgo.Session. Lebih jelasnya silakan merujuk https://godoc.org/gopkg.in/mgo.v2#Session.SetMode.
+Terkahir buat fungsi insert yang didalamnya berisikan kode untuk insert data ke mongodb, lalu implementasikan di main.
+func insert() {
+    var session = connect()
+    defer session.Close()
+    var collection = session.DB("belajar_golang").C("student")
+
+    var err = collection.Insert(&student{"Wick", 2}, &student{"Ethan", 2})
+    if err != nil {
+        fmt.Println(err.Error())
+    }
+}
+
+func main() {
+    insert()
+}
+Session di mgo juga harus di close ketika sudah tidak digunakan, seperti pada instance connection di bab SQL. Statement defer session.Close() akan mengakhirkan proses close session dalam fungsi insert().
+Struct mgo.Session memiliki method DB() yang digunakan untuk memilih database yang digunakan, dan bisa langsung di chain dengan fungsi C() untuk memilih collection.
+Setelah mendapatkan instance collection-nya, digunakan method Insert() untuk insert data ke database. Method ini memiliki parameter variadic pointer data yang ingin di-insert.
+Jalankan program tersebut, lalu cek menggunakan mongo GUI untuk melihat apakah data sudah masuk.
+Insert mongo
+
+###Membaca Data
+
+method Find() milik tipe collection mgo.Collection digunakan untuk melakukan pembacaan data. Query selectornya dituliskan menggunakan bson.M lalu disisipkan sebagai parameter fungsi Find().
+Untuk menggunakan bson.M, package gopkg.in/mgo.v2/bson harus di-import terlebih dahulu.
+import "gopkg.in/mgo.v2/bson"
+Setelah itu buat fungsi find yang didalamnya terdapat proses baca data dari database.
+func find() {
+    var session = connect()
+    defer session.Close()
+    var collection = session.DB("belajar_golang").C("student")
+
+    var result = student{}
+    var selector = bson.M{"name": "Wick"}
+    var err = collection.Find(selector).One(&result)
+    if err != nil {
+        fmt.Println(err.Error())
+    }
+
+    fmt.Println("Name  :", result.Name)
+    fmt.Println("Grade :", result.Grade)
+}
+
+func main() {
+    find()
+}
+Variabel result di-inisialisasi menggunakan struct student. Variabel tersebut nantinya digunakan untuk menampung hasil pencarian data.
+Tipe bson.M sebenarnya adalah alias dari map[string]interface{}, digunakan dalam penulisan selector.
+Selector tersebut kemudian dimasukan sebagai parameter method Find(), yang kemudian di chain langsung dengan method One() untuk mengambil 1 baris datanya. Kemudian pointer variabel result disisipkan sebagai parameter method tersebut.
+Pencarian data
+
+###Update Data
+
+Method Update() milik struct mgo.Collection digunakan untuk update data. Ada 2 parameter yang harus diisi:
+Parameter pertama adalah query selector data yang ingin di update
+Parameter kedua adalah data perubahannya
+func update() {
+    var session = connect()
+    defer session.Close()
+    var collection = session.DB("belajar_golang").C("student")
+
+    var selector = bson.M{"name": "Wick"}
+    var changes = student{"John Wick", 2}
+    var err = collection.Update(selector, changes)
+    if err != nil {
+        fmt.Println(err.Error())
+    }
+}
+
+func main() {
+    update()
+}
+Bisa dicek lewat Mongo GUI apakah data sudah berubah.
+Update data
+
+### Menghapus Data
+
+Cara menghapus document pada collection cukup mudah, tinggal gunakan method Remove() dengan isi parameter adalah query selector document yang ingin dihapus.
+func remove() {
+    var session = connect()
+    defer session.Close()
+    var collection = session.DB("belajar_golang").C("student")
+
+    var selector = bson.M{"name": "John Wick"}
+    var err = collection.Remove(selector)
+    if err != nil {
+        fmt.Println(err.Error())
+    }
+}
+
+func main() {
+    remove()
+}
+2 data yang sebelumnya sudah di-insert kini tinggal satu saja.
+Menghapus data
 
 
 

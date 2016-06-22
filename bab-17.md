@@ -1,132 +1,283 @@
 # GopherJS
 
-##GopherJS - A compiler from Go to JavaScript
--------------------------------------------
+##membuat package main
+~~~bash
 
-[![Circle CI](https://circleci.com/gh/gopherjs/gopherjs.svg?style=svg)](https://circleci.com/gh/gopherjs/gopherjs)
-
-GopherJS compiles Go code ([golang.org](https://golang.org/)) to pure JavaScript code. Its main purpose is to give you the opportunity to write front-end code in Go which will still run in all browsers. Give GopherJS a try on the [GopherJS Playground](http://gopherjs.github.io/playground/).
-
-### What is supported?
-Nearly everything, including Goroutines ([compatibility table](https://github.com/gopherjs/gopherjs/blob/master/doc/packages.md)). Performance is quite good in most cases, see [HTML5 game engine benchmark](https://ajhager.github.io/engi/demos/botmark.html).
-
-### Installation and Usage
-Get or update GopherJS and dependencies with:
-
-```
-go get -u github.com/gopherjs/gopherjs
-```
-
-Now you can use `gopherjs build [package]`, `gopherjs build [files]` or `gopherjs install [package]` which behave similar to the `go` tool. For `main` packages, these commands create a `.js` file and `.js.map` source map in the current directory or in `$GOPATH/bin`. The generated JavaScript file can be used as usual in a website. Use `gopherjs help [command]` to get a list of possible command line flags, e.g. for minification and automatically watching for changes.
-
-If you want to use `gopherjs run` or `gopherjs test` to run the generated code locally, install Node.js 4.x and the module `source-map-support`:
-
-```
-npm install --global source-map-support
-```
-
-For system calls (file system access, etc.), see [this page](https://github.com/gopherjs/gopherjs/blob/master/doc/syscalls.md).
-
-*Note: GopherJS will try to write compiled object files of the core packages to your $GOROOT/pkg directory. If that fails, it will fall back to $GOPATH/pkg.*
-
-#### gopherjs serve
-
-`gopherjs serve` is a useful command you can use during development. It will start an HTTP server serving on ":8080" by default, and dynamically compile Go packages with GopherJS and serve them.
-
-For example, navigating to `http://localhost:8080/example.com/user/project/` should compile and run the Go package `example.com/user/project`. The generated JavaScript output will be served at `http://localhost:8080/example.com/user/project/project.js`. If the directory contains `index.html` it will be served, otherwise a minimal `index.html` that includes `<script src="{{base}}.js"></script>` will be provided, causing the JavaScript to be executed. All other static files will be served too.
-
-Refreshing in the browser will rebuild the served files if needed. Compilation errors will be displayed in terminal, and in browser console. Additionally, it will serve $GOROOT and $GOPATH for sourcemaps.
-
-If you include an argument, it will be the root from which everything is served. For example, if you run gopherjs serve github.com/user/project then the generated JavaScript for the package github.com/user/project/mypkg will be served at http://localhost:8080/mypkg/mypkg.js.
-
-### Performance Tips
-
-- Use the `-m` command line flag to generate minified code.
-- Apply gzip compression (https://en.wikipedia.org/wiki/HTTP_compression).
-- Use `int` instead of `(u)int8/16/32/64`.
-- Use `float64` instead of `float32`.
-
-### Community
-- [#gopherjs Channel on Gophers Slack](https://gophers.slack.com/messages/gopherjs/) (invites to Gophers Slack are available [here](http://blog.gopheracademy.com/gophers-slack-community/#how-can-i-be-invited-to-join:2facdc921b2310f18cb851c36fa92369))
-- [Google Group](https://groups.google.com/d/forum/gopherjs)
-- [Bindings to JavaScript APIs and libraries](https://github.com/gopherjs/gopherjs/wiki/bindings)
-- [GopherJS on Twitter](https://twitter.com/GopherJS)
-
-### Getting started
-#### Interacting with the DOM
-The package `github.com/gopherjs/gopherjs/js` (see [documentation](https://godoc.org/github.com/gopherjs/gopherjs/js)) provides functions for interacting with native JavaScript APIs. For example the line
-
-```js
-document.write("Hello world!");
-```
-
-would look like this in Go:
-
-```go
-js.Global.Get("document").Call("write", "Hello world!")
-```
-
-You may also want use the [DOM bindings](http://dominik.honnef.co/go/js/dom), the [jQuery bindings](https://github.com/gopherjs/jquery) (see [TodoMVC Example](https://github.com/gopherjs/todomvc)) or the [AngularJS bindings](https://github.com/neelance/go-angularjs). Those are some of the [bindings to JavaScript APIs and libraries](https://github.com/gopherjs/gopherjs/wiki/bindings) by community members.
-
-#### Providing library functions for use in other JavaScript code
-Set a global variable to a map that contains the functions:
-
-```go
 package main
 
-import "github.com/gopherjs/gopherjs/js"
+import (
+  "github.com/gopherjs/gopherjs/js"
+  "github.com/rolaveric/pet"
+)
 
 func main() {
 	js.Global.Set("pet", map[string]interface{}{
-		"New": New,
+		"New": pet.New,
 	})
 }
+~~~
+
+##membuat package pet
+~~~bash
+package pet
+
+import "github.com/gopherjs/gopherjs/js"
 
 type Pet struct {
 	name string
-}
-
-func New(name string) *js.Object {
-	return js.MakeWrapper(&Pet{name})
 }
 
 func (p *Pet) Name() string {
 	return p.name
 }
 
-func (p *Pet) SetName(name string) {
-	p.name = name
+func (p *Pet) SetName(newName string) {
+	p.name = newName
 }
-```
 
-For more details see [Jason Stone's blog post](http://legacytotheedge.blogspot.de/2014/03/gopherjs-go-to-javascript-transpiler.html) about GopherJS.
+func New(name string) *js.Object {
+	return js.MakeWrapper(&Pet{name})
+}
+~~~
 
-### Architecture
+##gropherjs result short.js
+~~~bash
+// Lines 8-13
+var go$global;
+if (typeof window !== "undefined") {
+	go$global = window;
+} else if (typeof GLOBAL !== "undefined") {
+	go$global = GLOBAL;
+}
 
-#### General
-GopherJS emulates a 32-bit environment. This means that `int`, `uint` and `uintptr` have a precision of 32 bits. However, the explicit 64-bit integer types `int64` and `uint64` are supported. The `GOARCH` value of GopherJS is "js". You may use it as a build constraint: `// +build js`.
+// Lines 1425-1461
+go$packages["github.com/rolaveric/gopherjs/pet"] = (function() {
+	var go$pkg = {}, Pet, New;
+	Pet = go$pkg.Pet = go$newType(0, "Struct", "pet.Pet", "Pet", "github.com/rolaveric/gopherjs/pet", function(name_) {
+		this.go$val = this;
+		this.name = name_ !== undefined ? name_ : "";
+	});
+	Pet.Ptr.prototype.Name = function() {
+		var p;
+		p = this;
+		return p.name;
+	};
+	Pet.prototype.Name = function() { return this.go$val.Name(); };
+	Pet.Ptr.prototype.SetName = function(newName) {
+		var p;
+		p = this;
+		p.name = newName;
+	};
+	Pet.prototype.SetName = function(newName) { return this.go$val.SetName(newName); };
+	New = go$pkg.New = function(name) {
+		return new Pet.Ptr(name);
+	};
+	go$pkg.init = function() {
+		(go$ptrType(Pet)).methods = [["Name", "", [], [Go$String], false, -1], ["SetName", "", [Go$String], [], false, -1]];
+		Pet.init([["name", "name", "github.com/rolaveric/gopherjs/pet", Go$String, ""]]);
+	}
+	return go$pkg;
+})();
+go$packages["C:\GoCode\src\github.com\rolaveric\gopherjs"] = (function() {
+	var go$pkg = {}, js = go$packages["github.com/gopherjs/gopherjs/js"], pet = go$packages["github.com/rolaveric/gopherjs/pet"], main;
+	main = go$pkg.main = function() {
+		var _map, _key;
+		go$global.pet = go$externalize((_map = new Go$Map(), _key = "New", _map[_key] = { k: _key, v: new (go$funcType([Go$String], [(go$ptrType(pet.Pet))], false))(pet.New) }, _map), (go$mapType(Go$String, go$emptyInterface)));
+	};
+	go$pkg.init = function() {
+	}
+	return go$pkg;
+})();
+~~~
 
-#### Application Lifecycle
+##Posting perpustakaan Javascript untuk Go
+Katakanlah kita punya ' Pengguna objek model yang menggunakan variabel global ' DB ' untuk membuat panggilan database SQL 
+###gropherjs model original
+~~~bash
+// User Type
+function User(name, id) {
+  this.name = name;
+  this.id = id;
+  
+  this.save = function () {
+    DB.query('UPDATE User SET name = ? WHERE id = ?', this.name, this.id);
+  }
+}
 
-The `main` function is executed as usual after all `init` functions have run. JavaScript callbacks can also invoke Go functions, even after the `main` function has exited. Therefore the end of the `main` function should not be regarded as the end of the application and does not end the execution of other goroutines.
+// Factory for creating a new user
+User.new = function (name) {
+  DB.query('INSERT INTO User (name) VALUES (?)', name);
+  var id = DB.query('SELECT @@IDENTITY').nextRow()[0];
+  return new User(name, id);
+};
 
-In the browser, calling `os.Exit` (e.g. indirectly by `log.Fatal`) also does not terminate the execution of the program. For convenience, it calls `runtime.Goexit` to immediately terminate the calling goroutine.
+// Retrieves a user from the database
+User.get = function (id) {
+  var result = DB.query('SELECT name FROM User WHERE id = ?', id);
+  if (result.rowCount === 0) {
+    return null;
+  }
+  var name = result.nextRow()[0];
+  return new User(name, id);
+};
 
-#### Goroutines
-Goroutines are fully supported by GopherJS. The only restriction is that you need to start a new goroutine if you want to use blocking code called from external JavaScript:
+// Retrieves all users from the database
+User.all = function () {
+  var users = [];
+  var result = DB.query('SELECT name, id FROM User');
+  for (var x = 0; x < result.rowCount; x++) {
+    var row = result.nextRow();
+    users.push(new User(row[0], row[1]));
+  }
+  return users;
+};
 
-```go
-js.Global.Get("myButton").Call("addEventListener", "click", func() {
-  go func() {
-    [...]
-    someBlockingFunction()
-    [...]
-  }()
-})
-```
+// Use case that still needs to use this model
+function myHttpHandler(request) {
+  if (request.method === 'GET') {
+    var id = request.params['userid'];
+    if (id) {
+      return User.get(id);
+    } else {
+      return User.all();
+    }
+  } else if (request.method === 'POST') {
+    return User.new(request.params['name']);
+  }
+}
+~~~
 
-How it works:
+##Beberapa hal yang kita tahu akan berbeda ketika kita mengubahnya ke Go .
+API refactored terlihat seperti :
 
-JavaScript has no concept of concurrency (except web workers, but those are too strictly separated to be used for goroutines). Because of that, instructions in JavaScript are never blocking. A blocking call would effectively freeze the responsiveness of your web page, so calls with callback arguments are used instead.
+~~~bash
+// Namespace created within an IIFE for private scope
+var user = (function () {
+  // Variable for holding the injected DB interface
+  var DB;
+  
+  // User Type
+  function User(name, id) {/* ... */}
+  
+  return {
+    // Expose a function for setting the DB interface
+    "registerDB": function (db) {
+      DB = db;
+    },
+    "new": function (name) {
+      // The "DB" type's methods will be capitalised
+      DB.Query('INSERT INTO User (name) VALUES (?)', name);
+      
+      // Lets be a bit more type safe and specify that we expect an int
+      var id = DB.Query('SELECT @@IDENTITY').NextRow().GetInt(0);
+      
+      return new User(name, id);
+    },
+    "get": function (id) {/* ... */},
+    "all": function () {/* ... */},
+    "save": function () {/* ... */}
+  };
+})();
+~~~
 
-GopherJS does some heavy lifting to work around this restriction: Whenever an instruction is blocking (e.g. communicating with a channel that isn't ready), the whole stack will unwind (= all functions return) and the goroutine will be put to sleep. Then another goroutine which is ready to resume gets picked and its stack with all local variables will be restored. This is done by preserving each stack frame inside a closure.
+##kode go
+~~~
+package user
+
+// Interface for a database result row
+type DBRow interface {
+	GetInt(colnum int) int
+	GetString(colnum int) string
+}
+
+// Interface for a database result
+type DBResult interface {
+	NextRow() DBRow
+	RowCount() int
+}
+
+// Interface for an object which can be used to make database queries
+type DB interface {
+	Query(query string, params ...interface{}) DBResult
+}
+
+// Private package variable for the registered DB interface
+var db DB
+
+// Method for registering a DB interface
+func RegisterDB(newDb DB) {
+	db = newDb
+}
+
+// User type
+type User struct {
+	Name string
+	ID   int
+}
+
+// Save method for the User type
+func Save(u *User) {
+	db.Query("UPDATE User SET name = ? WHERE id = ?", u.Name, u.ID)
+}
+
+// Function for creating a new User
+func New(name string) *User {
+	db.Query("INSERT INTO User (name) VALUES (?)", name)
+	id := db.Query("SELECT @@IDENTITY").NextRow().GetInt(0)
+	return &User{name, id}
+}
+
+// Function for getting a single User
+func Get(id int) *User {
+	result := db.Query("SELECT name FROM User WHERE id = ?", id)
+	if result.RowCount() == 0 {
+		return nil
+	}
+	name := result.NextRow().GetString(0)
+	return &User{name, id}
+}
+
+// Function for getting all users
+func All() []*User {
+	result := db.Query("SELECT name, id FROM User")
+	users := make([]*User, result.RowCount())
+	for x, c := 0, result.RowCount(); x < c; x++ {
+		row := result.NextRow()
+		users[x] = &User{row.GetString(0), row.GetInt(1)}
+	}
+	return users
+}
+~~~
+
+##model main go
+
+~~~
+package main
+
+import (
+	"github.com/gopherjs/gopherjs/js"
+	"github.com/rolaveric/gopherjs-demo/user"
+	"github.com/rolaveric/gopherjs-demo/user/js/db"
+)
+
+// Starting point for compiling JS code
+func main() {
+	js.Global.Set("user", map[string]interface{}{
+		"registerDB": RegisterDBJS,
+		"new":        user.New,
+		"get":        user.Get,
+		"all":        user.All,
+		"save":       SaveJS,
+	})
+}
+
+// Takes a DB adapter written in Javascript and wraps it as a DB interface
+func RegisterDBJS(o *js.Object) {
+	user.RegisterDB(db.JSDB{o})
+}
+
+// Takes a JS object and wraps it as a User struct
+func SaveJS(o *js.Object) {
+	user.Save(&user.User{o.Get("Name").String(), o.Get("ID").Int()})
+}
+~~~

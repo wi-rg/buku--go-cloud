@@ -2,7 +2,7 @@
 
 Apa itu backend?. Backend adalah suatu tempat/pekerjaan yang hasilnya digunakan untuk bagian front-end. jadi Seorang pengembang back-end bertanggung jawab untuk server-side logika aplikasi web dan integrasi dari pekerjaan front-end web developer . Pengembang Back- end biasanya menulis layanan web dan API yang digunakan oleh pengembang front-end dan pengembang aplikasi mobile .
 
-Menulis deskripsi pada pekerjaan yang baik untuk pengembang back-end membutuhkan pemisahan yang tepat antara logis dan deskripsi dan posting deskripsi pengembang web dalam pekerjaan Anda , ketika Anda mencari back-end developer web canggih , akan membawa banyak aplikasi dari orang-orang yang mengkhususkan diri dalam membangun antarmuka pengguna front-end , atau web desainer yang sama sekali tidak memiliki pengetahuan tentang pemrograman .
+ketika Anda mencari back-end developer , akan membawa banyak aplikasi dari orang-orang yang mengkhususkan diri dalam membangun antarmuka pengguna front-end , atau web desainer yang sama sekali tidak memiliki pengetahuan tentang pemrograman .
 
 Ada teknologi dan pengetahuan yang umum untuk semua pengembang web , dan beberapa yang khusus untuk pengembang back-end . Artikel ini akan memberikan Anda dengan sampel back- end, fokus utama pengembang backend yaitu : 
 

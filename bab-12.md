@@ -239,17 +239,17 @@ PostgreSQL adalah sebuah sistem basis data yang disebarluaskan secara bebas menu
 
 PostgreSQL adalah sistem database yang kuat untuk urusan relasi, open source. Memiliki lebih dari 15 tahun pengembangan aktif dan sudah terbukti segala rancangan arsitekturnya telah mendapat reputasi tentang “kuat”, “handal”, “integritas data”, dan “akurasi data”
 
-Pengguna PostgreSQL
+####Pengguna PostgreSQL
 
-    * Yahoo! untuk analisa prilaku pengguna web, menyimpan 2 petabyte data dan mengklaim sebagai gudang data terbesar. Menggunakan versi PostgreSQL yang dimodifikasi, dengan engine penyimpanan berbasis kolom yang sepenuhnya berbeda.[6][7]
-    *MySpace, situs jejaring sosial populer, menggunakan basisdata Aster nCluster untuk gudang data, dibangun diatas PostgreSQL tanpa modifikasi.[8][9]
-    *OpenStreetMap, proyek kolaboratif untuk menciptakan peta dunia yang bebas sunting.[10]
-    *Afilias, register domain untuk .org, .info, dan sebagainya.[11]
-    *Sony Online multiplayer online game.[12]
-    *BASF, platform belanja untuk portal agribisnisnya.[13]
-    *hi5.com portal jejaring sosial.[14]
-    *Skype aplikasi VoIP, basisdata pusat bisnis.[15]
-    *Sun xVM, perangkat lunak virtualisasi dan otomasi datacenter milik Sun.
+- Yahoo! untuk analisa prilaku pengguna web, menyimpan 2 petabyte data dan mengklaim sebagai gudang data terbesar. Menggunakan versi PostgreSQL yang dimodifikasi, dengan engine penyimpanan berbasis kolom yang sepenuhnya berbeda.[6][7]
+- MySpace, situs jejaring sosial populer, menggunakan basisdata Aster nCluster untuk gudang data, dibangun diatas PostgreSQL tanpa modifikasi.[8][9]
+- OpenStreetMap, proyek kolaboratif untuk menciptakan peta dunia yang bebas sunting.[10]
+- Afilias, register domain untuk .org, .info, dan sebagainya.[11]
+- Sony Online multiplayer online game.[12]
+- BASF, platform belanja untuk portal agribisnisnya.[13]
+- hi5.com portal jejaring sosial.[14]
+- Skype aplikasi VoIP, basisdata pusat bisnis.[15]
+- Sun xVM, perangkat lunak virtualisasi dan otomasi datacenter milik Sun.
 
 ## Go dan NoSQL: RethinkDB
 

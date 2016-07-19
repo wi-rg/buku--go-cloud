@@ -36,19 +36,19 @@
 
 Pembagian Pekerjaan
 
-Zikru Hakim : 
+Zikru Hakim / 145410231 : 
 - Akses Basis Data
 - Sekilas Tentang Basis Data
 - Basis Data SQL
 - Go dan SQL: PostgreSQL
 
-Afif Budi :
+Afif Budi / 145410202 :
 - Go dan NoSQL: RethinkDB
 
-Agita Prianggi :
+Agita Prianggi / 145410207 :
 - Paket Standar Go untuk Akses Basis Data
 - Driver Go untuk Akses Basis Data
 
-Boy Satria : 
+Boy Satria / 145410223: 
 - Basis Data NoSQL
 - Basis Data NewSQL

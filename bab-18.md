@@ -27,15 +27,19 @@ Contoh layanan Middleware :
 1. Menyimpan data dalam suatu antrian message jika mesin tujuan sedang mati atau overloaded
 2. Berisi business logic yang merutekan message ke ujuan sebenarnya dan memformat ulang data lebih tepat
 3. Sama seperti sistem messaging email, kecuali messaging middleware digunakan untuk mengirim data antar aplikasi
+
 #####Produk Messaging Middleware
 Produk utama messaging (pengiriman pesan) untuk pengaturan komunikasi asinkronus antar aplikasi adalah MQSeries dari IBM. MQSeries telah dipasangkan pada semua platform server. Microsoft memperkenalkan sistem messagingnya sendiri yang digabungkan dengan Component Object Model(COM), yaitu Microsoft Message QueueServer (MSMQ). MSMQ dan MQSeries menawarkan fungsi yang sama.
+
 #####Distributed Object Middleware
 menurut terminologinya, sebuah Object yang terdistribusikan oleh layanan Middleware, ini merupakan layanan utama yang dimiliki oleh Middleware. layanan ini dibagi menjadi beberapa :
 Contoh: RPC (Remote Procedure Calls), CORBA (Common Object Request Broker Architecture) dan DCOM/COM (Distributed Component Object Model)
+
 #####Middleware basis data
 menyediakan antarmuka antara sebuah query dengan beberapa database yang terdistribusi
 Contoh: JDBC, ODBC, dan ADO.NET
+
 #####Application Server Middleware
 J2EE Application Server, Oracle Application Server
--Lebih detailnya untuk keterangan Middleware sebagai Application Server ialah Sebuah Web-based Application server, yang menyediakan antarmuka untuk berbagai aplikasi,digunakan sebagai middleware antara browser dan aplikasi.
--J2EE adalah contoh application serverA wide range of server-side processing has been supported by appservers(i.e.;J2EE).
+- Lebih detailnya untuk keterangan Middleware sebagai Application Server ialah Sebuah Web-based Application server, yang menyediakan antarmuka untuk berbagai aplikasi,digunakan sebagai middleware antara browser dan aplikasi.
+- J2EE adalah contoh application serverA wide range of server-side processing has been supported by appservers(i.e.;J2EE).

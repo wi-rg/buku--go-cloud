@@ -8,6 +8,7 @@ Buku ini ditulis bersama-sama oleh dosen dan mahasiswa [STMIK AKAKOM Yogyakarta]
 
 * [Bambang Purnomosidi D. P.](http://bpdp.xyz): penulis utama, editor, maintainer, all hands person.
 * ... Afif Budianto ...
+* ... Fajar Ananda ...
 
 ## Ingin Berkontribusi?
 

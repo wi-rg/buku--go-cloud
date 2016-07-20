@@ -228,6 +228,7 @@ PostgreSQL merupakan Sebuah Obyek-Relasional Data Base Management System (ORDBMS
 - views
 - transactional integrity
 - multiversion concurrency control
+
 ####Selain itu PostgreSQL juga dapat di extend sesuai kebutuhan pengguna melalui beberapa metode dengan menambangkan obyek baru, seperti
 - Penambahan Tipe Data
 - Penambahan Fungsi
@@ -265,7 +266,7 @@ Menyoroti  Fitur Database PostgreSQL.
 - Multi-version concurrency control (MVCC)
 - Asynchronous replication
 
-Versi terbaru dari database postgreSQL sebagai database open source mendukung fitur berikut:
+####Versi terbaru dari database postgreSQL sebagai database open source mendukung fitur berikut:
 - Microsoft Windows versi Server
 - Tabel spasi
 - Point-in-time recovery

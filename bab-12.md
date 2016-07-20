@@ -219,6 +219,68 @@ ColumnConverter mungkin opsional dilaksanakan oleh Stmt jika pernyataan sadar ak
 
 ## Go dan SQL: PostgreSQL
 
+###Tentang PostgreSQL
+PostgreSQL merupakan Sebuah Obyek-Relasional Data Base Management System (ORDBMS) yang dikembangkan oleh Berkeley Computer Science Department. System yang ditawarkan PostgreSQL diharapkan sanggup dan dapat mencukupi untuk kebutuhan proses aplikasi data masa depan. PostgreSQL juga menawarkan tambahan-tambahan yang cukup signifikan yaitu class, inheritance, type, dan function. Tambahan keistimewaan lain yang tidak dimiliki database management system yang lain berupa constraint, triggers, rule, dan transaction integrity, dengan adanya feature (keistimewaan) tersebut maka para pemakai dapat dengan mudah mengimplementasikan dan menyampaikan sistem ini. Sejak tahun 1996 PostgreSQL mengalami kemajuan yang sangat berarti, berbagai keistimewaan dari PostgreSQL sanggup membuat database ini melebihi database lain dari berbagai sudut pandang. Pada awal pembuatannya di University of California Berkeley (1977-1985) postgresl masih mempunyai banyak kekurangan bila dibandingkan dengan database yang lain, namun seiring dengan berjalannya waktu tepatnya pada tahun 1996 PostgresSQL berubah menjadi sebuah database yang menawarkan standar melebihi standar ANSI-SQL92 dan sanggup memenuhi permintaan dunia open source akan server database SQL. Standar ANSI-SQL92 merupakan standar yang ditetapkan untuk sebuah database berskala besar seperti Oracle, Interbase, DB2 dan yang lainnya. Kelebihan PostgreSQL Berbeda dengan database lain, PostgreSQL menyediakan begitu banyak dokumentasi yang disertakan pada berbagai distribusi Linux, sehingga para pembaca bisa dengan mudah mempelajari bahkan mengimplementasikannya. Tidak hanya itu berbagai dokumentasi yang bertebaran di Internet maupun mailing list yang semuanya dapat kita ambil dan pelajari. PostgreSQL memiliki keluwesan dan kinerja yang tinggi, artinya sesuai dengan niatan awal para pembuat PostgreSQL bahwa database yang mereka buat harus melebihi database lain dan ini terbukti pada arsitekturnya. Dengan arsitektur yang luwes maka sebuah user PostgreSQL mampu mendefenisikan sendiri SQL-nya, inilah yang membuat database PostgreSQL berbeda dengan sistem relasional standar. Di samping mendefenisikan sendiri SQL-nya, PostgreSQL juga memungkinkan setiap user untuk membuat sendiri object file yang dapat diterapkan untuk mendefenisikan tipe data, fungsi dan bahasa pemrograman yang baru sehingga PostgreSQL sangat mudah dikembangkan maupun di implementasikan pada tingkat user. PostgreSQL versi 7.0.x dan versi di atasnya menyertakan dokumentasi maupun berbagai macam contoh pembuatan fungsi maupun sebuah prosedur. Dengan keluwesan dan fitur yang dimilikinya, PostgreSQL patut bahkan melebihi jika disandingkan dengan database yang berskala besar lainnya. Jika kita menggunkan sebuah database , tentunya tak lepas dari tujuan dan maksud apa yang ingin dicapai serta kelebihan yang bagaimana yang kita inginkan.
+
+PostgreSQL juga mendukung beberapa fitur database modern, antar lain;
+•complex queries
+•foreign keys triggers
+•views
+•transactional integrity
+•multiversion concurrency control
+Selain itu PostgreSQL juga dapat di extend sesuai kebutuhan pengguna melalui beberapa metode dengan menambangkan obyek baru, seperti
+•Penambahan Tipe Data
+•Penambahan Fungsi
+•Penambahan Operator
+•Penambahan Fungsi Aggregate
+•Metode Index
+•Bahasa prosedural
+
+###Pengguna PostgreSQL
+- Yahoo! untuk analisa prilaku pengguna web, menyimpan 2 petabyte data dan mengklaim sebagai gudang data terbesar. Menggunakan versi PostgreSQL yang dimodifikasi, dengan engine penyimpanan berbasis kolom yang sepenuhnya berbeda.[6][7]
+- MySpace, situs jejaring sosial populer, menggunakan basisdata Aster nCluster untuk gudang data, dibangun diatas PostgreSQL tanpa modifikasi.[8][9]
+- OpenStreetMap, proyek kolaboratif untuk menciptakan peta dunia yang bebas sunting.[10]
+- Afilias, register domain untuk .org, .info, dan sebagainya.[11]
+- Sony Online multiplayer online game.[12]
+- BASF, platform belanja untuk portal agribisnisnya.[13]
+- hi5.com portal jejaring sosial.[14]
+- Skype aplikasi VoIP, basisdata pusat bisnis.[15]
+- Sun xVM, perangkat lunak virtualisasi dan otomasi datacenter milik Sun.
+- PostgreSQL adalah tujuan umum dan sistem manajemen database relasional obyek, yang paling canggih dari sistem database open source. Database postgreSQL dikembangkan berdasarkan POSTGRES 4.2 di departemen Ilmu Komputer, Berkeley University of California, inilah salah satu sebab menjadi database open source.
+
+Database postgreSQL  sebagai database open source dirancang untuk berjalan pada platform UNIX-like. Namun, database postgreSQL kemudian selain sebagai database open source juga dirancang untuk menjadi portabel sehingga dapat berjalan di berbagai platform seperti Mac OS X, Solaris dan Windows.
+
+Database postgreSQL adalah perangkat lunak bebas dan open source. Kode sumbernya tersedia di bawah lisensi database postgreSQL  lisensi open source liberal. Anda bebas untuk memakai, memodifikasi serta mendistribusikan database postgreSQL dalam wujud apa pun.
+
+Database postgreSQL memerlukan upaya sangat minimal, sebagai database open source  ini dipertahankan karena stabilitasnya. Oleh karena itu, jika Anda mengembangkan aplikasi berbasis database postgreSQL yang notabene adalah database open source, postgreSQL tutorial memastikan biaya total kepemilikan yang rendah bila dibandingkan dengan sistem manajemen database lain, ataupun database berbayar yang lain.
+Menyoroti  Fitur Database PostgreSQL. 
+
+Database postgreSQL sebagai database open source mempunyai banyak feature canggih yang sebagaimana system manajemen database perusahaan lain tawarkan, seperti:
+• jenis-jenis User-defined 
+• Tabel inheritance
+• mekanisme penguncian Canggih
+• Foreign key referential integrity
+• Views, rules, sub-select
+• Transaksi bersarang / nested transaction (savepoints)
+• Multi-version concurrency control (MVCC)
+• Asynchronous replication
+
+Versi terbaru dari database postgreSQL sebagai database open source mendukung fitur berikut:
+• Microsoft Windows versi Server
+• Tabel spasi
+• Point-in-time recovery
+Dan fitur baru lainnya ditambahkan dalam setiap rilis baru dari database postgreSQL sebagai database open source yang paling stabil saat ini.
+
+Apa yang membuat Database PostgreSQL sebagai pelopor database open source lebih menonjol dari database lainnya?
+
+Database postgreSQL adalah sistem manajemen database open source pertama yang mengimplementasikan fitur multi-versi-concurrency control (MVCC), bahkan sebelum Oracle yang notabene adalah database berbayar. Fitur MMVC dikenal sebagai isolasi snapshot di Oracle.
+
+Database postgreSQL sebagai database open source adalah obyek sistem manajemen database relasional dengan tujuan umum. Hal ini memungkinkan Anda untuk menambahkan fungsi kustom untuk dikembangkan dengan menggunakan bahasa pemrograman yang berbeda seperti C / C + +, Java, dll
+
+Database postgreSQL sebagai database open source dirancang untuk bisa diperluas. Di database postgreSQL  Anda dapat menentukan jenis data Anda sendiri, jenis indeks, bahasa fungsional, dll. Pada database open source  ini, jika Anda tidak menyukai setiap bagian dari sistem, Anda selalu dapat mengembangkan custom plugin untuk meningkatkan itu untuk memenuhi kebutuhan Anda misalnya, menambahkan optimizer baru.
+
+Jika anda memerlukan dukungan apapun, komunitas yang aktif tersedia untuk membantu. Anda selalu dapat menemukan jawaban dari masyarakat PostgreSQL untuk masalah yang mungkin Anda miliki ketika bekerja dengan database postgreSQL sebagai database open source  Banyak perusahaan menawarkan layanan dukungan komersial dalam kasus Anda memerlukan lebih.
+
 
 
 ## Go dan NoSQL: RethinkDB

@@ -16,6 +16,7 @@ e.       Handal dan selalu tersedia
 
 ![Repository downloads Go](images/middleware.png)
 
+###1.4 Pembahasan
 Middleware sebagai perangkat yang dirancang untuk mendukung Enterprise Arsitektur (EA) sebagai sistem yang tersebar dan saling berhubungan, Ia memiliki beberapa layanan yang bisa digunakan dan dimanfaatkan.
 Contoh layanan Middleware :
 

@@ -49,7 +49,7 @@ J2EE Application Server, Oracle Application Server
 
 ###1.5 Lingkungan Komputasi
  
-#####Pelayanan middleware menyediakan banyak set fungsi dari aplikasi antarmuka pemogramanan yang mengizinkan sebuah aplikasi untuk:
+####Pelayanan middleware menyediakan banyak set fungsi dari aplikasi antarmuka pemogramanan yang mengizinkan sebuah aplikasi untuk:
 1.    Menemukan tempat melewati jaringan secara transparan sehingga dapat menyediakan interaksi dengan service atau aplikasi lainnya.
 2.    Mandiri dari service jaringan.
 3.    Dapat dipercaya dan selalu tersedia.

@@ -47,14 +47,15 @@ J2EE Application Server, Oracle Application Server
 - Lebih detailnya untuk keterangan Middleware sebagai Application Server ialah Sebuah Web-based Application server, yang menyediakan antarmuka untuk berbagai aplikasi,digunakan sebagai middleware antara browser dan aplikasi.
 - J2EE adalah contoh application serverA wide range of server-side processing has been supported by appservers(i.e.;J2EE).
 
-###1.5Lingkungan Komputasi
-
+###1.5 Lingkungan Komputasi
+ 
 #####Pelayanan middleware menyediakan banyak set fungsi dari aplikasi antarmuka pemogramanan yang mengizinkan sebuah aplikasi untuk:
 1.    Menemukan tempat melewati jaringan secara transparan sehingga dapat menyediakan interaksi dengan service atau aplikasi lainnya.
 2.    Mandiri dari service jaringan.
 3.    Dapat dipercaya dan selalu tersedia.
 
 Middleware menawarkan beberapa keuntungan unik dari technologi untuk bisnis dan industri. Sebagai contoh, sistem database tradisional biasanya diletakan dalam lingkungan yang dekat dimana pengguna mengakses sistem menggunakan jaringan terbatas atau intranet. Dengan perkembangan fenomena dari World Wide Web, pengguna dapat mengakses database secara virtual dengan berbagai macam jenis akses dari belahan dunia manapun. Middleware mengalamatkan masalah dari berbagai level interoperbilitas diantara struktur database yang berbeda. Middleware memfasilitasi akses transparan untuk melegalkan sistem manajemen database (DBMS) atau aplikasi lewat sebuah web server tanpa memperhatikan karakteristik spesifik database. 
+
 Perusahaan bisnis sering menggunakan aplikasi middleware untuk menghubungkan informasi dari database departemen, misalnya daftar pembayaran, penjualan, dan penghitungan atau database house dalam lokasi geografi yang bermacam-macam. Dalam tingginya kompetisi komunitas kesehatan, laboratorium membuat luas penggunaan dari aplikasi middleware untuk data mining, sistem informasi laboratorium (LIS) cadangan, dan untuk menggabungkan sistem selama proses penggabungan dua rumah sakit. Middleware menolong menjembatani jarak pemisah antara LIS dalam bentuk baru jaringan kesehatan mengikuti proses pembelian rumah sakit. Pengembang jaringan wireless dapat menggunakan middleware untuk menghadapi tantangan penggabungan dengan sensor jaringan wireless (WSN) atau teknologi WSN. Pengimplementasian sebuah aplikasi middleware mengizinkan pengembang middleware untuk menyatukan sistem operasi dan perangkat keras dengan berbagai macam aplikasi yang tersedia. Middleware dapat menolong pengembang perangkat lunak menghindari penulisan antarmuka program aplikasi (API) untuk setiap pengendali program, dengan cara melayani sebagai sebuah antarmuka pemograman yang berdiri sendiri untuk setiap aplikasi yang dibuat. 
 
 Contoh Middleware:

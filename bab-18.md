@@ -18,12 +18,13 @@ e.       Handal dan selalu tersedia
 
 Middleware sebagai perangkat yang dirancang untuk mendukung Enterprise Arsitektur (EA) sebagai sistem yang tersebar dan saling berhubungan, Ia memiliki beberapa layanan yang bisa digunakan dan dimanfaatkan.
 Contoh layanan Middleware :
+
 ####Transaction Monitor
 1. Produk pertama yang disebut middleware.
 2. Menempati posisi antara permintaan dari program client dan database, untuk menyakinkan bahwa semua transaksi ke database terlayani dengan baik
+
 ####Messaging Middleware
 ![Repository downloads Go](images/layanan.png)
-
 1. Menyimpan data dalam suatu antrian message jika mesin tujuan sedang mati atau overloaded
 2. Berisi business logic yang merutekan message ke ujuan sebenarnya dan memformat ulang data lebih tepat
 3. Sama seperti sistem messaging email, kecuali messaging middleware digunakan untuk mengirim data antar aplikasi

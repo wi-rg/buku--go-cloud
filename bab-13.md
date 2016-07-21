@@ -46,17 +46,6 @@ Sedangkan komponen dari http response :
 
 [gin-gonic/gin](https://github.com/gin-gonic/gin)
 
-1. Download and install it:
-
-	$ go get github.com/gin-gonic/gin
-
-2. Import it in your code:
-
-	import "github.com/gin-gonic/gin"
-
-3. (Optional) Import net/http. This is required for example if using constants such as http.StatusOK.
-
-	import "net/http"
 
 API Examples
 
@@ -82,6 +71,44 @@ func main() {
 }
 
 perinntah diatas digunakan untuk membuat sebuah router gin dengan default middleware.
+
+Parameters in path
+
+func main() {
+    router := gin.Default()
+
+    // This handler will match /user/john but will not match neither /user/ or /user
+    router.GET("/user/:name", func(c *gin.Context) {
+        name := c.Param("name")
+        c.String(http.StatusOK, "Hello %s", name)
+    })
+
+    // However, this one will match /user/john/ and also /user/john/send
+    // If no other routers match /user/john, it will redirect to /user/john/
+    router.GET("/user/:name/*action", func(c *gin.Context) {
+        name := c.Param("name")
+        action := c.Param("action")
+        message := name + " is " + action
+        c.String(http.StatusOK, message)
+    })
+
+    router.Run(":8080")
+}
+Querystring parameters
+
+func main() {
+    router := gin.Default()
+
+    // Query string parameters are parsed using the existing underlying request object.
+    // The request responds to a url matching:  /welcome?firstname=Jane&lastname=Doe
+    router.GET("/welcome", func(c *gin.Context) {
+        firstname := c.DefaultQuery("firstname", "Guest")
+        lastname := c.Query("lastname") // shortcut for c.Request.URL.Query().Get("lastname")
+
+        c.String(http.StatusOK, "Hello %s %s", firstname, lastname)
+    })
+    router.Run(":8080")
+}
 
 
 

@@ -28,15 +28,15 @@ akan dirancang agar setiap fungsi bekerja secara independen, dan setiap fungsi d
 menggunakan teknologi stack yang sesuai dengan kebutuhan, yang artinya akan terdapat
 teknologi yang berbeda - beda dalam satu aplikasi besar.
 
-    Dengan pemisahan aplikasi berdasarkan fungsinya ini, pada akhirnya akan menemui keragaman
+Dengan pemisahan aplikasi berdasarkan fungsinya ini, pada akhirnya akan menemui keragaman
 teknologi dalam sebuah satu layanan, misalkan dari layanan blog yang dapat dipecah menjadi 
 beberapa fungsi utama misalnya : fungsi konten, user management, komentar, rangking, search
 dan lainnya.
-    Pada bagian fungsi konten mungkin kita dapat menggunakan PHP dan mysql, tetapi pada komentar
+Pada bagian fungsi konten mungkin kita dapat menggunakan PHP dan mysql, tetapi pada komentar
 kita menggunakan python dan mongodb, sedangkan di search menggunakan nodejs dan elasticsearch untuk 
 menyimpan datanya. Disini terlihat bahwa setiap fungsi / permasalahan teknis dapat diselesaikan 
 dengan cara dan teknologi yang berbeda - beda.  
-    Dalam konsep microservice, kita tidak hanya melakukan pemisahan di level aplikasi saja, tetapi
+Dalam konsep microservice, kita tidak hanya melakukan pemisahan di level aplikasi saja, tetapi
 dari sisi infrastruktur juga, kita akan menemukan keragaman arsitektur, konfigurasi dan optimalisasi
 sistem yang berbeda, dan sering juga ditemukan jumlah dan spesifikasi server yang tidak sama antara
 service yang satu dengan yang lain.

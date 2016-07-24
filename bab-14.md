@@ -1,10 +1,51 @@
 # Go dan Microservices
+golang dan microservice memiliki konsep yang mirip yaitu servis yang kecil, yang difokuskan
+untuk satu fungnsionalitas tertentu dan berkomunikasi melalui HTTP, TPC atau Message Queue
+    Ketika mempublish API untuk konsumsi umum HTTP dan JSON sudah menjadi standar
+tetapi ada juga alternatif lain untuk komunikasi inter-servis dengan menggunakan library
+protobuf
+            (Protokol buffer adalah cara untuk meng encoding struktur data dengan cara yang efisien
+            dan juga degan format yang dapat di extend atau diperluas/diperbesar
+            google menggunakan protocol buffers untuk hampir semua protokol internal RPC)
 
+berikut ini adalah contoh golang micro-services yang menerima koneksi HTTP/JSON pada level API
+dan kemudian memanfaatkan gRPC untuk komunikasi inter-servis.
+
+![golang micro-services HTTP/JSON](https://cloud.githubusercontent.com/assets/739782/7439604/d1f324c2-f036-11e4-958a-6f6913049946.png)
+
+gambar diatas adalah API endpoint menerima request http pada micro.demo:8080 dan kemudian menghasilkan beberapa 
+RPC request kepada backend servis.
+    NB: Data pada setiap servis disimpan dalam format JSON dan file biasa dimasukan pada direktori /data/
+        pada kenyataannya setiap servis dapat memilih datastore nya sendiri - sendiri. Sebagai contoh
+        Geo servis dapat menggunakan PostGis atau database lain untuk digunakan pada geospacial queries.
 
 ## Memahami Microservices
+microservice adalah istilah untuk salah satu jenis arsitektur software atau aplikasi
+yang bersifat micro(sangat kecil) yang difokuskan untuk satu fungsionalitas tertentu,
+dan tidak sekedar dengan memisahkan berdasarkan user-role atau subdomain saja, tetapi 
+aplikasi akan di breakdown lebih rinci lagi dari sisi fungsionalitasnya. Aplikasi 
+akan dirancang agar setiap fungsi bekerja secara independen, dan setiap fungsi dapat 
+menggunakan teknologi stack yang sesuai dengan kebutuhan, yang artinya akan terdapat
+teknologi yang berbeda - beda dalam satu aplikasi besar.
+
+    Dengan pemisahan aplikasi berdasarkan fungsinya ini, pada akhirnya akan menemui keragaman
+teknologi dalam sebuah satu layanan, misalkan dari layanan blog yang dapat dipecah menjadi 
+beberapa fungsi utama misalnya : fungsi konten, user management, komentar, rangking, search
+dan lainnya.
+    Pada bagian fungsi konten mungkin kita dapat menggunakan PHP dan mysql, tetapi pada komentar
+kita menggunakan python dan mongodb, sedangkan di search menggunakan nodejs dan elasticsearch untuk 
+menyimpan datanya. Disini terlihat bahwa setiap fungsi / permasalahan teknis dapat diselesaikan 
+dengan cara dan teknologi yang berbeda - beda.  
+    Dalam konsep microservice, kita tidak hanya melakukan pemisahan di level aplikasi saja, tetapi
+dari sisi infrastruktur juga, kita akan menemukan keragaman arsitektur, konfigurasi dan optimalisasi
+sistem yang berbeda, dan sering juga ditemukan jumlah dan spesifikasi server yang tidak sama antara
+service yang satu dengan yang lain.
 
 
-
+Sumber : 	google.com 
+			https://github.com/harlow/go-micro-services
+			https://id.techinasia.com/talk/migrasi-microservice-tidak-optimal
+			
 ## Arsitektur Microservices
 
 

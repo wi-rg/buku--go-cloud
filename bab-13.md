@@ -35,7 +35,13 @@ Sedangkan komponen dari http response :
 
 
 ## Pustaka REST untuk Go
-
+Golang menyediakan akses yang lumayan lengkap untuk memenuhi keperluan HTTP client, meskipun begitu masih diperlukan beberapa penambahan seperti thin layer untuk wrapper yang digunakan untuk mempermudah aksesnya, namun jika tidak memerlukan pembuatan wrapper, dapat menggunakan pustaka REST standar yang disediakan oleh Golang.
+Inilah beberapa pustaka untuk Golang : 
+			Gorilla, 
+			Restclient (https://github.com/jmcvetta/restclient) yang dibuat oleh Jason McVetta (https://github.com/jmcvetta),
+			Gin, 
+			Awesome Go, 
+			Elastic
 
 ## RESTful API Menggunakan Pustaka Standar Go
 

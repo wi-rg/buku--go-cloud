@@ -285,6 +285,135 @@ Jika anda memerlukan dukungan apapun, komunitas yang aktif tersedia untuk memban
 
 
 ## Go dan NoSQL: RethinkDB
+Go dan NoSQL: RethinkDB
+GoRethink adalah salah satu driver klien pihak ketiga yang paling populer dan terpelihara dengan baik untuk RethinkDB.
+Untuk baru-baru ini diperbarui driver untuk membuat kompatibel dengan RethinkDB 1,16, menambahkan dukungan untuk changefeeds. Pada fitur concurrency asli, bahasa ini membuatnya mudah untuk mengkonsumsi changefeeds dalam aplikasi realtime Go.
+RethinkDB changefeeds ini menyediakan cara untuk berlangganan aliran update database realtime. 
+Disini kami mengambil kode Go untuk dijadikan contoh,  seperti berikut.
+
+type Issue struct {
+    Description, Type string
+}
+
+db, err := r.Connect(r.ConnectOpts{Address: "localhost:28015"})
+if err != nil {
+    log.Fatal("Database connection failed:", err)
+}
+
+issues, _ := r.Db("rethinkdb").Table("current_issues").Filter(
+    r.Row.Field("critical").Eq(true)).Changes().Field("new_val").Run(db)
+
+go func() {
+    var issue Issue
+    for issues.Next(&issue) {
+      if issue.Type != "" {
+        log.Println(issue.Description)
+      }
+    }
+}()
+
+The ReQL ini menggunakan Filter untuk mencocokkan masalah di mana properti penting membawa nilai  yang sebenarnya.
+The changefeed query ini hanya memancarkan dokumen yang cocok dengan filternya.
+Ketika menerima output dari changefeed, kita langsung dapat membungkus di goroutine, sehingga asynchronous dapat beroperasi di latar belakang bukan menghalangi eksekusi. 
+Menggunakan goroutines untuk pemrograman asynchronous dapat menyederhanakan arsitektur aplikasi realtime yang ada.
+
+Membuat bot IRC
+GoIRC terdapat perpustakaan yang membuatnya relatif mudah untuk membuat IRC bot sederhana. Kode berikut ini kami ambil di buku refrensi, dimana ini untuk menghubungkan ke server IRC dan menginstruksikan bot untuk bergabung dengan saluran tertentu :
+
+ircConf := irc.NewConfig("mybot")
+ircConf.Server = "localhost:6667" 
+bot := irc.Client(ircConf)
+
+bot.HandleFunc("connected", func(conn *irc.Conn, line *irc.Line) {
+    log.Println("Connected to IRC server")
+    conn.Join("#mychannel")
+})
+
+Jika terdapat masalah IRC bot memberikan pemberitahuan, disini hanya menambahkan beberapa baris saja, dari kode sebelumnya :
+
+issues, _ := r.Db("rethinkdb").Table("current_issues").Filter(
+    r.Row.Field("critical").Eq(true)).Changes().Field("new_val").Run(db)
+
+go func() {
+    var issue Issue
+    for issues.Next(&issue) {
+        if issue.Type != "" {
+            text := strings.Split(issue.Description, "\n")[0]
+            message := fmt.Sprintf("(%s) %s ...", issue.Type, text)
+            bot.Privmsg("#mychannel", message)
+        }
+    }
+}()
+
+Disini juga terdapat beberapa perintah dasar dari pengguna. kami ingin program untuk terus berjalan sampai pengguna di channel IRC memberitahu bot untuk berhenti.
+
+quit := make(chan bool, 1)
+...
+bot.HandleFunc("privmsg", func(conn *irc.Conn, line *irc.Line) {
+    log.Println("Received:", line.Nick, line.Text())
+    if strings.HasPrefix(line.Text(), config.IRC.Nickname) {
+        command := strings.Split(line.Text(), " ")[1]
+        switch command {
+        case "quit":
+            log.Println("Received command to quit")
+            quit <- true
+        }
+        ...
+    }
+})
+
+disini menggunakan pernyataan switch supaya lebih mudah untuk memperkenalkan perintah baru di masa depan dengan menambahkan kasus tambahan yang cocok dengan string lainnya. Untuk saat ini masih sangat sederhana. 
+
+
+
+
+
+ Membangun aplikasi web realtime dengan Go dan RethinkDB
+
+IRC ini cukup baik untuk digunakan latihan, tapi disini kami belom mengerti untuk membangun aplikasi web realtime dengan driver Go.
+Tapi kami disini mengambil sebuah contoh dari buku referensi yang kami baca, untuk membangun sebuah versi Go dari aplikasi monitoring klaster sederhana.
+
+server, _ := socketio.NewServer(nil)
+
+conn, _ := r.Connect(r.ConnectOpts{Address: "localhost:28015"})
+stats, _ := r.Db("rethinkdb").Table("stats").Filter(
+    r.Row.Field("id").AtIndex(0).Eq("cluster")).Changes().Run(conn)
+
+go func() {
+    var change r.WriteChanges
+    for stats.Next(&change) {
+        server.BroadcastTo("monitor", "stats", change.NewValue)
+    }
+}()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

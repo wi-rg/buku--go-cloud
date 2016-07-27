@@ -19,19 +19,7 @@ Berikut metode HTTP yang umum digunakan dalam arsitektur berbasis REST.
 •	DELETE, digunakan untuk menghapus resource
 •	POST, digunakan untuk memperbarui resource yang ada atau membuat resource baru
 •	OPTIONS, digunakan untuk mendapatkan operasi yang disupport pada resource
-Bagaimana cara kerja restful web service? Alurnya cukup sederhana sebagai berikut:
-Mula2 sebuah client mengirimkan sebuah data atau request melalui HTTP Request dan kemudian server merespon melalui HTTP Response	.
-Komponen dari http request :
-•	Verb, HTTP method yang digunakan misalnya GET, POST, DELETE, PUT dll.
-•	Uniform Resource Identifier  (URI) untuk mengidentifikasikan lokasi resource pada server.
-•	HTTP Version, menunjukkan versi dari HTTP yang digunakan, contoh HTTP v1.1.
-•	Request Header, berisi metadata untuk HTTP Request. Contoh, type client/browser, format yang didukung oleh client, format dari body pesan, seting cache dll.
-•	Request Body, konten dari data.
-Sedangkan komponen dari http response :
-•	Status/Response Code, mengindikasikan status server terhadap resource yang direquest. misal : 404, artinya resource tidak ditemukan dan 200 response OK.
-•	HTTP Version, menunjukkan versi dari HTTP yang digunakan, contoh HTTP v1.1.
-•	Response Header, berisi metadata untuk HTTP Response. Contoh, type server, panjang content, tipe content, waktu response, dll
-•	Response Body, konten dari data yang diberikan.
+Dalam pengaplikasiannya, REST lebih banyak digunakan untuk web service yang berorientasi pada resource. Maksud orientasi pada resource adalah orientasi yang menyediakan resource-resource sebagai layanannya dan bukan kumpulan kumpulan dari aktifitas yang mengolah resource itu. Resource adalah setiap informasi yang dapat diberikan nama, misalnya twit seseorang, image yang di upload user. Beberapa contoh web service yang menggunakan REST adalah: Flickr API (Application Program Interface), YouTube API, Amazon API.
 
 
 ## Pustaka REST untuk Go

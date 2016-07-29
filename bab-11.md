@@ -174,3 +174,95 @@ lainnya : tidak ada
 
 
 ## Go dan Protocol Buffer
+Protokol Buffer adalah metode serialisasi data terstruktur. Hal ini berguna dalam mengembangkan program-program untuk berkomunikasi satu sama lain melalui sebuah jaringan atau untuk menyimpan data. Metode ini melibatkan bahasa deskripsi antarmuka yang menggambarkan struktur beberapa data dan program yang menghasilkan source codde dari deskripsi untuk menghasilkan atau mengurai aliran byte yang mewakili data terstruktur.
+
+#### Mendefinisikan Format protokol
+Untuk membuat aplikasi buku alamat, yang dilakukan pertama kali dengan membuat file `.proto`. Definisi dalam file `.proto` : Dengan menambahkan pesan untuk setiap struktur data yang ingin diserialisasikan, kemudian tentukan nama dan jenis untuk masing-masing bidang dalam pesan. Contohnya file `.proto` yang sudah mendefinisikan pesan `addressbook.proto`.
+
+File `.proto` dimulai dengan deklarasi paket, yang membantu untuk mencegah konflik penamaan antara proyek yang berbeda.
+```
+syntax = "proto3";
+package tutorial;
+```
+Didalam Go, nama paket digunakan sebagai paket Go, kecuali jika menetapkan sebuah `go_package`. Bahkan jika kita memberikan `go_package`, kita masih harus menentukan paket normal dan juga untuk menghindari tabrakan nama pada Protocol Buffer ruang nama serta bukan dalam bahasa Go.
+
+Selanjutnya, kita mendefinisikan sebuah pesan dengan agregat dengan isi rangkaian yang diketik. Banyak standar tipe data sederhana yang tersedia sebagai jenis isian, termasuk `bool`, `int32`, `float`, `double`, dan `string`. Kita juga dapat menambahkan struktur lebih lanjut untuk pesan dengan menggunakan jenis pesan lain sebagai jenis isian.
+```
+message Person {
+  string name = 1;
+  int32 id = 2;  // Nomor ID untuk Person.
+  string email = 3;
+
+  enum PhoneType {
+    MOBILE = 0;
+    HOME = 1;
+    WORK = 2;
+  }
+
+  message PhoneNumber {
+    string number = 1;
+    PhoneType type = 2;
+  }
+
+  repeated PhoneNumber phones = 4;
+}
+
+// file buku alamat.
+message AddressBook {
+  repeated Person people = 1;
+}
+```
+Contoh di atas, pesan `Person` berisi pesan `PhoneNumber`, sedangkan pesan `AddressBook` berisi pesan `Person`. Kita bahkan dapat menentukan jenis pesan yang bersarang didalam pesan lain - seperti yang kita lihat, jenis `PhoneNumber` didefinisikan dalam `Person`. Kita juga dapat menentukan jenis enum jika kita ingin salah satu dari berapa isian yang kita memiliki dari daftar yang tersedia - disini kita ingin menentukan bahwa nomor telepon dapat menjadi salah satu `MOBILE`, `HOME`, atau `WORK`.
+
+Nilai "= 1", "= 2" sebagai penanda pada setiap elemen mengidentifikasi unik "tag" isian yang digunakan dalam pengkodean biner. Tag nomor 1-15 memerlukan sekurangnya satu byte untuk mengkodekan dari angka yang lebih tinggi, sehingga optimasi kita dapat memutuskan untuk menggunakan tag tersebut untuk elemen yang biasa digunakan atau berulang, meninggalkan tag 16 dan lebih tinggi untuk elemen opsional yang kurang digunakan. Setiap elemen dalam isian yang diulang membutuhkan pengkodean ulang dengan nomor tag, sehingga isian yang diulang adalah kandidat yang sangat baik untuk optimasi ini.
+
+Jika nilai isian tidak diatur, `nilai default`: nol untuk tipe numerik, string kosong untuk string, kesalahan untuk bools. Untuk pesan tertanam, nilai default selalu "ditetapkan" atau "prototipe" pesan, yang tidak memiliki isian yang yang diberikan. Memanggil pengaksesan untuk mendapatkan nilai dari isian yang belum eksplisit selalu diatur untuk mengembalikan nilai default.
+
+Jika isian diulang, mungkin isian dapat diulang beberapa kali (termasuk nol). Urutan nilai berulang akan dipertahankan dalam protocol buffer. Isian yang diulang secara dinamis nilainya berukuran array.
+
+#### Protokol Buffer API
+Menghasilkan addressbook.pb.go memberi kita jenis penggunaan sebagai berikut:
++ Struktur `AddressBook` dengan kolom `People`.
++ Struktur `Person` dengan kolom `Name`, `Id`, `Email` dan `Phones`.
++ Struktur `Person_PhoneNumber`, dengan kolom `Number` dan `Type`.
++ Jenis `Person_PhoneType` dan nilai yang ditetapkan untuk setiap nilai dalam enum `Person.PhoneType`.
+
+Berikut ini adalah contoh dari unit test perintah `list_people` tentang bagaimana kita dapat membuat sebuah perumpamaan dari Person:
+```
+p := pb.Person{
+        Id:    1234,
+        Name:  "John Doe",
+        Email: "jdoe@example.com",
+        Phones: []*pb.Person_PhoneNumber{
+                {Number: "555-4321", Type: pb.Person_HOME},
+        },
+}
+```
+#### Penulisan pesan
+Tujuan menggunakan protocol buffer adalah untuk serialisasi data sehingga bisa diurai ditempat lain. Didalam Go, kita menggunakan library `proto` fungsi `Marshal` untuk serialisasi data protocol buffer. Sebuah pointer ke `struct` pesan protocol buffer mengimplementasikan `proto.Message` antarmuka. Pemanggilan `proto.Marshal` untuk mengembalikan protocol buffer yang dikodekan dalam format wire. Sebagai contoh, kita menggunakan fungsi ini di perintah `add_person`:
+```
+book := &pb.AddressBook{}
+// ...
+
+// Menulis kembali buku alamat yang baru kedalam penyimpanan.
+out, err := proto.Marshal(book)
+if err != nil {
+        log.Fatalln("Gagal untuk mengkodekan buku alamat:", err)
+}
+if err := ioutil.WriteFile(fname, out, 0644); err != nil {
+        log.Fatalln("Gagal untuk menulis buku alamat:", err)
+}
+```
+#### Pesan Pembaca
+Untuk mengurai penkodean pesan, kita menggunakan library `proto` fungsi `Unmarshal`. Pemanggilan ini digunakan untuk mengurai data dalam `buf` sebagai protocol buffer dan menempatkan hasilnya di pb. Jadi untuk mengurai file dalam perintah `list_people`, kami menggunakan:
+```
+// Membaca buku alamat yang sudah ada.
+in, err := ioutil.ReadFile(fname)
+if err != nil {
+        log.Fatalln("Kesalahan membaca file:", err)
+}
+book := &pb.AddressBook{}
+if err := proto.Unmarshal(in, book); err != nil {
+        log.Fatalln("Gagal mengurai buku alamat:", err)
+}
+```

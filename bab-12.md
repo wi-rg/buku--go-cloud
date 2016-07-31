@@ -183,13 +183,21 @@ RawBytes adalah sepotong byte yang memegang referensi ke memori yang dimiliki ol
 ### Tipe Result
 type Result interface {
         // LastInsertId mengembalikan integer yang dihasilkan oleh database
+        
         // dalam menanggapi perintah. Biasanya ini akan terjadi dari
+        
         // "Auto increment" kolom saat memasukkan baris baru. Tidak semua
+        
         // database mendukung fitur ini, dan sintaks seperti
+        
         // pernyataan dapat bervariasi.
+        
         LastInsertId() (int64, error)
+        
         // RowsAffected mengembalikan jumlah baris yang dipengaruhi oleh
+        
         // update, insert, atau delete. Tidak setiap basisdata atau driver database
+        
         // dapat mendukung ini.
         RowsAffected() (int64, error)
 }
@@ -243,14 +251,14 @@ Setiap pemanggilan untuk Scan, bahkan yang pertama, harus didahului dengan pangg
 func (rs *Rows) Scan(dest ...interface{}) error
 Salinan scan kolom pada baris saat ini ke dalam nilai-nilai yang ditunjuk oleh dest. Jumlah nilai di dest harus sama dengan jumlah kolom di Rows.
 Scan mengkonversi kolom yang membaca dari database ke jenis Go umum dan jenis khusus yang disediakan oleh paket sql:
-*string
-*[]byte
-*int, *int8, *int16, *int32, *int64
-*uint, *uint8, *uint16, *uint32, *uint64
-*bool
-*float32, *float64
-*interface{}
-*RawBytes
+- *string
+- *[]byte
+- *int, *int8, *int16, *int32, *int64
+- *uint, *uint8, *uint16, *uint32, *uint64
+- *bool
+- *float32, *float64
+- *interface{}
+- *RawBytes
 any type implementing Scanner (see Scanner docs)
 Dalam kasus yang paling sederhana, jika jenis value dari kolom sumber adalah integer, bool atau string jenis T dan dest adalah tipe *T, Scan hanya memberikan nilai melalui pointer.
 Scan juga mengubah antara string dan tipe numerik, selama tidak ada informasi akan hilang. Sementara Scan stringifies semua nomor dipindai dari kolom database yang numerik ke *string, scan menjadi tipe numerik diperiksa untuk overflow. Misalnya, float64 dengan nilai 300 atau string dengan nilai "300" dapat di Scan ke uint16, tapi tidak ke uint8, meskipun float64 (255) atau "255" dapat di scan ke uint8 a. Satu pengecualian adalah bahwa scan dari beberapa nomor float64 ke string mungkin kehilangan informasi ketika stringifying. Secara umum, memindai floating point kolom ke *float64.
@@ -263,19 +271,33 @@ Untuk scanning ke *bool, sumber mungkin benar, salah, 1, 0, atau input string ya
 ### Tipe Scanner
 type Scanner interface {
         // scan memberikan nilai dari database driver.
+        
         //
+        
         // Nilai src akan menjadi salah satu dari jenis berikut:
+        
         //
+        
         // int64
+        
         // float64
+        
         // bool
+        
         // [] Byte
+        
         // string yang
+        
         // time.Time
+        
         // Nol - untuk nilai-nilai NULL
+        
         //
+        
         // Kesalahan harus dikembalikan jika nilai tidak dapat disimpan
+        
         // tanpa kehilangan informasi.
+        
         Scan(src interface{}) error
 }
 Scanner adalah sebuah antarmuka yang digunakan oleh Scan.
@@ -406,9 +428,12 @@ Is Value reports whether v adalah jenis Nilai parameter yang valid. Tidak sepert
 
 ### Tipe ColumnConverter
 type ColumnConverter interface {
-   // ColumnConverter mengembalikan ValueConverter untuk diberikan
+        // ColumnConverter mengembalikan ValueConverter untuk diberikan
+        
          // Indeks kolom. Jika jenis kolom tertentu tidak diketahui
+         
          // Atau tidak harus ditangani secara khusus, DefaultValueConverter
+         
          // Dapat dikembalikan.
          ColumnConverter (idx int) ValueConverter
 }
@@ -417,17 +442,29 @@ ColumnConverter mungkin opsional dilaksanakan oleh Stmt jika pernyataan sadar ak
 ### Tipe Conn
 type Conn interface {
         // Menyiapkan kembali sebuah pernyataan, terikat pada hubungan ini.
+        
          Prepare(query string) (Stmt, error)
+         
         // Menutup yang tidak valid dan berpotensi berhenti saat apapun
+        
         // prepared statement dan transaksi, menandai ini
+        
         // koneksi seperti tidak lagi digunakan.
+        
         //
+        
         // Karena paket sql memelihara pool bebas dari
+        
         // koneksi dan hanya panggilan Tutup ketika ada surplus dari
+        
         // koneksi idle, seharusnya tidak perlu driver untuk
+        
         // melakukan caching koneksi mereka sendiri.
+        
         Close() error
+        
         // Mulailah start dan returns sebuah transaksi baru.
+        
         Begin() (Tx, error)
 }
 Conn adalah koneksi ke database. Hal ini tidak digunakan secara bersamaan oleh beberapa goroutines. Conn diasumsikan untuk menjadi stateful.
@@ -435,14 +472,23 @@ Conn adalah koneksi ke database. Hal ini tidak digunakan secara bersamaan oleh b
 ### Tipe Driver
 type Driver interface {
         // Buka kembali sambungan baru ke database.
+        
         // Nama adalah string dalam format sebuah driver-spesifik.
+        
         //
+        
         // Dapat dibuka kembali koneksi cache (yang sebelumnya
+        
         // ditutup), namun hal ini tidak perlu; paket sql
+        
         // memelihara pool dari koneksi idle agar efisien saat digunakan kembali.
+        
         //
+        
         // Returned connection hanya digunakan oleh satu goroutine pada satu
+        
         // waktu.
+        
         Open(name string) (Conn, error)
  }
 Driver adalah interface yang harus diimplementasikan oleh driver database.
@@ -484,11 +530,17 @@ Query dapat kembali ErrSkip.
 ### Tipe Result
 type Result interface {
         // LastInsertId mengembalikan ID otomatis yang dihasilkan database ini
+        
         // setelah, misalnya, INSERT ke tabel dengan
+        
         // kunci primer.
+        
         LastInsertId() (int64, error)
+        
         // RowsAffected mengembalikan jumlah baris yang dipengaruhi oleh
+        
         // query.
+        
         RowsAffected() (int64, error)
 }
 Hasilnya adalah hasil dari eksekusi query.
@@ -496,21 +548,37 @@ Hasilnya adalah hasil dari eksekusi query.
 ### Tipe Rows
 type Rows interface {
         // Kolom yang mengembalikan nama-nama dari kolom. Jumlah
+        
         // kolom hasilnya disimpulkan dari panjang
+        
         // slice. Jika nama kolom tertentu tidak diketahui, sebuah string kosong
+        
         // yang harus dikembalikan untuk masuk.
+        
         Columns() []string
+        
         // Tutup menutup baris iterator.
+        
         Close() error
+        
         // Berikutnya dipanggil untuk mengisi baris berikutnya dari data ke dalam
+        
         // slice yang disediakan. Slice yang disediakan akan sama
+        
         // ukurannya dengan columns() lebar.
+        
         //
+        
         // Slice dest dapat hanya diisi dengan
+        
         // sebuah driver tipe Value, tetapi tidak termasuk string.
+        
         // Semua nilai-nilai string harus dikonversi ke [] byte.
+        
         //
+        
         // Berikutnya harus kembali io. EOF ketika tidak ada lagi baris.
+        
         Next(dest []Value) error
 }
 Rows adalah iterator atas hasil query dieksekusi.
@@ -526,25 +594,45 @@ func (v RowsAffected) RowsAffected() (int64, error)
 ### Tipe Stmt
 type Stmt interface {
         // Close menutup pernyataan. 
+        
         //
+        
         // Sampai Go 1.1, Stmt yang tidak akan ditutup jika digunakan
+        
         // oleh beberapa pertanyaan.
+        
         Close() error
+        
         // NumInput mengembalikan jumlah parameter placeholder.
+        
         //
+        
         // Jika NumInput mengembalikan > = 0, paket sql akan melakukan cek kewajaran
+        
         // menghitung argumen dari pemanggil dan mengembalikan kesalahan ke pemanggil
+        
         // sebelum pernyataan Exec atau Query methods dipanggil.
+        
         //
+        
         // NumInput juga dapat kembali -1, jika driver tidak mengetahui
+        
         // jumlah placeholder. Dalam hal ini, paket sql
+        
         // tidak akan memeriksa kewajaran jumlah argumen Exec atau Query.
+        
         NumInput() int
+        
         // Exec mengeksekusi sebuah query yang tidak dapat kembali ke baris, seperti
+        
         // INSERT atau UPDATE.
+        
         Exec(args []Value) (Result, error)
+        
         // Query mengeksekusi sebuah query yang dapat kembali ke baris, seperti
+        
         // SELECT.
+        
         Query(args []Value) (Rows, error)
 }
 Stmt adalah sebuah prepared statement. Hal ini terikat dengan Conn dan tidak digunakan oleh beberapa goroutines bersamaan.

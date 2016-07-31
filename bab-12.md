@@ -21,7 +21,7 @@
 
 
 ## Driver Go untuk Akses Basis Data
-jenis Conn
+tipe Conn
 type Conn interface {
         // Menyiapkan kembali sebuah pernyataan, terikat pada hubungan ini.
          Prepare(query string) (Stmt, error)
@@ -40,7 +40,7 @@ type Conn interface {
 }
 Conn adalah koneksi ke database. Hal ini tidak digunakan secara bersamaan oleh beberapa goroutines. Conn diasumsikan untuk menjadi stateful.
 
-jenis Driver
+tipe Driver
 type Driver interface {
         // Buka kembali sambungan baru ke database.
         // Nama adalah string dalam format sebuah driver-spesifik.
@@ -55,7 +55,7 @@ type Driver interface {
 }
 Driver adalah interface yang harus diimplementasikan oleh driver database.
 
-jenis Execer
+tipe Execer
 type Execer interface {
         Exec(query string, args []Value) (Result, error)
 }
@@ -63,25 +63,25 @@ Execer adalah sebuah antarmuka opsional yang dapat diimplementasikan oleh Conn.
 Jika sebuah Conn tidak mengimplementasikan Execer, paket sql ini DB. Exec akan mempersiapkan query pertama, mengeksekusi pernyataan, dan kemudian tutup pernyataan tersebut.
 Exec dapat kembali ke ErrSkip.
 
-jenis NotNull
+tipe NotNull
 type NotNull struct {
         Converter ValueConverter
 }
-NotNull adalah jenis yang mengimplementasikan ValueConverter oleh pelarangan nilai nol tetapi sebaliknya mendelegasikan ke ValueConverter lain.
+NotNull adalah tipe yang mengimplementasikan ValueConverter oleh pelarangan nilai nol tetapi sebaliknya mendelegasikan ke ValueConverter lain.
 
 func (NotNull) ConvertValue
 func (n NotNull) ConvertValue(v interface{}) (Value, error)
 
-jenis Null
+tipe Null
 type Null struct {
         Converter ValueConverter
 }
-Null adalah jenis yang mengimplementasikan ValueConverter dengan memungkinkan nilai-nilai nol tetapi sebaliknya mendelegasikan ke ValueConverter lain.
+Null adalah tipe yang mengimplementasikan ValueConverter dengan memungkinkan nilai-nilai nol tetapi sebaliknya mendelegasikan ke ValueConverter lain.
 
 func (Null) ConvertValue
 func (n Null) ConvertValue(v interface{}) (Value, error)
 
-jenis Queryer
+tipe Queryer
 type Queryer interface {
         Query(query string, args []Value) (Rows, error)
 }
@@ -89,7 +89,7 @@ Queryer adalah sebuah antarmuka opsional yang dapat diimplementasikan oleh Conn.
 Jika Conn tidak mengimplementasikan Queryer, paket sql ini DB. Query akan mempersiapkan query pertama, mengeksekusi pernyataan, dan kemudian menutup pernyataan tersebut.
 Query dapat kembali ErrSkip.
 
-jenis Result
+tipe Result
 type Result interface {
         // LastInsertId mengembalikan ID otomatis yang dihasilkan database ini
         // setelah, misalnya, INSERT ke tabel dengan
@@ -101,7 +101,7 @@ type Result interface {
 }
 Hasilnya adalah hasil dari eksekusi query.
 
-jenis Rows
+tipe Rows
 type Rows interface {
         // Kolom yang mengembalikan nama-nama dari kolom. Jumlah
         // kolom hasilnya disimpulkan dari panjang
@@ -123,7 +123,7 @@ type Rows interface {
 }
 Rows adalah iterator atas hasil query dieksekusi.
 
-jenis RowsAffected
+tipe RowsAffected
 type RowsAffected int64
 RowsAffected mengimplementasikan Result untuk INSERT atau UPDATE operasi yang bermutasi ke sejumlah baris.
 
@@ -133,7 +133,7 @@ func (RowsAffected) LastInsertId() (int64, error)
 func (RowsAffected) RowsAffected
 func (v RowsAffected) RowsAffected() (int64, error)
 
-jenis Stmt
+tipe Stmt
 type Stmt interface {
         // Close menutup pernyataan. 
         //
@@ -162,16 +162,16 @@ type Stmt interface {
 }
 Stmt adalah sebuah prepared statement. Hal ini terikat dengan Conn dan tidak digunakan oleh beberapa goroutines bersamaan.
 
-jenis Tx
+tipe Tx
 type Tx interface {
         Commit() error
         Rollback() error
 }
 Tx adalah sebuah transaksi.
 
-jenis Value
+tipe Value
 type Value interface{}
-Value adalah nilai yang driver harus mampu menangani. Itu baik nol atau turunan dari salah satu jenis:
+Value adalah nilai yang driver harus mampu menangani. Itu baik nol atau turunan dari salah satu tipe:
 int64
 float64
 bool
@@ -179,7 +179,7 @@ bool
 string [*] di manapun kecuali dari Rows. Next.
 time.Time
 
-jenis ValueConverter
+tipe ValueConverter
 type ValueConverter interface {
         // ConvertValue converts a value to a driver Value.
         ConvertValue(v interface{}) (Value, error)
@@ -187,13 +187,13 @@ type ValueConverter interface {
 ValueConverter adalah antarmuka yang menyediakan metode ConvertValue.
 Berbagai implementasi dari ValueConverter disediakan oleh paket driver untuk menyediakan implementasi yang konsisten dari konversi antara driver. ValueConverters memiliki beberapa kegunaan:
 
-* Mengkonversi dari jenis Value yang disediakan oleh paket sql  menjadi tipe kolom tertentu pada tabel database dan memastikan itu  cocok, seperti memastikan suatu int64 tertentu sesuai dalam kolom uint16 tabel.
+* Mengkonversi dari tipe Value yang disediakan oleh paket sql  menjadi tipe kolom tertentu pada tabel database dan memastikan itu  cocok, seperti memastikan suatu int64 tertentu sesuai dalam kolom uint16 tabel.
 
-* Mengkonversi nilai seperti yang diberikan dari database ke dalam salah satu  jenis driver Value.
+* Mengkonversi nilai seperti yang diberikan dari database ke dalam salah satu  tipe driver Value.
 
-* Dengan paket sql, untuk mengkonversi dari tipe driver Value jenis pengguna di scan.
+* Dengan paket sql, untuk mengkonversi dari tipe driver Value tipe pengguna di scan.
 
-jenis Valuer
+tipe Valuer
 type Valuer interface {
         // Value returns a driver Value.
         Value() (Value, error)

@@ -2,169 +2,38 @@
 
 ## Pengertian Serialisasi
 
+Serialisasi adalah proses pengubahan suatu objek menjadi urutan `bit` agar dapat disimpan pada media penyimpanan (seperti berkas komputer, atau pada memori) atau ditransimisikan melalui saluran koneksi jaringan. Sewaktu rangkaian `bit` ini dibaca ulang sesuai dengan format serialisasinya, ia dapat digunakan untuk menciptakan `clone` identik secara `semantis` dari objek aslinya. Bagi banyak objek kompleks, misalnya objek yang banyak menggunakan rujukan, proses ini tidak dapat dilakukan begitu saja. Proses serialisasi objek ini biasa disebut penyusunan (`marshalling`) objek. Sedangkan operasi kebalikannya, yaitu penyusunan kembali bit menjadi struktur data utuh disebut pembongkaran (`unmarshalling`) objek. 
 
 ## Penggunaan Serialisasi
 
+Serialisasi digunakan sebagai :
+*Cara untuk melakukan penyimpanan objek yang lebih mudah dibandingkan menuliskan properti atas objek-objek tersebut ke dalam berkas teks, dan mengembalikannya sebagai objek.
+*Salah satu proses yang dilakukan dalam pemanggilan prosedur jarak jauh (`remote procedure call`), contoh `SOAP`
+*Salah satu cara untuk mendistribusikan objek, khususnya dalam arsitektur berbasis komponen, contoh, `COM`, `CORBA`, dll.
+*Salah satu cara untuk mendeteksi perubahan data dalam satu periode waktu tertentu.
 
+Agar fungsi serialisasi dapat memberikan manfaat seperti tujuan awalnya, arsitektur perangkat lunak yang independen harus dikelola secara konsisten. Misalnya, agar dapat berfungsi maksimal dalam hal pendistribusian, komputer yang memiliki arsitektur hardware yang berbeda harus pula dapat merekonstruksi aliran data yang telah diserialisasi secara reliabel. Tujuan dari serialisasi struktur data dalam arsitektur independen adalah agar data tersebut secara reliabel dapat dibaca, direkonstruksi secara mudah pada platform-platform lain. Hal ini berarti data yang berasal dari prosedur konvensional yang serderhana, berunjuk kerja tinggi, yang secara langsung menyalin blok-blok memori komputer biasanya tidak akan dapat digunakan pada arsitektur yang lain.
+ 
 ## Format Serialisasi
 
+Pada akhir 1990-an, atas desakan kebutuhan untuk menyediakan layanan protokol standar serialisasi alternatif yang lebih dapat dimengerti atau mudah dipahami oleh orang maka terciptalah `text-based encoding XML`. Pengkodean ini berguna untuk objek tetap yang dapat dibaca dan dipahami oleh manusia, atau komunikasi antar sistem tanpa memperhatikan bahasa pemrograman. Kekurangan dari pengkodean ini adalah kemampuan `byte-stream-based encoding`-nya berkurang banyak, tetapi seiring dengan perkembangan media penyimpanan data dan kapasitas pengiriman yang semakin pesat membuat masalah ini tidak terlalu penting seperti diawal era dunia komputer. `Binary XML` diperkenalkan, dimana `Binary XML` ini tidak dapat dibaca oleh text-editor biasa namun memiliki kemampuan penyimpanan data yang lebih baik dri `XML` biasa. Pada tahun 2000-an, XML sering digunakan untuk asinkronus transfer data antara `client` dan `server` dalam `web applications AJAX`.
+
+`JSON` yang notabene lebih ringan daripada `XML` yang mana lebih umum digunakan untuk komunikasi antar `client-server` dalam aplikasi web. `JSON` berbasis `Javascript syntax` namun tetap support dengan bahasa pemrograman lainnya.
+
+Alternatif lainnya adalah `YAML` yang tidak lain adalah pasangan terbaik untuk `JSON` membuatnya lebih powerful dalam serialisasi, lebih `human friendly`, dan jauh lebih ringkas. Fitur-fitur ini termasuk konsep penandaan jenis data, dukungan untuk struktur data non-hirarkis, pilihan untuk membuat struktur data dengan indentasi, dan berbagai bentuk `scalar data quoting`.
+
+Format serialiasi lain yang dapat dipahami manusia yaitu `property list` yang sering digunakan pada `NeXTSTEP`, `GNUstep`, dan `OS X Cocoa`.
+
+Untuk volume data ilmiah yang lebih besar, sepeti data satelit dan output numerik dari iklim, cuaca, atau model laut, telah dikembangkan standar serialisasi khusus diantaranya `HDF`, `netCDF` dan `GRIB` yang lama.  
 
 ## Go dan XML
 
 
 
 ## Go dan JSON
-#### Definisi
-`JSON` (JavaScript Object Notation) adalah format pertukaran data yang ringan, mudah dibaca dan ditulis oleh manusia, serta mudah diterjemahkan dan dibuat (generate) oleh komputer. Format ini dibuat berdasarkan bagian dari [Bahasa Pemprograman JavaScript](http://javascript.crockford.com/), [Standar ECMA-262 Edisi ke-3 - Desember 1999](http://www.ecma-international.org/publications/files/ecma-st/ECMA-262.pdf). JSON merupakan format teks yang tidak bergantung pada bahasa pemprograman apapun karena menggunakan gaya bahasa yang umum digunakan oleh programmer keluarga C termasuk C, C++, C#, Java, JavaScript, Perl, Python dll termasuk pada Golang yang akan kita bahas kal ini. Oleh karena sifat-sifat tersebut, menjadikan JSON ideal sebagai bahasa pertukaran-data.
 
-Dengan paket JSON ini kita dapat membaca dan menulis data JSON dari program Go.
 
-#### Encoding
-Encoding atau mengkonvert variable dalam Go ke string dengan format json. Fungsi yang dapat digunakan untuk encoding yaitu :
-```
-func Marshal(v interface{}) ([]byte, error)
-```
-Contoh :
-```
-package main
 
-import (
-	"fmt"
-	"encoding/json"
-)
-
-type MyStruct struct {
-	Name   string
-	Height int32
-	Score  float32
-	Exam   []string
-}
-
-func main() {
-	s := &MyStruct{"Apin", 160, 85.5, []string{"Math", "History"}}
-	if jsonStr, err := json.Marshal(s); err == nil {
-		fmt.Println(string(jsonStr))
-	}
-}
-```
-Output :
-
-```
-{"Name":"Apin","Height":160,"Score":85.5,"Exam":["Math","History"]}
-```
-Dari output diatas dapat diartikan bahwa nama key dari json sesuai dengan nama variable dalam struct tersebut. Jika kita menginginkan key berbeda dengan nama variable kita dapat menggunakan struct tag, perhatikan code dibawah ini :
-
-```
-package main
-
-import (
-	"encoding/json"
-	"fmt"
-)
-
-type MyStruct struct {
-	Name   string   `json:"nama"`
-	Height int32    `json:"tinggi"`
-	Score  float32  `json:"nilai"`
-	Exam   []string `json:"ulangan"`
-	Other  string   `json:"-"`
-}
-
-func main() {
-	s := &MyStruct{"Apin", 160, 85.5, []string{"Math", "History"}, "Lain-lain"}
-	if jsonStr, err := json.Marshal(s); err == nil {
-		fmt.Println(string(jsonStr))
-	}
-}
-```
-Maka outputnya :
-```
-{"nama":"Apin","tinggi":160,"nilai":85.5,"ulangan":["Math","History"]}
-```
-Jika kita ingin meng-ignore atau tidak ingin encode ke json, kita dapat menggunakan json:”-” pada tag di struct nya.
-
-#### Decoding
-Kebalikan dari encoding, decoding yaitu membuat variable Go dengan string json. Kita dapat menggunakan fungsi berikut :
-```
-func Unmarshal(data []byte, v interface{}) error
-```
-Penggunaannya mirip dengan encoding sebelumnya, dan berikut contoh penggunakaannya.
-
-```
-package main
-
-import (
-	"encoding/json"
-	"fmt"
-)
-
-type MyStruct struct {
-	Name   string   `json:"nama"`
-	Height int32    `json:"tinggi"`
-	Score  float32  `json:"nilai"`
-	Exam   []string `json:"ulangan"`
-	Other  string   `json:"-"`
-}
-
-func main() {
-	str := `{"nama":"Apin","tinggi":160,"nilai":85.5,"ulangan":["Math","History"], "lainnya": "tidak ada"}`
-	mystruct := &MyStruct{}
-	if err := json.Unmarshal([]byte(str), mystruct); err == nil {
-		fmt.Printf("%#v\n", mystruct)
-	}
-}
-```
-Output :
-```
-&main.MyStruct{Name:"Apin", Height:160, Score:85.5, Exam:[]string{"Math", "History"}, Other:""}
-```
-Sama dengan encoding sebelumnya kita dapat menggunakan tag pada struct. Jika tidak ada tag struct maka akan menggunakan nama dari variable pada struct tersebut.
-
-#### Encoding dan Decoding ke map
-Selain encoding dan decoding pada struct, Go juga dapat mengdecoding dan encoding ke map dengan tipe `map[string]interface{}`. Perhatikan contoh dibawah untuk lebih jelas
-```
-package main
-
-import (
-	"encoding/json"
-	"fmt"
-)
-
-func main() {
-	//encoding
-		fmt.Println("--ENCODING--")
-	mymap := make(map[string]interface{})
-	mymap["nama"] = "Rudi"
-	mymap["ulangan"] = []string{"Fisika", "Sejarah"}
-	mymap["object"] = map[string]interface{}{"key": "value"}
-	jsonstr, _ := json.Marshal(mymap)
-	fmt.Println(string(jsonstr))
-
-	//decoding
-	fmt.Println("\n--DECODING--")
-	str := `{"nama":"Apin","tinggi":160,"nilai":85.5,"ulangan":["Math","History"], "lainnya": "tidak ada"}`
-	m := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(str), &m); err == nil {
-		for key, val := range(m) {
-			fmt.Println(key, ":", val)
-		}
-	} else {
-		fmt.Println(err)
-	}
-}
-```
-Output :
-```
---ENCODING--
-{"nama":"Rudi","object":{"key":"value"},"ulangan":["Fisika","Sejarah"]}
-
---DECODING--
-nama : Apin
-tinggi : 160
-nilai : 85.5
-ulangan : [Math History]
-lainnya : tidak ada
-```
 ## Go dan YAML
 
 
@@ -174,3 +43,6 @@ lainnya : tidak ada
 
 
 ## Go dan Protocol Buffer
+
+
+

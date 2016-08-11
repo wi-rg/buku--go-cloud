@@ -90,8 +90,8 @@ SELECT adalah perintah yang paling sering digunakan pada SQL, sehingga kadang-ka
 
 SELECT adalah yang perintah paling sering SQL digunakan dan mempunyai format umum yang berikut:
 
-SELECT    [DISTINCT / ALL] {* I [columnExpression [AS newName]] [,�..]}
-FORM    TableName [alias] [,�..]
+SELECT    [DISTINCT / ALL] {* I [columnExpression [AS newName]] [,…..]}
+FORM    TableName [alias] [,…..]
 [WHERE    condition]
 [GROUP BY Column list] [HAVING condition]
 [ORDER BY Column list]
@@ -114,36 +114,78 @@ Kondisi dapat dihubungkan dengan operator logika, misalnya AND, OR, dan sebagain
 
 
 ### Basis Data NoSQL
-Mari Mengenal Database NoSQL (Not Only SQL) - Pada kesempatan kali ini, kita akan membahas tentang sebuah teknologi yang sangat menarik dalam dunia pengolahan database yaitu NoSQL. Jika sebelumnya kita mengenal berbagai macam jenis database sebagai RDBMS (Relational Database Management System) dengan teknologi utamanya adalah SQL (Structured Query Language). Database NoSQL merupakan lawan dari SQL ini. NoSQL merupakan singkatan dari Not Only SQL, dan menurut beberapa sumber NoSQL adalah sebuah konsep mengenai penyimpanan data non-relasional yang berbeda dengan model basis data relasional yang selama ini digunakan. NoSQL menggunakan beberapa metode yang berbeda-beda. Metode ini bergantung dari jenis database yang digunakan. Karena NoSQL sendiri merupakan konsep database dan pada implementasinya, banyak jenis-jenis dari NoSQL ini. 
+Pengenalan Basisdata NoSQL NoSQL adalah sebuah konsep mengenai penyimpanan data non-relasional. Berbeda dengan model basis data relasional yang selama ini digunakan, NoSQL menggunakan beberapa metode yang berbeda-beda. Metode ini bergantung dari jenis database yang digunakan. Karena NoSQL sendiri merupakan konsep database, dan pada implementasinya, banyak jenis-jenis dari NoSQL ini.
 
-Kelebihan utama dari NoSQL adalah untuk menangani Big Data (data dengan jumlah besar yang melebihi proses kapasitas konversi dari sistem database yang ada) dimana data terus-menerus berkembang dan dimana data tersebut sangat kompleks sehingga sebuah database relational tidak lagi bisa mengakomodir. Salah satu bentuknya adalah ketika suatu data saling berhubungan satu sama lain, maka akan muncul proses duplikasi data. Dimana data saling memanggil ke beberapa permintaan, tambahan data baru, perubahan data dan lain-lain dengan key yang sama. 
+NoSQL sangat berguna pada data-data yang terus-menerus berkembang, dimana data tersebut sangat kompleks sehingga sebuah database relational tidak lagi bisa mengakomodir. Salah satu bentuknya adalah ketika suatu data saling berhubungan satu sama lain, maka akan muncul proses duplikasi data. Dimana data saling memanggil ke beberapa permintaan, tambahan data baru, perubahan data, dan lain-lain dengan key yang sama. Karena faktor hubungan antar data yang sama terjadi terus-menerus, mendorong faktor redudansi data, data menjadi berlipat-lipat(terjadi kesamaan data pada banyak tempat) dan pada akhirnya akan menyebabkan crash pada database berkonsep RDBMS (Relational database management system).
 
-Karena faktor hubungan antar data yang sama terjadi terus-menerus, mendorong faktor redudansi/duplikasi data, data menjadi berlipat-lipat, dan pada akhirnya akan menyebabkan crash pada database yang berkonsep RDBMS itu, maka harus ada cara lain untuk menanggulangi masalah ini, dan NoSQL inilah solusinya. NoSQL menyederhanakan proses yang terjadi dalam sistem basis data relasional. Dimana hal-hal yang menyebabkan redudansi/duplikasi dihilangkan sehingga trafik server akan seimbang. Penyederhanaan proses ini memungkinkan data direplikasi di banyak server secara mudah dan menjamin ketersediaan data. 
+Contoh nyata penjelasan diatas bisa dilihat pada situs jejaring sosial, FACEBOOK.COM. Pernahkah terpikirkan 'sebesar apa server penyimpanan facebook dengan anggota ribuan orang tersebut?' 'Bagaimana kalau setengah dari member facebook adalah orang-orang yang narsis sehingga dibutuhkan storage yang sangat besar hanya untuk menyimpan foto seluruh member?' 'Berapa besar ukuran yang dibutuhkan facebook pada servernya?'.
 
-Kelebihan lain yang dimiliki oleh database NoSQL ini adalah kecepatan dalam hal pencarian data. Sebagai contoh Google, salah satu perusahaan yang telah mengaplikasikan NoSQL dalam database pencariannya. Pencarian yang ada di Google sangatlah cepat. Hanya dalam beberapa detik saja, data yang ingin kita cari sesuai keyword akan muncul, padahal kita tahu sendiri database Google sangatlah besar. 
+Untuk menanggulangi hal tersebut-lah kemudian dikenal suatu cara penataan Database yang disebut Basisdata NoSQL.
+
+MACAM-MACAM DATABASE NOSQL Dalam NoSQL, terdapat berbagai macam bentuk database dengan schema dan konsepnya sendiri. Sama halnya dengan database SQL yang seperti teman-teman kenal seperti MySQL, SQL Server, Oracle, PostgreSQL, dan lain-lain. Dalam NoSQL, terdapat MongoDB, CouchDB, Riak, dan lain-lain. Berikut ini adalah beberapa contoh dari database NoSQL yang sudah cukup banyak dikenal dan digunakan oleh kebanyakan orang, namun kami akan bahas beberapa saja, diantaranya yaitu:
+
+MongoDB MongoDB adalah database open source yang sudah dikembangkan sejak Oktober 2007 dan dipublikasikan pada februari 2009. MongoDB merupakan salah satu database yang berbasis document (Document-Oriented Database). Dari segi performa MongoDB 4 kali lebih cepat dibandingkan MySQL. Dikarenakan konsep MongoDB berbasis document maka MongoDB tidak memiliki table, kolom maupun baris namun yang ada adalah collection (tabel) dan document (record). Data modelnya disebut dengan BSON yang strukturnya mirip dengan JSON.
+Konsep key-value yang ada pada MongoDB, setiap document otomatis memiliki index id yang unik yang membantu mempercepat proses pencarian data secara global.
+
+"Pada MongoDb kita tidak mengenal istilah RELASI karena kita bepikir dalam kerangka dokumen. Semua yang kita butuhkan diletakkan didalam sebuah dokumen."
+
+    Kelebihan MongoDB sendiri memiliki beberapa kelebihan yaitu :
+    1.  Performa lebih cepat disbanding MySQL
+    2.  Replikasi dilakukan secara realtime
+    3.  Auto sharding à fitur memecah database yang besar menjadi beberapa bagian
+    4.  Mendukung beberapa macam bahasa pemrograman
+    5.  Dapat digunakan di berbagai macam platform seperti Windows, Linux dll
+    6.  CRUD (Create Read Update Delete) sangat ringan
+    7.  GridFS, Spesifikasi yang digunakan untuk menyimpan data yang sangat besar
+    8.  Dengan konsep key-value, setiap document otomatis memiliki index id yang unik.
+
+Adapun Kelemahan dari MongoDB sendiri yaitu :
+    1.  Tidak mendukung transaction SQL
+untuk contoh Pembahasan, Cara Penggunaan dan Tambahan Topik dapat dilihat langsung pada: https://en.wikipedia.org/wiki/MongoDB
+untuk contoh tambahan Penggunaan Dokumen MongoDB dapat dilihat langsung pada: https://docs.mongodb.com/ dan www.tutorialspoint.com/mongodb/
+untuk Mendapatkan https://www.mongodb.com/
+
+Cassandra Apache adalah sebuah aplikasi database berbasis Bigtabel’s Data. Dikutip dari situs resminya, Database Apache Cassandra adalah pilihan yang tepat ketika Anda membutuhkan skalabilitas dan ketersediaan tinggi tanpa mengorbankan kinerja. Skalabilitas linear dan terbukti toleransi kesalahan pada perangkat keras komoditas atau infrastruktur cloud membuatnya menjadi platform yang sempurna untuk misi-data penting. Dukungan Cassandra untuk mereplikasi di beberapa pusat data yang terbaik di kelasnya, memberikan latency rendah untuk pengguna Anda dan ketenangan pikiran mengetahui bahwa Anda dapat bertahan hidup padam daerah. ColumnFamily Cassandra data model menawarkan kenyamanan indeks kolom dengan kinerja log-terstruktur update, dukungan yang kuat untuk pandangan terwujud, dan kuat built-in caching. Cassandra Dikembangkan oleh APACHE. Aplikasi Inilah yang digunakan facebook untuk penyimpanan miliayaran data hingga saat ini. (http://cassandra.apache.org/)
+Secara garis besar, Basis data NoSQL Cassandra dapat menangani data dalam jumlah yang besar (Big Data). Cassandra secara otomatis mereplikasi Data ke simpul (node) yang mendukung replikasi di beberapa pusat data yang terkait. Dengan arsitektur desentralisasi seperti ini risiko kegagalan penyimpanan data dapat meminimalkan secara default.
+
+Beberapa Fitur Utama Cassandra:
+    
+    - Desentralisasi: Setiap node di cluster memiliki peran yang sama. Tidak ada single point of failure. Data didistribusikan lintas cluster (sehingga setiap node berisi data yang berbeda), namun tidak ada master karena setiap node dapat melayani permintaan apapun yang sama. Mendukung replikasi dan replikasi di multi data center: Strategi replikasi dapat dikonfigurasi. Cassandra dirancang sebagai sistem terdistribusi, untuk penyebaran sejumlah besar node di beberapa pusat data. Fitur utama dari arsitektur terdistribusi Cassandra adalah secara khusus dirancang untuk penyebaran di multi-pusat data, untuk redundansi, untuk failover dan pemulihan dari bencana.
+
+    - Skalabilitas: Membaca dan menulis throughput yang baik meningkat secara linear ketika mesin baru ditambahkan, tanpa downtime atau dampak gangguan pada aplikasi.
+
+    - Fault-tolerant: Data secara otomatis direplikasi ke beberapa node untuk toleransi kesalahan. Replikasi di beberapa pusat data didukung. Node gagal dapat diganti tanpa downtime.
+
+    - Penyetelan secara konsisten: Menulis dan membaca menawarkan tingkat penyetelan secara konsisten, sepanjang jalan dari “menulis tidak pernah gagal” untuk “blok untuk semua replika agar dapat dibaca”, dengan tingkat kuorum di tengah.
+
+    - Dukungan MapReduce: Cassandra memiliki kemampuan untuk di integrasi dengan Hadoop, berikut dukungan MapReduce. Juga mendukung Apache Pig dan Apache Hive.
+
+    - Bahasa query: Memperkanalkan CQL (Cassandra Query Language) diperkenalkan, merupakan SQL-like alternatif terhadap antarmuka RPC tradisional. Bahasa driver tersedia untuk Java (JDBC), Python (DBAPI2) dan Node.js (Helenus). 
+
+
+
 
 ### Basis Data NewSQL
 
-Lanskap untuk sistem manajemen database berubah lebih cepat hari ini daripada sejak hari-hari awal DBMS relasional. Kita tidak hanya memiliki serangan sistem database NoSQL dari berbagai bentuk yang berbeda (kolom, dokumen, kunci / nilai, dan database grafik), tapi kami juga melihat pasar yang sedang berkembang untuk manajemen database di memori, di mana DBMS bergantung pada memori utama bukannya disk untuk penyimpanan data, manajemen, dan manipulasi. Tapi ada yang lain "kategori" dari DBMS berkembang yang dikenal sebagai "NewSQL."
+Bidang Manajemen System Database pada hari ini sudah berkembang begitu cepat sejak pertama kali dikenalkan kepada Dunia sebagai DBMS. Tidak hanya dapat menyelesiakan bentuk System Database NoSQL pada bentuk-bentuk berkeda(Kolom, Dokumen, Key/Value dan Database berbentuk Grafik), tapi juga dapat menyelesaikan masalah dan melihat Pasar yang tengah berkembang berdasarkan Perhitungan dan Memori yang terdapat pada Manajemen Database itu sendiri, dimana DBMS bergantung pada Memory yang paling utama yang dia miliki daripada kepada Memory Penyimpanan, Manajemen Memori dan bentuk Manipulasi Memory. Setelah sekian lama mengenal bentuk Database DBMS yang sudah menjadi semakin umum, sekarang muncul lagi bentuk Kategori baru dari DBMS yang baru saja ber-evolusi belakangan ini, dikenal dengan sebutan "NewSQL" .
 
-The NewSQL jangka membingungkan dan tidak sangat baik didefinisikan. Pada dasarnya, NewSQL DBMSs ditandai oleh relasional, sistem database SQL dengan terdistribusi, arsitektur kesalahan-toleran. Di memori kemampuan adalah fitur tambahan khas persembahan NewSQL, seperti yang berkerumun layanan database dengan kemampuan akan dikerahkan di awan. produk NewSQL DBMS mungkin memiliki fitur yang lebih sedikit dan komponen, dengan jejak yang ringan, membuat mereka lebih mudah untuk mendukung dan belajar dari warisan persembahan relasional.
+Apa itu NewSQL ?
 
-Tentu saja, fitur yang disebutkan di sini tidak eksklusif untuk sistem database NewSQL, juga tidak semua dari mereka diperlukan untuk dianggap sebagai produk NewSQL. Banyak produk RDBMS yang ada mendukung banyak fitur ini.
+NewSQL adalah bentuk Bahasa Akses Database baru yang banyak dikatakan lebih baik, hebat dan lebih cerdas dibandingkan dengan SQL. Banyak para Profesional di bidang Database yang menyatakan bahwa SQL, yang berupa Bahasa Database berbasis-Objek, sudah terlalu Usang dan terlalu Rumit untuk digunakan .
 
-Secara umum, sistem database NewSQL dirancang untuk memerangi serangan NoSQL menggunakan teknologi relasional. Jenis aplikasi yang dirancang untuk mendapatkan keuntungan dari NewSQL DBMS biasanya akan memiliki sejumlah besar transaksi pendek yang mengakses sejumlah kecil data diindeks dan melaksanakan berulang-ulang. Jelas, yang merupakan bagian besar dari aplikasi (tetapi tidak berarti semua aplikasi). Tujuan dari NewSQL adalah untuk memberikan ketersediaan tinggi dan kinerja untuk data modern tanpa mengorbankan persyaratan konsistensi yang kuat dan kemampuan transaksi yang NoSQL sering skimps pada.
-Dengan kata lain, NewSQL DBMSs memberikan transaksi ACID. ACID adalah akronim untuk atomicity, konsistensi, isolasi, dan daya tahan. Masing-masing dari empat kualitas ini diperlukan untuk transaksi untuk dapat memastikan integritas data:
+Database NewSQL ini pada dasarnya memiliki Performa yang sama dengan yang dikenal dengan Sistem NoSQL dan yang menyediakan para Administrator sebuah Fasilitas yang Detil, Konsisten, Terisolasi(aman), Tahan lama atau yang sering dikenal sebagai bergaransi Berkemampuan ACID (Atomicity, Consistency, Isolation & Durability) .
 
-Atomicity berarti bahwa transaksi harus menunjukkan "semua atau tidak" perilaku. Baik semua petunjuk dalam transaksi terjadi, atau tidak satupun dari mereka terjadi. Atomicity mempertahankan "kelengkapan" dari proses bisnis.
-Konsistensi mengacu pada keadaan data sebelum dan setelah transaksi dijalankan. Sebuah transaksi mempertahankan konsistensi keadaan data. Dengan kata lain, setelah transaksi dijalankan, semua data dalam database adalah "benar."
-Isolasi berarti bahwa transaksi dapat berjalan pada waktu yang sama. Transaksi berjalan secara paralel memiliki ilusi bahwa tidak ada concurrency. Dengan kata lain, tampak bahwa sistem berjalan hanya satu transaksi pada suatu waktu. Tidak ada transaksi konkuren lainnya memiliki visibilitas ke database modifikasi uncommitted dibuat oleh transaksi lainnya. Untuk mencapai isolasi, mekanisme penguncian diperlukan.
-Daya tahan mengacu pada dampak pemadaman atau kegagalan pada transaksi berjalan. Sebuah transaksi tahan lama tidak akan mempengaruhi keadaan data jika transaksi berakhir tidak normal. Data akan bertahan kegagalan apapun.
-Jadi, NewSQL DBMS relasional, memberikan ACID, dan menawarkan kemampuan modern dan arsitektur modern. Dan, tentu saja, menggunakan SQL untuk mengakses dan memodifikasi data.
+Kata-kata atau kalimat baru NewSQL dicanangkan oleh Matthew Aslett, seorang analis yang memiliki 'Group 451'. Beliau yang mencanangkan bentuk pengertian produk baru yang menggunakan Data Model Relasi sambil tetap memiliki interface/Antarmuka seperti yang dimiliki SQL.
 
-Meskipun tidak ada buku aturan untuk apa yang merupakan NewSQL, ada beberapa jenis yang berbeda dari sistem yang memanfaatkan moniker NewSQL. Paling umum, NewSQL mengacu pada produk RDBMS yang sama sekali baru yang beroperasi di cluster didistribusikan shared-
+Aslett menjelaskan: " 'NewSQL' adalah kependekan tangan dari berbagai bentuk dan jenis baru yang memiliki Performa Tinggi untuk para Vendor Database SQL. Kami sebelumnya sering menyebut produk ini sebagai 'SQLterukur' atau ScalableSQL untuk membedakannya dari bentuk Produk Database Relasional yang biasanya. Dikarenakan Database ini mengedepankan Skalabilitas, yang sebenarnya adalah fitur yang tidak begitu diperlukan ada pada semua produk, kami kemudian menggunakan (istilah) 'NewSQL' [...] Dan untuk mengklarifikasi perbedaannya, seperti NoSQL, NewSQL agar tidak dipahami secara harafiah: sebagai sesuatu yang baru dari Vendor SQL adalah Vendor-nya itu sendiri, bukan SQL-nya. "
 
-tidak ada node, dengan setiap node memiliki subset dari data. Dengan merancang NewSQL RDBMS dari awal, kode dapat tegas ditulis untuk arsitektur terdistribusi dan menghindari beberapa overhead dari RDBMS tradisional. Contoh produk NewSQL termasuk VoltDB, Clustrix, MemSQL, dan Translattice.
+NewSQL didesain untuk mendukung SQL dalam upaya menghandel masalah yang paling baru dengan cara transaksi online Tradisional, yang lebih Spesifik, menitik beratkan pada Skalabilitas dan Performa mereka. Memang sedikit mirip dengan NoSQL, kata beberapa Advokat menambahkan.
 
-Istilah NewSQL juga dapat berlaku untuk mesin penyimpanan SQL seperti Infobright dan sistem sharding transparan seperti Scalebase.
+Jadi, kesimpulannya adalah bahwa NewSQL dibuat dan akan sangat baik saat digunakan perusahaan yang berjalan dan tertarik untuk mulai bermigrasi/memindahkan penggunaan aplikasinya kepada Platform pengembangan tentang Big Data, yang kemudian pada aplikasinya akan mengembangkan penggunaan/aplikasi baru pada skalabilitas Transaksi Online pada proses Sistemnya dan berharap untuk tetap menggunakan pengetahuan mereka yang sudah ada sebelumnya dalam bidang Proses Transaksi Online, menurut keterangan Prasanna Venkatesh dan Nirmala S.
+
+di akhir, "NewSQL" berarti untuk meng-kategorikan beberapa bentuk dari grup-grup yang mirip, kata ASlett. Ini bukan masalah tentang membandingkan NewSQL melawan NoSQL, karena perbedaannya antara NoSQL dan NewSQL sangat tipis hingga pada titik dimana kita mengharapkan bahwa Pengertian tentang NoSQL dan NewSQL akan menjadi lebih jelas dan Relevan saat fokus penggunaannya menjadi lebih Spesifik.
+
+
 
 
 ## Paket Standar Go untuk Akses Basis Data

@@ -35,7 +35,53 @@ Untuk volume data ilmiah yang lebih besar, sepeti data satelit dan output numeri
 
 
 ## Go dan YAML
+Paket `yaml` memungkinkan program `go`
+ untuk encode dan decode nilai pada `yaml`. Paket ini dikembangkan dalam `Canonical` yang mana sebagian dari proyek `juju`  dan didasarkan pada port Go murni dari libyaml C library terkenal untuk mengurai dan menghasilkan data YAML dengan baik.
 
+#### Instalasi
+Sebelum melakukan instalasi buat direktori untuk golang terlebih dahulu, disini saya contohkan diletakkan pada direktori `$HOME` dandengan nama `gocode` kemudian lakukan perintah berikut untuk menentukan `PATH` yang dibutuhkan :
+```
+export GOPATH=$HOME/gocode
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+```
+Karen saya menggunakan ubuntu dan yang akan di install adalah yaml versi 2 maka menggunakan perintah :
+```
+go get gopkg.in/yaml.v2
+111
+
+#### Contoh Program Go-Yaml
+```
+package main
+
+import (
+    "fmt"
+    "log"
+    "gopkg.in/yaml.v2"
+)
+
+var configText = `
+  Message: Welcome
+  UpdateInterval: 5
+  EmailAddresses:
+    - rohimmt@yahoo.com
+    - raigeki.rmt@yahoo.com`
+
+type Config struct {
+    Message        string   `yaml:"Message"`
+    UpdateInterval int      `yaml:"UpdateInterval"`
+    EmailAddresses []string `yaml:"EmailAddresses"`
+}
+
+func main() {
+    var c Config
+    if err := yaml.Unmarshal([]byte(configText), &c); err != nil {
+        log.Fatalf("Failed to parse yaml: %v", err)
+    }
+
+    fmt.Printf("Config: %+v\n", c)
+}
+```
+Maka output yang dihasilkan adalah
 
 
 ## Go dan MessagePack

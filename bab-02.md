@@ -15,22 +15,19 @@ $ cd
 $ mkdir .vim/autoload
 $ mkdir .vim/bundle
 $ cd .vim/autoload
-$ wget -c  https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
---2014-12-06 22:56:07--  https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
-Resolving raw.github.com (raw.github.com)... 103.245.222.133
-Connecting to raw.github.com (raw.github.com)|103.245.222.133|:443... connected.
-HTTP request sent, awaiting response... 301 Moved Permanently
-Location: https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim [following]
---2014-12-06 22:56:14--  https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
-Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 103.245.222.133
-Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|103.245.222.133|:443... connected.
+$ wget https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
+--2016-08-15 11:16:50--  https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 151.101.100.133
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|151.101.100.133|:443... connected.
 HTTP request sent, awaiting response... 200 OK
-Length: 12139 (12K) [text/plain]
+Length: 12474 (12K) [text/plain]
 Saving to: ‘pathogen.vim’
 
-pathogen.vim                          100%[========================================================================>]  11.85K  --.-KB/s   in 0.1s   
+pathogen.vim                   100%[==================================================>]  12.18K  --.-KB/s    in 0.02s   
 
-2014-12-06 22:56:14 (85.9 KB/s) - ‘pathogen.vim’ saved [12139/12139]
+2016-08-15 11:16:56 (512 KB/s) - ‘pathogen.vim’ saved [12474/12474]
+
+$
 ~~~
 
 Setelah itu, untuk menggunakan Pathogen, letakkan aktivasinya di `$HOME/.vimrc` atau di `$HOME/.vim/vimrc` (saya pilih lokasi yang kedua) sebagai berikut:
@@ -45,9 +42,9 @@ Setelah itu, semua plugin tinggal kita ambil dari repository (bisa dari github, 
 
 Setelah selesai melakukan instalasi Pathogen, berbagai plugin yang diperlukan bisa diambil langsung dari Internet. Berikut ini adalah daftar yang digunakan penulis:
 
-* Colorschemes: untuk tema warna dari Vim. Bisa diperoleh di https://github.com/flazz/vim-colorschemes
-* Nerdtree: untuk menampilkan file-file dalam struktur pohon di sebelah kiri sehingga memudahkan navigasi. Bisa diperoleh di https://github.com/scrooloose/nerdtree
-* Golang: plugin utama agar Vim mengenali kode sumber Go. Bisa diperoleh di https://github.com/jnwhiteh/vim-golang.git
+* [Colorschemes](https://github.com/flazz/vim-colorschemes): untuk tema warna dari Vim.
+* [Nerdtree](https://github.com/scrooloose/nerdtree): untuk menampilkan file-file dalam struktur pohon di sebelah kiri sehingga memudahkan navigasi.
+* [vim-go](https://github.com/fatih/vim-go.git): plugin utama agar Vim mengenali kode sumber Go.
 
 Cara instalasi:
 

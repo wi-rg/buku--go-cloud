@@ -33,7 +33,7 @@ Buku ini akan dibagi menjadi beberapa bagian:
 
 ## Pengenalan
 
-Pada bagian ini, akan dibahas instalasi peranti pengembangan bahasa pemrograman Go serta peranti yang biasanya digunakan pada saat `coding` menggunakan Go (IDE - `Integrated Development Environment`). Setalah membaca, memahmi, dan mengikuti instruksi pada bagian ini, pembaca akan mempunyai peranti pengembangan Go serta IDE untuk `coding` terinstall pada komputer. Pembaca juga akan memahami struktur kode sumber Go dan siap untuk mempelajari komponen Go lebih lanjut.
+Pada bagian ini, akan dibahas instalasi peranti pengembangan bahasa pemrograman Go serta peranti yang biasanya digunakan pada saat `coding` menggunakan Go (IDE - `Integrated Development Environment`). Setelah membaca, memahami, dan mengikuti instruksi pada bagian ini, pembaca akan mempunyai peranti pengembangan Go serta IDE untuk `coding` terinstall pada komputer. Pembaca juga akan memahami struktur kode sumber Go dan siap untuk mempelajari komponen Go lebih lanjut.
 
 * [Bab 1: Pengenalan Go](bab-01.md)
 * [Bab 2: IDE untuk Go](bab-02.md)

@@ -1,2 +1,2 @@
-% Membangun Aplikasi Cloud Menggunakan Go
+% Pemrograman Go
 % Bambang Purnomosidi D. P.

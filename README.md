@@ -1,6 +1,6 @@
-# Membangun Aplikasi Cloud Menggunakan Go
+# Pemrograman Go
 
-Buku ini merupakan buku pemrograman Go yang ditujukan untuk pengembangan aplikasi SaaS di Cloud. Meskipun titik berat dari buku ini ada pada pemrograman aplikasi di Cloud, buku ini juga meliputi dasar-dasar Go serta penggunaan Go untuk backend dan frontend. 
+Buku ini merupakan buku pemrograman Go yang ditujukan terutama untuk memperkenalkan bahasa pemrograman Go serta ekosistem Go dalam membangun berbagai macam peranti lunak. Tujuan akhir dari buku ini adalah pengetahuan yang kuat tentang pemrograman menggunakan Go serta kemampuan mendayagunakan ekosistem Go untuk membangun aplikasi.
 
 # Penulis
 

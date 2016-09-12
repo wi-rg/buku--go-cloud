@@ -14,7 +14,7 @@ Go didistribusikan dengan menggunakan lisensi modifikasi dari BSD. Lisensi lengk
 * boleh memberikan garansi
 * tidak boleh menggunakan merk dagang Go
 * tanpa jaminan dan jika terjadi kerusakan terkait penggunaan software ini maka pemberi lisensi tidak bisa dituntut
-jika mendistribusikan harus mengikutsertakan pemberitahuan hak cipta.
+* jika mendistribusikan harus mengikutsertakan pemberitahuan hak cipta.
 
 ## Instalasi Go
 
@@ -24,74 +24,92 @@ Go tersedia pada berbagai platform. Proyek Go sendiri secara resmi mendukung pla
 
 ![Repository downloads Go](images/download-go.png)
 
-Dengan dukungan tersebut, Proyek Go akan menerima laporan `bugs` terkait dengan distribusi pada berbagai platform tersebut. Meski demikian, bukan berarti platform-platform lain tidak bisa menggunakan Go karena distribusi dalam bentuk kode sumber tersedia dan telah berhasil dikompilasi ke berbagai platform: NetBSD, OpenBSD, DragonFlyBSD, dan lain-lain. Informasi mengenai platform-platform yang mungkin bisa digunakan oleh Go bisa diperoleh di [Wiki](https://code.google.com/p/go-wiki/w/list).
+Dengan dukungan tersebut, Proyek Go akan menerima laporan `bugs` terkait dengan distribusi pada berbagai platform tersebut. Meski demikian, bukan berarti platform-platform lain tidak bisa menggunakan Go karena distribusi dalam bentuk kode sumber tersedia dan telah berhasil dikompilasi ke berbagai platform: NetBSD, OpenBSD, DragonFlyBSD, dan lain-lain. Informasi mengenai platform-platform yang mungkin bisa digunakan oleh Go bisa diperoleh di [Wiki](https://github.com/golang/go/wiki#platform-specific-information).
 
 ### Download dan Install Go
 
 ~~~
 Catatan:
 
-Go akan diinstall di direktori $HOME/software/go-dev-tools/go/goVERSI
+Go akan diinstall di direktori /opt/software/go-dev-tools/go/goVERSI
 
-VERSI = versi dari Go yang akan diinstall, misalnya go1.4.1
-Lokasi instalasi tersebut saya gunakan karena saya mempunyai lebih dari 1 versi Go, jika nanti ada versi lainnya, versi lain tersebut akan saya install (misal versi 1.5) di $HOME/software/go-dev-tools/go/go1.5
+VERSI = versi dari Go yang akan diinstall, misalnya go1.7.1
+Lokasi instalasi tersebut saya gunakan karena saya mempunyai lebih dari 1 versi Go, jika nanti ada versi lainnya, versi lain tersebut akan saya install (misal versi 1.6.3) di /opt/software/go-dev-tools/go/go1.6.3
 ~~~
 
-Meski mendukung banyak platform, di buku ini hanya akan dibahas penggunaan Go di platform Linux. Pada dasarnya peranti pengembang yang disediakan sama. Silahkan menyesuaikan dengan platform yang anda gunakan. Untuk instalasi berikut ini, ambil distribusi yang sesuai dengan platform di komputer anda. Untuk pembahasan ini, digunakan `go1.4.1.linux-386.tar.gz`. Setelah itu, ikuti langkah-langkah berikut:
+Meski mendukung banyak platform, di buku ini hanya akan dibahas penggunaan Go di platform Linux. Pada dasarnya peranti pengembang yang disediakan sama. Silahkan menyesuaikan dengan platform yang anda gunakan. Untuk instalasi berikut ini, ambil distribusi yang sesuai dengan platform di komputer anda. Untuk pembahasan ini, digunakan `go1.7.1.linux-amd64.tar.gz`. Setelah itu, ikuti langkah-langkah berikut:
 
 ~~~bash
-$ pwd
-/home/bpdp/master/go
-$ ls
-total 51144
-drwxr-xr-x  12 bpdp bpdp     4096 Jan 16 09:12 .
-drwxr-xr-x 100 bpdp bpdp     4096 Jan 20 09:02 ..
--rw-r--r--   1 bpdp bpdp 52313284 Jan 16 07:41 go1.4.1.linux-386.tar.gz
+ls ~/master/go/1.7/
+total 79708
+drwxr-xr-x 1 bpdp users       52 Sep  8 10:15 .
+drwxr-xr-x 1 bpdp users      198 Jun 13 13:17 ..
+-rw-r--r-- 1 bpdp users 81618401 Sep  8 10:14 go1.7.1.linux-amd64.tar.gz
 ...
 ...
-$ mkdir ~/software/go-dev-tools/
-$ cd ~/software/go-dev-tools
-$ tar -xzvf ~/master/go/go1.4.1.linux-386.tar.gz
+$ mkdir -p /opt/software/go-dev-tools/go
+$ cd /opt/software/go-dev-tools/go
+$ tar -xvf ~/master/go/1.7/go1.7.1.linux-amd64.tar.gz
+$ mv go go1.7.1
 ~~~
 
-Setelah menjalankan langkah-langkah di atas, Go sudah terinstall di direktori `$HOME/software/go-dev-tools/go`
+Setelah menjalankan langkah-langkah di atas, Go sudah terinstall di direktori `/opt/software/go-dev-tools/go/go1.7.1`
 
 ### Konfigurasi Variabel Lingkungan Sistem Operasi
 
-Go menggunakan beberapa variabel lingkungan sistem operasi. Supaya berfungsi dengan baik, tetapkan nilai-nilai variabel lingkungan tersebut di file inisialisasi shell (penulis menggunakan Bash, sehingga file-file inisialisasi diletakkan di `$HOME/.bashrc`). Isikan baris-baris berikut di `$HOME/.bashrc`:
+Go menggunakan beberapa variabel lingkungan sistem operasi. Supaya berfungsi dengan baik, tetapkan nilai-nilai variabel lingkungan tersebut di file inisialisasi shell (penulis menggunakan Bash, sehingga file-file inisialisasi diletakkan di `$HOME/.bashrc`). Meski bisa diletakkan pada file tersebut, penulis menyarankan untuk meletakkan pada suatu file text biasa dan kemudian di - *source*. Pada bagian ini, penulis akan meletakkan di file `%HOME/env/go/go1.7.1`.
 
 ~~~bash
-...
-...
-GO_HOME=$HOME/software/go
+GODEVTOOLS_HOME=/opt/software/go-dev-tools
+
+GO_HOME=$GODEVTOOLS_HOME/go/go1.7.1
+LITEIDE_HOME=$GODEVTOOLS_HOME/liteide
+GOTOOLS=$GODEVTOOLS_HOME/workspace/go17/bin
+GO3RDPARTYTOOLS=$GODEVTOOLS_HOME/go-3rd-party-tools
 
 export GOROOT=$GO_HOME
-export GOOS=linux 
-export GOARCH=386 
-export GOHOSTOS=linux 
-export GOHOSTARCH=386
-export GOBIN=$GOROOT/bin
+export GOOS=linux
+export GOARCH=amd64
+export GOHOSTOS=linux
+export GOHOSTARCH=amd64
 
-export PATH=$PATH:$GO_HOME/bin
+# https://golang.org/cmd/go/#hdr-GOPATH_environment_variable
+# a)    If you don't set your GOBIN env variable, 
+#       you get the Go compiler binaries going in 
+#       GOROOT/bin whereas the your binaries are going 
+#       in GOPATH/bin. (I personally like this separation of 
+#       binaries.)
+# (b)   If you set your GOBIN to anything, then both the Go 
+#       binaries and your binaries are going to GOBIN.
+#export GOBIN=$GOROOT/bin
+
+export PATH=$PATH:$GO_HOME/bin:$LITEIDE_HOME/bin:$GOTOOLS:$GO3RDPARTYTOOLS/bin
+
+alias godev='cd $GODEVTOOLS_HOME/workspace/go17'
 ~~~
 
-Dengan memasukkan beberapa variabel lingkungan tersebut ke `.bashrc`, Go bisa digunakan. Untuk melihat hasil, login ke shell, setelah itu eksekusi perintah `go env`, hasilnya seharusnya adalah sebagai berikut:
+Dengan memasukkan beberapa variabel lingkungan tersebut ke file, saat kita ingin menggunakan Go, tinggal di - *source* sebagai berikut:
+
+~~~bash
+$ source ~/env/go/go1.7.1
+~~~
+
+Setelah itu, Go bisa digunakan. Untuk melihat hasil, eksekusi perintah `go env`, hasilnya seharusnya adalah sebagai berikut:
 
 ~~~bash
 $ go env
-GOARCH="386"
-GOBIN="/home/bpdp/software/go-dev-tools/go/bin"
-GOCHAR="8"
+GOARCH="amd64"
+GOBIN=""
 GOEXE=""
-GOHOSTARCH="386"
+GOHOSTARCH="amd64"
 GOHOSTOS="linux"
 GOOS="linux"
 GOPATH=""
 GORACE=""
-GOROOT="/home/bpdp/software/go"
-GOTOOLDIR="/home/bpdp/software/go-dev-tools/go/pkg/tool/linux_386"
+GOROOT="/opt/software/go-dev-tools/go/go1.7.1"
+GOTOOLDIR="/opt/software/go-dev-tools/go/go1.7.1/pkg/tool/linux_amd64"
 CC="gcc"
-GOGCCFLAGS="-fPIC -m32 -pthread -fmessage-length=0"
+GOGCCFLAGS="-fPIC -m64 -pthread -fmessage-length=0 -fdebug-prefix-map=/tmp/go-build947764430=/tmp/go-build -gno-record-gcc-switches"
 CXX="g++"
 CGO_ENABLED="1"
 $
@@ -117,34 +135,38 @@ func main() {
 Berikut ini adalah langkah-langkah untuk mengeksekusi `hello.go`:
 
 ~~~bash
-$ ls
-total 12
-drwxr-xr-x 2 bpdp bpdp 4096 Apr  2  2013 .
-drwxr-xr-x 4 bpdp bpdp 4096 Apr  9  2013 ..
--rw-r--r-- 1 bpdp bpdp   74 Mar 30  2013 hello.go
 $ go run hello.go 
 hello, world
-$ go build hello.go 
+$ go build hello.go
 $ ls -la
-total 1456
-drwxr-xr-x 2 bpdp bpdp    4096 Dec  6 16:31 .
-drwxr-xr-x 4 bpdp bpdp    4096 Apr  9  2013 ..
--rwxr-xr-x 1 bpdp bpdp 1476376 Dec  6 16:31 hello
--rw-r--r-- 1 bpdp bpdp      74 Mar 30  2013 hello.go
+total 1624
+drwxr-xr-x 1 bpdp users     102 Sep 12 21:20 .
+drwxr-xr-x 1 bpdp users     288 Aug 15 11:24 ..
+-rwxr-xr-x 1 bpdp users 1650350 Sep 12 21:20 hello
+-rw-r--r-- 1 bpdp users     162 Aug 15 11:28 hello-formatted.go
+-rw-r--r-- 1 bpdp users      86 Aug 15 11:26 hello.go
+-rw-r--r-- 1 bpdp users     170 Aug 15 11:28 hello-unformatted.go
 $ ./hello 
 hello, world
 $ file hello
-hello: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), statically linked, not stripped
+hello: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, not stripped
 $
 ~~~
 
 ## Memahami Lingkungan Peranti Pengembangan Go
 
-Saat menginstall Go, kita akan memperoleh 4 buah file `binary executable`:
+Saat menginstall Go, kita akan memperoleh 3 buah file `binary executable`:
 
-* go
-* godoc
-* gofmt
+~~~bash
+$ ls /opt/software/go-dev-tools/go/go1.7.1/bin/
+total 27496
+drwxr-xr-x 1 bpdp users       24 Sep  8 02:38 .
+drwxr-xr-x 1 bpdp users      230 Sep  8 02:38 ..
+-rwxr-xr-x 1 bpdp users  9954032 Sep  8 02:35 go
+-rwxr-xr-x 1 bpdp users 15156929 Sep  8 02:37 godoc
+-rwxr-xr-x 1 bpdp users  3036195 Sep  8 02:35 gofmt
+$
+~~~
 
 Penjelasan untuk masing-masing akan diuraikan di sub-sub bab berikut.
 
@@ -162,32 +184,35 @@ Usage:
 
 The commands are:
 
-    build       compile packages and dependencies
-    clean       remove object files
-    env         print Go environment information
-    fix         run go tool fix on packages
-    fmt         run gofmt on package sources
-    generate    generate Go files by processing source
-    get         download and install packages and dependencies
-    install     compile and install packages and dependencies
-    list        list packages
-    run         compile and run Go program
-    test        test packages
-    tool        run specified go tool
-    version     print Go version
-    vet         run go tool vet on packages
+	build       compile packages and dependencies
+	clean       remove object files
+	doc         show documentation for package or symbol
+	env         print Go environment information
+	fix         run go tool fix on packages
+	fmt         run gofmt on package sources
+	generate    generate Go files by processing source
+	get         download and install packages and dependencies
+	install     compile and install packages and dependencies
+	list        list packages
+	run         compile and run Go program
+	test        test packages
+	tool        run specified go tool
+	version     print Go version
+	vet         run go tool vet on packages
 
 Use "go help [command]" for more information about a command.
 
 Additional help topics:
 
-    c           calling between Go and C
-    filetype    file types
-    gopath      GOPATH environment variable
-    importpath  import path syntax
-    packages    description of package lists
-    testflag    description of testing flags
-    testfunc    description of testing functions
+	c           calling between Go and C
+	buildmode   description of build modes
+	filetype    file types
+	gopath      GOPATH environment variable
+	environment environment variables
+	importpath  import path syntax
+	packages    description of package lists
+	testflag    description of testing flags
+	testfunc    description of testing functions
 
 Use "go help [topic]" for more information about that topic.
 ~~~
@@ -200,29 +225,52 @@ Use "go help [topic]" for more information about that topic.
 $ godoc 
 usage: godoc package [name ...]
 	godoc -http=:6060
-  -analysis="": comma-separated list of analyses to perform (supported: type, pointer). See http://golang.org/lib/godoc/analysis/help.html
-  -ex=false: show examples in command line mode
-  -goroot="/home/bpdp/software/go-dev-tools/go/go1.4.1": Go root directory
-  -html=false: print HTML in command-line mode
-  -http="": HTTP service address (e.g., ':6060')
-  -httptest.serve="": if non-empty, httptest.NewServer serves on this address and blocks
-  -index=false: enable search index
-  -index_files="": glob pattern specifying index files;if not empty, the index is read from these files in sorted order
-  -index_throttle=0.75: index throttle value; 0.0 = no time allocated, 1.0 = full throttle
-  -links=true: link identifiers to their declarations
-  -maxresults=10000: maximum number of full text search results shown
-  -notes="BUG": regular expression matching note markers to show
-  -play=false: enable playground in web interface
-  -q=false: arguments are considered search queries
-  -server="": webserver address for command line searches
-  -src=false: print (exported) source in command-line mode
-  -tabwidth=4: tab width
-  -templates="": directory containing alternate template files
-  -timestamps=false: show timestamps with directory listings
-  -url="": print HTML for named URL
-  -v=false: verbose mode
-  -write_index=false: write index to a file; the file name must be specified with -index_files
-  -zip="": zip file providing the file system to serve; disabled if empty
+  -analysis string
+    	comma-separated list of analyses to perform (supported: type, pointer). See http://golang.org/lib/godoc/analysis/help.html
+  -ex
+    	show examples in command line mode
+  -goroot string
+    	Go root directory (default "/opt/software/go-dev-tools/go/go1.7.1")
+  -html
+    	print HTML in command-line mode
+  -http string
+    	HTTP service address (e.g., ':6060')
+  -httptest.serve string
+    	if non-empty, httptest.NewServer serves on this address and blocks
+  -index
+    	enable search index
+  -index_files string
+    	glob pattern specifying index files; if not empty, the index is read from these files in sorted order
+  -index_interval duration
+    	interval of indexing; 0 for default (5m), negative to only index once at startup
+  -index_throttle float
+    	index throttle value; 0.0 = no time allocated, 1.0 = full throttle (default 0.75)
+  -links
+    	link identifiers to their declarations (default true)
+  -maxresults int
+    	maximum number of full text search results shown (default 10000)
+  -notes string
+    	regular expression matching note markers to show (default "BUG")
+  -play
+    	enable playground in web interface
+  -q	arguments are considered search queries
+  -server string
+    	webserver address for command line searches
+  -src
+    	print (exported) source in command-line mode
+  -tabwidth int
+    	tab width (default 4)
+  -templates string
+    	directory containing alternate template files
+  -timestamps
+    	show timestamps with directory listings
+  -url string
+    	print HTML for named URL
+  -v	verbose mode
+  -write_index
+    	write index to a file; the file name must be specified with -index_files
+  -zip string
+    	zip file providing the file system to serve; disabled if empty
 ~~~
 
 ### gofmt
@@ -232,13 +280,15 @@ usage: godoc package [name ...]
 ~~~bash
 $ gofmt --help
 usage: gofmt [flags] [path ...]
-  -cpuprofile="": write cpu profile to this file
-  -d=false: display diffs instead of rewriting files
-  -e=false: report all errors (not just the first 10 on different lines)
-  -l=false: list files whose formatting differs from gofmt's
-  -r="": rewrite rule (e.g., 'a[b:len(a)] -> a[b:]')
-  -s=false: simplify code
-  -w=false: write result to (source) file instead of stdout
+  -cpuprofile string
+    	write cpu profile to this file
+  -d	display diffs instead of rewriting files
+  -e	report all errors (not just the first 10 on different lines)
+  -l	list files whose formatting differs from gofmt's
+  -r string
+    	rewrite rule (e.g., 'a[b:len(a)] -> a[b:]')
+  -s	simplify code
+  -w	write result to (source) file instead of stdout
 ~~~
 
 Untuk melihat bagaimana `gofmt` bisa digunakan untuk membantu memformat kode sumber, buat kode sumber sederhana berikut ini:

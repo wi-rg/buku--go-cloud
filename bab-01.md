@@ -28,6 +28,8 @@ Dengan dukungan tersebut, Proyek Go akan menerima laporan `bugs` terkait dengan 
 
 ### Download dan Install Go
 
+Download dan instalasi Go pada tulisan ini adalah download dan instalasi untuk lebih dari satu versi Go dan masing-masing menggunakan workspace sendiri-sendiri. Hal ini disebabkan karena seringkali software yang dibangun ditargetkan untuk lebih dari satu versi, misalnya Go 1.5 ke atas (Go 1.5.x, 1.6.x, dan 1.7.x). Kondisi ini menjadi tidak sederhana karena penulis tidak ingin mencampuraduk source code yang dibuat menggunakan masing-masing versi. Go sendiri menyarankan untuk menggunakan satu workspace untuk semua proyek Go yang kita buat. Satu workspace saja tidak masalah jika hanya mentargetkan satu versi. Di bagian ini penulis akan menjelaskan konfigurasi yang saya gunakan untuk menangani masalah tersebut.
+
 ~~~
 Catatan:
 
@@ -55,7 +57,22 @@ $ mv go go1.7.1
 
 Setelah menjalankan langkah-langkah di atas, Go sudah terinstall di direktori `/opt/software/go-dev-tools/go/go1.7.1`
 
-### Konfigurasi Variabel Lingkungan Sistem Operasi
+### Konfigurasi Variabel Lingkungan Sistem Operasi, Compiler Go, dan Workspace
+
+Untuk konfigurasi kompiler, ada tiga langkah yang perlu dilakukan: download, ekstrak pada lokasi tertentu, dan terakhir setting environment variables. Pada konfigurasi ini, compiler dan workspace berada pada /opt/software/go-dev-tools/. Lokasi ini selanjutnya akan kita sebut dengan GODEVTOOLS_HOME. Setelah download dan install compiler Go seperti langkah di atas, buat struktur direktori sebagai berikut (untuk go1.7.1 sudah dibuat dengan cara di atas):
+
+![Struktur direktori](images/struktur-dir.png)
+
+Direktori go digunakan untuk lokasi semua versi compiler Go. Direktori workspace digunakan untuk menyimpan source code yang kita buat seesuai dengan versi Go yang kita targetkan. Untuk setiap direktori di workspace, buat struktur dan 1 file env.sh sebagai berikut:
+
+![Struktur workspace](images/workspace-dir.png)
+
+Isi dari file env.sh adalah sebagai berikut:
+
+~~~bash
+export GOPATH=`pwd`
+export PATH=$PATH:$GOPATH/bin
+~~~
 
 Go menggunakan beberapa variabel lingkungan sistem operasi. Supaya berfungsi dengan baik, tetapkan nilai-nilai variabel lingkungan tersebut di file inisialisasi shell (penulis menggunakan Bash, sehingga file-file inisialisasi diletakkan di `$HOME/.bashrc`). Meski bisa diletakkan pada file tersebut, penulis menyarankan untuk meletakkan pada suatu file text biasa dan kemudian di - *source*. Pada bagian ini, penulis akan meletakkan di file `%HOME/env/go/go1.7.1`.
 
@@ -114,6 +131,64 @@ CXX="g++"
 CGO_ENABLED="1"
 $
 ~~~
+
+Ssaat bekerja menggunakan Go, pada dasarnya kita akan menemukan berbagai macam proyek yang bisa dikategorikan menjadi 2 berdasarkan output dari proyek tersebut: (1) ready-to-use application — aplikasi yang siap dipakai, biasanya didistribusikan dalam bentuk binary executable(s) atau kode sumber seperti nsq, Hugo, dan lain-lain. (2) pustaka / library. Untuk dua kategori ini, ada dua perlakuan.
+
+**Ready-to-use application**
+
+Untuk kategori ini, siapkan lokasi khusus di media penyimpan untuk menyimpan hasil binary executable, setelah itu set PATH, GOPATH dan go get -u -v repo. Berikut adalah setting pada komputer penulis:
+
+![Struktur direktori untuk 3rd party tools](images/dir-3rd-party.png)
+
+Isi dari file `go-pkg-needed.sh` adalah sebagai berikut, anda bisa menambah atau mengurangi sesuai kebutuhan:
+
+~~~bash
+#!/usr/bin/bash
+go get -u -v github.com/nsf/gocode
+go get -u -v github.com/rogpeppe/godef
+go get -u -v github.com/golang/lint/golint
+go get -u -v github.com/lukehoban/go-outline
+go get -u -v github.com/sqs/goreturns
+go get -u -v golang.org/x/tools/cmd/gorename
+go get -u -v github.com/tpng/gopkgs
+go get -u -v github.com/newhook/go-symbols
+go get -u -v golang.org/x/tools/cmd/guru
+go get -u -v github.com/derekparker/delve/cmd/dlv
+go get -u -v github.com/pointlander/peg
+go get -u -v github.com/songgao/colorgo
+go get -u -v github.com/constabulary/gb/...
+# glide now taken from release page 
+go get -u -v github.com/Masterminds/glide
+go get -u -v github.com/motemen/gore
+go get -u -v github.com/onsi/ginkgo/ginkgo
+go get -u -v github.com/onsi/gomega
+go get -u -v github.com/smartystreets/goconvey
+go get -u -v github.com/blynn/nex
+go get -u -v golang.org/x/tools/cmd/goimports
+go get -u -v golang.org/x/tools/cmd/gotype
+go get -u -v github.com/zmb3/gogetdoc
+go get -u -v github.com/govend/govend
+~~~
+
+Dengan konfigurasi seperti itu, kerjakan berikut ini untuk install:
+
+~~~bash
+$ source env/go/go1.7.1
+$ cd /opt/software/go-dev-tools/go-3rd-party-tools
+$ source env.sh
+$ ./go-pkg-needed.sh
+~~~
+Setelah proses sebentar, hasil binary executables akan diletakkan pada $GO3RDPARTYTOOLS/bin dan bisa kita jalankan langsung.
+
+**Catatan**: jangan meletakkan paket-paket executables ini dalam skema vendoring karena bisa mencampuradukkan dan mengacaukan letak dari hasil kompilasi.
+
+**Pustaka / Library**
+
+Untuk pustaka, sebaiknya menggunakan vendoring (aktif default mulai Go 1.6+). Pustaka ini biasanya kita gunakan pada proyek kita. Untuk kasus seperti ini, gunakan vendoring. Dengan struktur workspace seperti yang telah dijelaskan di atas, gunakan tools yang mendukung vendoring (penulis menggunakan govend). Direktori vendor diletakkan pada src/ dan pustaka di src/vendor dikelola menggunakan govend. Berikut ini contoh struktur direktori yang penulis gunakan:
+
+![Struktur direktori untuk vendoring](images/vendor-dir.png)
+
+Pada skema di atas, proyek saya adalah hayy dan bisa di akses menggunakan skema import github.com/bpdp/hayy. Proyek saya tersebut menggunakan pustaka github.com/spf13/cobra (github.com/inconshreveable/mousetrap dan github.com/spf13/pflag adalah dependency dari github.com/spf13/cobra). Dengan demikian, vendoring ini memungkinkan kita mengelola dependency dengan lebih baik dan membuat source code proyek kita “bersih” dari berbagai pustaka dependencies.
 
 ### Menguji Instalasi Go
 

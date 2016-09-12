@@ -1,6 +1,6 @@
 # IDE Untuk Go
 
-IDE (`Integrated Development Environment`) merupakan software yang digunakan oleh pemrogram dan pengembang software untuk membangun software. IDE berisi berbagai fasilitas komprehensif yang diperlukan para pemrogram untuk membantu mereka dalam membangun software aplikasi. Secara minimal, biasanya IDE terdiri atas editor teks (untuk mengetikkan kode sumber), debugger (pencari bugs), `syntax highlighting, code completion, serta dokumentasi / help. Bab ini akan membahas beberapa software yang bisa digunakan. Sebenarnya menggunakan editor teks yang menghasilkan file text / ASCII murni sudah cukup untuk bisa menuliskan kode sumber dan kemudian mengkompilkasi. Pada bab ini akan dibahas [Vim](http://www.vim.org) sebagai editor teks dan LiteIDE sebagai software IDE yang lebih lengkap untuk Go, tidak sekedar hanya untuk menuliskan kode sumber.
+IDE (`Integrated Development Environment`) merupakan software yang digunakan oleh pemrogram dan pengembang software untuk membangun software. IDE berisi berbagai fasilitas komprehensif yang diperlukan para pemrogram untuk membantu mereka dalam membangun software aplikasi. Secara minimal, biasanya IDE terdiri atas editor teks (untuk mengetikkan kode sumber), debugger (pencari bugs), `syntax highlighting, code completion, serta dokumentasi / help. Bab ini akan membahas beberapa software yang bisa digunakan. Sebenarnya menggunakan editor teks yang menghasilkan file text / ASCII murni sudah cukup untuk bisa menuliskan dan kemudian mengkompilasi kode sumber. Pada bab ini akan dibahas [Vim](http://www.vim.org) sebagai editor teks dan LiteIDE sebagai software IDE yang lebih lengkap untuk Go, tidak sekedar hanya untuk menuliskan kode sumber.
 
 ## Menggunakan Vim
 
@@ -60,20 +60,7 @@ Hasil dari menjalankan ``vim'' atau ``gvim'' melalui shell untuk menulis kode su
 
 ## Autocompletion
 
-Vim menyediakan fasilitas `autocompletion` melalui `Omniautocompletion`. Fasilitas ini sudah terinstall saat kita menginstall Vim. Untuk mengaktifkan fasilitas ini untuk keperluan Go, kita harus menginstall dan mengaktifkan [Gocode](https://github.com/nsf/gocode). Sebaiknya source code dari Gocode diambil semua karena ada script Vim yang akan kita gunakan:
-
-~~~
-$ git clone https://github.com/nsf/gocode.git
-Cloning into 'gocode'...
-remote: Counting objects: 2491, done.
-remote: Compressing objects: 100% (1128/1128), done.
-remote: Total 2491 (delta 1323), reused 2449 (delta 1295)
-Receiving objects: 100% (2491/2491), 1.07 MiB | 17 KiB/s, done.
-Resolving deltas: 100% (1323/1323), done.
-$
-~~~
-
-Setelah itu, install Gocode menggunakan perintah `go get -u github.com/nsf/gocode`. Hasilnya dari perintah tersebut adalah file `executable binary` `\$GOROOT/bin/gocode`. Sebelum menggunakan Vim, aktifkan dulu gocode dengan mengeksekusi `gocode` melalui shell. Setelah itu, tambahkan satu baris di `$HOME/.vim/vimrc`: `set ofu=syntaxcomplete#Complete` di bawah baris `filetype plugin indent on`.
+Vim menyediakan fasilitas `autocompletion` melalui `Omniautocompletion`. Fasilitas ini sudah terinstall saat kita menginstall Vim. Untuk mengaktifkan fasilitas ini untuk keperluan Go, kita harus menginstall dan mengaktifkan [Gocode](https://github.com/nsf/gocode). Gocode sudah terinstall setelah selesai mengerjakan instalasi di [bab 1](bab-01.md). Hasil dari instalasi Gocode adalah file `executable binary` `\$GOROOT/bin/gocode` (sesuai letak GOROOT di env.sh). Sebelum menggunakan Vim, aktifkan dulu gocode dengan mengeksekusi `gocode` melalui shell. Setelah itu, tambahkan satu baris di `$HOME/.vim/vimrc`: `set ofu=syntaxcomplete#Complete` di bawah baris `filetype plugin indent on`.
 
 Kode sumber lengkap dari \$HOME/.vim/vimrc yang penulis gunakan bisa dilihat pada listing adalah sebagai berikut:
 
@@ -118,8 +105,7 @@ Untuk mengaktifkan completion, kita harus masuk ke mode `Insert` dari Vim, setel
 
 ## Menggunakan LiteIDE
 
-![LiteIDE](images/liteIde
-
+![LiteIDE](images/liteide.png)
 
 LiteIDE dibuat oleh visualfc dan tersedia dalam bentuk kode sumber maupun binary. Kode sumber bisa diperoleh di [repo GitHub](https://github.com/visualfc/liteide). Installer executable bisa diperoleh di [Sourceforge](http://sourceforge.net/projects/liteide/files)
 

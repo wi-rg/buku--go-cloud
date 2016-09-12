@@ -60,9 +60,9 @@ Hasil dari menjalankan ``vim'' atau ``gvim'' melalui shell untuk menulis kode su
 
 ## Autocompletion
 
-Vim menyediakan fasilitas `autocompletion` melalui `Omniautocompletion`. Fasilitas ini sudah terinstall saat kita menginstall Vim. Untuk mengaktifkan fasilitas ini untuk keperluan Go, kita harus menginstall dan mengaktifkan [Gocode](https://github.com/nsf/gocode). Gocode sudah terinstall setelah selesai mengerjakan instalasi di [bab 1](bab-01.md). Hasil dari instalasi Gocode adalah file `executable binary` `\$GOROOT/bin/gocode` (sesuai letak GOROOT di env.sh). Sebelum menggunakan Vim, aktifkan dulu gocode dengan mengeksekusi `gocode` melalui shell. Setelah itu, tambahkan satu baris di `$HOME/.vim/vimrc`: `set ofu=syntaxcomplete#Complete` di bawah baris `filetype plugin indent on`.
+Vim menyediakan fasilitas `autocompletion` melalui `Omniautocompletion`. Fasilitas ini sudah terinstall saat kita menginstall Vim. Untuk mengaktifkan fasilitas ini untuk keperluan Go, kita harus menginstall dan mengaktifkan [Gocode](https://github.com/nsf/gocode). Gocode sudah terinstall setelah selesai mengerjakan instalasi di [bab 1](bab-01.md). Hasil dari instalasi Gocode adalah file `executable binary` `$GOPATH/bin/gocode` (sesuai letak GOPATH di env.sh). Sebelum menggunakan Vim, aktifkan dulu gocode dengan mengeksekusi `gocode` melalui shell. Setelah itu, tambahkan satu baris di `$HOME/.vim/vimrc`: `set ofu=syntaxcomplete#Complete` di bawah baris `filetype plugin indent on`.
 
-Kode sumber lengkap dari \$HOME/.vim/vimrc yang penulis gunakan bisa dilihat pada listing adalah sebagai berikut:
+Kode sumber lengkap dari `$HOME/.vim/vimrc` yang penulis gunakan bisa dilihat pada listing berikut ini:
 
 ~~~vim
 execute pathogen#infect()

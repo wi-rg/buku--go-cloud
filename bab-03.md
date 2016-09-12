@@ -13,7 +13,7 @@ Suatu aplikasi `executable` (artinya bisa dijalankan secara langsung oleh sistem
 	Contoh program sederhana untuk menjelaskan
 	struktur program Go untuk aplikasi executable
 
-	(c) bpdp.name
+	(c) bpdp.xyz
 
 */
 
@@ -65,31 +65,124 @@ Untuk menjalankan kode sumber di atas, ikuti langkah-langkah berikut:
 $ go run aplikasi.go 
 Halo bpdp
 Home anda di /home/bpdp
-Anda menggunakan Go di /home/bpdp/software/go-dev-tools/go/go1.4.1
+Anda menggunakan Go di /home/bpdp/software/go-dev-tools/go/go1.7.1
 ~~~
 
 ### Mengkompilasi Menjadi *Binary Executable*
 
 ~~~bash
-go build aplikasi.go 
+$ go build aplikasi.go 
 $ ls -la
-total 1544
-drwxr-xr-x 2 bpdp bpdp    4096 Jan 20 15:35 .
-drwxr-xr-x 5 bpdp bpdp    4096 Dec 24 20:18 ..
--rwxr-xr-x 1 bpdp bpdp 1564752 Jan 20 15:35 aplikasi
--rw-r--r-- 1 bpdp bpdp     900 Dec 10 11:32 aplikasi.go
+total 1620
+drwxr-xr-x 1 bpdp users      38 Sep 12 22:49 .
+drwxr-xr-x 1 bpdp users     288 Aug 15 11:24 ..
+-rwxr-xr-x 1 bpdp users 1654480 Sep 12 22:49 aplikasi
+-rw-r--r-- 1 bpdp users     900 Sep 12 22:49 aplikasi.go
 $ ./aplikasi 
 Halo bpdp
 Home anda di /home/bpdp
-Anda menggunakan Go di /home/bpdp/software/go-dev-tools/go/go1.4.1
+Anda menggunakan Go di /opt/software/go-dev-tools/go/go1.7.1
 $ file aplikasi
-aplikasi: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), statically linked, not stripped
+aplikasi: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, not stripped
 $
 ~~~
 
+## Pustaka / Library / Package
 
-## Pustaka / Package
+Ada kalanya, para software developer membangun pustaka yang berisi berbagai fungsionalitas yang bisa digunakan kembali suatu saat nanti. Untuk keperluan ini, Go menyediakan fasilitas untuk membangun library dalam bentuk kumpulan fungsi. Kumpulan fungsi ini nantinya akan diletakkan pada suatu repo tertentu sehingga bisa langsung di `go get <lokasi repo pustaka>`. Pada penjelasan berikut ini, kita akan membangun suatu aplikasi kecil (hello) yang menggunakan suatu pustaka yang sebelumnya sudah kita bangun (stringutil/Reverse - untuk membalik kata). Kode sumber diambil dari [How to write Go code](https://golang.org/doc/code.html).
 
+### Mengatur Workspace
+
+Ada 3 direktori di workspace yang disiapkan: bin, pkg, dan src:
+* bin: berisi hasil kompilasi aplikasi (hello)
+* pkg: berisi hasil kompilasi pustaka (stringutil)
+* src: kode sumber untuk pustaka serta aplikasi
+Pada direktori tersebut, juga dibuat `env.sh`.
+
+~~~bash
+$ ls
+total 4
+drwxr-xr-x 1 bpdp users 30 Sep 12 23:16 .
+drwxr-xr-x 1 bpdp users 56 Sep 12 23:05 ..
+drwxr-xr-x 1 bpdp users 10 Sep 12 23:16 bin
+-rw-r--r-- 1 bpdp users 50 Sep 12 23:05 env.sh
+drwxr-xr-x 1 bpdp users 22 Sep 12 23:16 pkg
+drwxr-xr-x 1 bpdp users 32 Sep 12 23:07 src
+$ cat env.sh 
+export GOPATH=`pwd`
+export PATH=$PATH:$GOPATH/bin
+$ source ~/env/go/go1.7.1 
+$ source env.sh 
+$ 
+~~~
+
+Semua kode sumber, baik untuk pustaka ataupun aplikasi akan diletakkan pada pola direktori tertentu. Go menggunakan pola repo untuk penamaan / pengelompokan aplikasi atau pustaka meskipun belum dimasukkan ke repo di Internet. Sebaiknya membiasakan diri sejak awal menggunakan pola tersebut meskipun belum akan dimasukkan ke repositori di Internet. 
+
+### Membuat Pustaka
+
+Kode sumber untuk pustaka ini akan diletakkan di `src/github.com/bpdp/stringutil`. Paket yang dibuat dengan penamaan ini, nantinya akan diacu dalam `import` sebagai `github.com/bpdp/stringutil`.
+
+~~~go
+/*	src/github.com/bpdp/stringutil/reverse.go 
+	diambil dari https://golang.org/doc/code.html
+*/
+package stringutil
+
+// Reverse returns its argument string reversed rune-wise left to right.
+func Reverse(s string) string {
+	r := []rune(s)
+	for i, j := 0, len(r)-1; i < len(r)/2; i, j = i+1, j-1 {
+		r[i], r[j] = r[j], r[i]
+	}
+	return string(r)
+}
+~~~
+
+Untuk mengkompilasi:
+
+~~~bash
+$ go build github.com/bpdp/stringutil
+$
+~~~
+
+Jika tidak ada kesalahan, maka akan langsung kembali ke prompt shell. 
+
+### Membuat Aplikasi yang Memanfaatkan Pustaka
+
+Sama halnya dengan pustaka, aplikasi juga menggunakan pola penamaan yang sama. 
+
+~~~go
+/* 
+    src/github.com/bpdp/hello/hello.go 
+    hello.go
+    diambil dari https://golang.org/doc/code.html
+*/
+package main
+
+import (
+	"fmt"
+
+	"github.com/bpdp/stringutil"
+)
+
+func main() {
+	fmt.Printf(stringutil.Reverse("!oG ,olleH"))
+}
+~~~
+
+Untuk mengkompilasi:
+
+~~~bash
+$ go install github.com/bpdp/hello
+$ hello
+Hello, Go!
+$ ls bin/
+total 1612
+drwxr-xr-x 1 bpdp users      10 Sep 12 23:16 .
+drwxr-xr-x 1 bpdp users      30 Sep 12 23:16 ..
+-rwxr-xr-x 1 bpdp users 1650409 Sep 12 23:16 hello
+$
+~~~
 
 ## Tipe Data Dasar
 

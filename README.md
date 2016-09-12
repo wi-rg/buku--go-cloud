@@ -1,3 +1,7 @@
+# README.1st
+
+Jika ingin membaca di repo ini, silahkan akses [mulai dari sini](README.md).
+
 # Pemrograman Go
 
 Buku ini merupakan buku pemrograman Go yang ditujukan terutama untuk memperkenalkan bahasa pemrograman Go serta ekosistem Go dalam membangun berbagai macam peranti lunak. Tujuan akhir dari buku ini adalah pengetahuan yang kuat tentang pemrograman menggunakan Go serta kemampuan mendayagunakan ekosistem Go untuk membangun aplikasi.
@@ -35,8 +39,8 @@ Buku ini akan dibagi menjadi beberapa bagian:
 
 Pada bagian ini, akan dibahas instalasi peranti pengembangan bahasa pemrograman Go serta peranti yang biasanya digunakan pada saat `coding` menggunakan Go (IDE - `Integrated Development Environment`). Setelah membaca, memahami, dan mengikuti instruksi pada bagian ini, pembaca akan mempunyai peranti pengembangan Go serta IDE untuk `coding` terinstall pada komputer. Pembaca juga akan memahami struktur kode sumber Go dan siap untuk mempelajari komponen Go lebih lanjut.
 
-* [Bab 1: Pengenalan Go](./bab-01.md)
-* [Bab 2: IDE untuk Go](./bab-02.md)
+* [Bab 1: Pengenalan Go](bab-01.md)
+* [Bab 2: IDE untuk Go](bab-02.md)
 
 ## Dasar Pemrograman `Go`: Sintaksis, Semantik, dan Pustaka Standar
 

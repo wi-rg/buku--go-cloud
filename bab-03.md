@@ -123,7 +123,8 @@ Semua kode sumber, baik untuk pustaka ataupun aplikasi akan diletakkan pada pola
 Kode sumber untuk pustaka ini akan diletakkan di `src/github.com/bpdp/stringutil`. Paket yang dibuat dengan penamaan ini, nantinya akan diacu dalam `import` sebagai `github.com/bpdp/stringutil`.
 
 ~~~go
-/*	src/github.com/bpdp/stringutil/reverse.go 
+/*	
+    src/github.com/bpdp/stringutil/reverse.go 
 	diambil dari https://golang.org/doc/code.html
 */
 package stringutil
@@ -184,9 +185,16 @@ drwxr-xr-x 1 bpdp users      30 Sep 12 23:16 ..
 $
 ~~~
 
-## Tipe Data Dasar
+## Konstruksi Dasar Bahasa Pemrograman Go
 
-### Angka / Numerik
+### Komentar
+
+Bagian komentar dimaksudkan untuk dokumentasi dari *source code*. Ada dua cara untuk memberikan komentar:
+* Menggunakan `/* ... */` untuk komentar yang meliputi lebih dari satu baris
+* Menggunakan `//` di awal baris untuk komentar yang meliputi satu baris saja
+Komentar ini sejak awal sebaiknya sudah dibiasakan harus ada karena Go menyediakan fasilitas `godoc` untuk menghasilkan dokumentasi dari *source code*. Bagian yang sebaiknya diberikan komentar / dokumentasi adalah bagian diatas `package` dan di atas setiap definisi fungsi (lihat contoh dari `stringutil` di atas.
+
+### Tipe Data Angka / Numerik
 
 Untuk tipe numerik, pada dasarnya kita bisa menggunakan bilangan bulat (*integer*) dan bilangan pecahan (*floating-point*). Bilangan bulat terdiri atas bilangan bertanda (*signed* - int) dan bilangan tak-bertanda (*unsigned* - uint). Berikut ini adalah daftar lengkap dari tipe data numerik tersebut:
 
@@ -222,14 +230,82 @@ Selain definisi di atas, Go juga mempunyai alias penyebutan yang implementasinya
 
 ### String
 
+String digunakan untuk men
+
+~~~go
+package main
+
+import (
+	"fmt"
+	"reflect"
+	s "strings"
+)
+
+// Definisi string
+var str1 string = "STMIK AKAKOM"
+var str2 = "Yogyakarta"
+var str3 = "stmik akakom"
+
+func main() {
+
+	// Lihat https://golang.org/pkg/strings/
+	fmt.Println(str1)
+	fmt.Println(len(str1))
+	fmt.Println(s.Contains(str1, "AKAKOM"))
+	fmt.Println(s.Title(str3))
+	fmt.Println(str1[2])
+	fmt.Println(s.Join([]string{str1, str2}, " "))
+	fmt.Println(reflect.TypeOf(str1))
+	fmt.Println(reflect.TypeOf(str2))
+	fmt.Println()
+
+}
+~~~
+
+Hasil:
+
+~~~bash
+$ go run contoh-string.go 
+STMIK AKAKOM
+12
+true
+Stmik Akakom
+77
+STMIK AKAKOM Yogyakarta
+string
+string
+~~~
+
 ### Boolean
 
-## Variabel dan Konstanta
+Tipe data Boolean berisi nilai benar (`true`) atau salah (`false`).
+
+~~~go
+package main
+
+import "fmt"
+
+var hasilPerbandingan bool
+var angka1 uint8 = 21
+var angka2 uint8 = 17
+
+func main() {
+	hasilPerbandingan = angka1 < angka2
+	fmt.Println(hasilPerbandingan)
+}
+~~~
+
+Hasil:
+
+~~~bash
+$ go run boolean.go 
+false
+~~~
 
 ### Variabel
 
 
-```go
+~~~go
 // nilai-default-variabel.go
 package main
 
@@ -294,7 +370,7 @@ func main() {
 
 Hasil eksekusi:
 
-```bash
+~~~bash
 $ go run nilai-default-variabel.go
 
 Nilai default untuk uint8 =  0

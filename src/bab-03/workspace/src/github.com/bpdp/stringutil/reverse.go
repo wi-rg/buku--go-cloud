@@ -1,4 +1,6 @@
-/*	reverse.go
+/*
+	Package stringutil adalah paket untuk utilities yang
+		terkait dengan operasi string
 	diambil dari https://golang.org/doc/code.html
 */
 package stringutil

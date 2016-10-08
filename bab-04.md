@@ -1,3 +1,5 @@
 # Fungsi / `Function`
 
+Fungsi merupakan bagian dari kode sumber yang dimaksudkan untuk mengerjakan sesuatu hal. Hal yang dikerjakan tersebut biasanya merupakan suatu hal yang sifatnya cukup umum sehingga terdapat kemungkinan dalam kode sumber bisa digunakan berkali-kali. Fungsi dibuat supaya tidak perlu mengkode ulang pekerjaan tersebut. Jika diperlukan pada suatu kode, bagian tersebut tinggal memanggil fungsi. Untuk mengerjakan pekerjaan tersebut, fungsi biasanya memerlukan data masukan (sering disebut dengan ``argumen`` atau ``parameter``). Setelah mengerjakan fungsi tersebut, fungsi biasanya menghasilkan suatu nilai (sering disebut dengan istilah ``return value`` / nilai kembalian). Kode sumber Go yang dimaksudkan untuk menghasilkan ``binary executable`` mempunyai satu fungsi yang akan dikerjakan saat kode tersebut dikompilasi dan dieksekusi, yaitu fungsi ``main()``.
+
 

@@ -1,8 +1,8 @@
 BUILD = build
-BOOKNAME = go-cloud
+BOOKNAME = pemrograman-go
 TITLE = title.txt
 METADATA = metadata.xml
-CHAPTERS = bab-01.md bab-02.md bab-03.md bab-04.md bab-05.md bab-06.md bab-07.md bab-08.md bab-09.md bab-10.md bab-11.md bab-12.md bab-13.md bab-14.md bab-15.md bab-16.md bab-17.md bab-18.md bab-19.md bab-20.md bab-21.md bab-22.md bab-23.md bab-24.md sumberdaya.md daftar-pustaka.md
+CHAPTERS = awal.md bab-01.md bab-02.md bab-03.md bab-04.md bab-05.md bab-06.md bab-07.md bab-08.md bab-09.md bab-10.md bab-11.md bab-12.md bab-13.md bab-14.md bab-15.md bab-16.md bab-17.md bab-18.md bab-19.md bab-20.md bab-21.md bab-22.md bab-23.md bab-24.md sumberdaya.md daftar-pustaka.md
 
 TOC = --toc --toc-depth=2
 COVER_IMAGE = images/cover.jpg

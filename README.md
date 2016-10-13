@@ -15,7 +15,7 @@ Buku ini ditulis bersama-sama oleh dosen dan mahasiswa [STMIK AKAKOM Yogyakarta]
 
 ## Ingin Berkontribusi?
 
-Cara berkontribusi dijelaskan dalam suatu [dokumen tersendiri tentang berkontribusi](berkontribusi.md)
+Cara berkontribusi dijelaskan dalam suatu [dokumen tersendiri tentang berkontribusi](https://github.com/wi-rg/articles/tree/master/kontribusi-repo)
 
 # Menggunakan Buku
 

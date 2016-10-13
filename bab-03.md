@@ -2,7 +2,7 @@
 
 ## Struktur Program Go
 
-## Program Aplikasi Sederhana - 1 File `Executable` Utama
+## Program Aplikasi Sederhana - 1 File `binary executable` Utama
 
 Suatu aplikasi `executable` (artinya bisa dijalankan secara langsung oleh sistem operasi) mempunyai struktur seperti yang terlihat pada listing berikut ini:
 

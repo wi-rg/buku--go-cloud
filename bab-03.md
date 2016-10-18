@@ -404,6 +404,8 @@ Konstanta dimaksudkan untuk menampung data yang tidak akan berubah-ubah. Konstan
 
 ## Pointer
 
+Konsep *pointer* sebenarnya sudah ada pada bahasa pemrograman lain, khususnya C/C++ (dengan kompleksitas yang lebih tinggi). Suatu *pointer* merupakan suatu nilai yang menunjuk ke suatu nilai lain. 
+
 ## Struktur Kendali
 
 ### Perulangan dengan `for`

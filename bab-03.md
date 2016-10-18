@@ -417,3 +417,8 @@ Konsep *pointer* sebenarnya sudah ada pada bahasa pemrograman lain, khususnya C/
 
 #### Pernyataan `switch`
 
+#### Defer
+
+Defer digunakan untuk mengekesekusi suatu perintah sebelum suatu fungsi berakhir. Jika berada pada suatu fungsi, baris kode sumber yang di-defer akan dikerjakan sebelum menemui akhir (*return*). Kegunaan utama dari *defer* ini adalah untuk keperluan pembersihan (*cleanup*). Saat kita membuat kode sumber Go, sering kali dalam setiap operasi terdapat beberapa hal yang harus kita akhiri dengan kondisi tertentu, misalnya jika kita membuka file maka kita harus menutup file jika kita sudah selesai melakukan operasi dengan file tersebut. *Defer* mempermudah kita untuk memastikan bahwa pekerjaan-pekerjaan pembersihan tersebut selalu bisa dilakukan.
+
+

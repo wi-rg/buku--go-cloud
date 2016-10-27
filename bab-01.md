@@ -35,31 +35,29 @@ Catatan:
 
 Go akan diinstall di direktori /opt/software/go-dev-tools/go/goVERSI
 
-VERSI = versi dari Go yang akan diinstall, misalnya go1.7.1
+VERSI = versi dari Go yang akan diinstall, misalnya go1.7.3
 Lokasi instalasi tersebut saya gunakan karena saya mempunyai lebih dari 1 versi Go, jika nanti ada versi lainnya, versi lain tersebut akan saya install (misal versi 1.6.3) di /opt/software/go-dev-tools/go/go1.6.3
 ~~~
 
-Meski mendukung banyak platform, di buku ini hanya akan dibahas penggunaan Go di platform Linux. Pada dasarnya peranti pengembang yang disediakan sama. Silahkan menyesuaikan dengan platform yang anda gunakan. Untuk instalasi berikut ini, ambil distribusi yang sesuai dengan platform di komputer anda. Untuk pembahasan ini, digunakan `go1.7.1.linux-amd64.tar.gz`. Setelah itu, ikuti langkah-langkah berikut:
+Meski mendukung banyak platform, di buku ini hanya akan dibahas penggunaan Go di platform Linux. Pada dasarnya peranti pengembang yang disediakan sama. Silahkan menyesuaikan dengan platform yang anda gunakan. Untuk instalasi berikut ini, ambil distribusi yang sesuai dengan platform di komputer anda. Untuk pembahasan ini, digunakan `go1.7.3.linux-amd64.tar.gz`. Setelah itu, ikuti langkah-langkah berikut:
 
 ~~~bash
-ls ~/master/go/1.7/
-total 79708
-drwxr-xr-x 1 bpdp users       52 Sep  8 10:15 .
+$ ls -la
+total 80632
+drwxr-xr-x 1 bpdp users       52 Oct 20 21:38 .
 drwxr-xr-x 1 bpdp users      198 Jun 13 13:17 ..
--rw-r--r-- 1 bpdp users 81618401 Sep  8 10:14 go1.7.1.linux-amd64.tar.gz
-...
-...
+-rw-r--r-- 1 bpdp users 82565628 Oct 20 02:02 go1.7.3.linux-amd64.tar.gz
 $ mkdir -p /opt/software/go-dev-tools/go
 $ cd /opt/software/go-dev-tools/go
-$ tar -xvf ~/master/go/1.7/go1.7.1.linux-amd64.tar.gz
-$ mv go go1.7.1
+$ tar -xvf ~/master/go/1.7/go1.7.3.linux-amd64.tar.gz
+$ mv go go1.7.3
 ~~~
 
-Setelah menjalankan langkah-langkah di atas, Go sudah terinstall di direktori `/opt/software/go-dev-tools/go/go1.7.1`
+Setelah menjalankan langkah-langkah di atas, Go sudah terinstall di direktori `/opt/software/go-dev-tools/go/go1.7.3`
 
 ### Konfigurasi Variabel Lingkungan Sistem Operasi, Compiler Go, dan Workspace
 
-Untuk konfigurasi kompiler, ada tiga langkah yang perlu dilakukan: download, ekstrak pada lokasi tertentu, dan terakhir setting environment variables. Pada konfigurasi ini, compiler dan workspace berada pada /opt/software/go-dev-tools/. Lokasi ini selanjutnya akan kita sebut dengan GODEVTOOLS_HOME. Setelah download dan install compiler Go seperti langkah di atas, buat struktur direktori sebagai berikut (untuk go1.7.1 sudah dibuat dengan cara di atas):
+Untuk konfigurasi kompiler, ada tiga langkah yang perlu dilakukan: download, ekstrak pada lokasi tertentu, dan terakhir setting environment variables. Pada konfigurasi ini, compiler dan workspace berada pada /opt/software/go-dev-tools/. Lokasi ini selanjutnya akan kita sebut dengan GODEVTOOLS_HOME. Setelah download dan install compiler Go seperti langkah di atas, buat struktur direktori sebagai berikut (untuk go1.7.3 sudah dibuat dengan cara di atas):
 
 ![Struktur direktori](images/struktur-dir.png)
 
@@ -74,12 +72,12 @@ export GOPATH=`pwd`
 export PATH=$PATH:$GOPATH/bin
 ~~~
 
-Go menggunakan beberapa variabel lingkungan sistem operasi. Supaya berfungsi dengan baik, tetapkan nilai-nilai variabel lingkungan tersebut di file inisialisasi shell (penulis menggunakan Bash, sehingga file-file inisialisasi diletakkan di `$HOME/.bashrc`). Meski bisa diletakkan pada file tersebut, penulis menyarankan untuk meletakkan pada suatu file text biasa dan kemudian di - *source*. Pada bagian ini, penulis akan meletakkan di file `%HOME/env/go/go1.7.1`.
+Go menggunakan beberapa variabel lingkungan sistem operasi. Supaya berfungsi dengan baik, tetapkan nilai-nilai variabel lingkungan tersebut di file inisialisasi shell (penulis menggunakan Bash, sehingga file-file inisialisasi diletakkan di `$HOME/.bashrc`). Meski bisa diletakkan pada file tersebut, penulis menyarankan untuk meletakkan pada suatu file text biasa dan kemudian di - *source*. Pada bagian ini, penulis akan meletakkan di file `%HOME/env/go/go1.7.3`.
 
 ~~~bash
 GODEVTOOLS_HOME=/opt/software/go-dev-tools
 
-GO_HOME=$GODEVTOOLS_HOME/go/go1.7.1
+GO_HOME=$GODEVTOOLS_HOME/go/go1.7.3
 LITEIDE_HOME=$GODEVTOOLS_HOME/liteide
 GOTOOLS=$GODEVTOOLS_HOME/workspace/go17/bin
 GO3RDPARTYTOOLS=$GODEVTOOLS_HOME/go-3rd-party-tools
@@ -108,7 +106,7 @@ alias godev='cd $GODEVTOOLS_HOME/workspace/go17'
 Dengan memasukkan beberapa variabel lingkungan tersebut ke file, saat kita ingin menggunakan Go, tinggal di - *source* sebagai berikut:
 
 ~~~bash
-$ source ~/env/go/go1.7.1
+$ source ~/env/go/go1.7.3
 ~~~
 
 Setelah itu, Go bisa digunakan. Untuk melihat hasil, eksekusi perintah `go env`, hasilnya seharusnya adalah sebagai berikut:
@@ -123,8 +121,8 @@ GOHOSTOS="linux"
 GOOS="linux"
 GOPATH=""
 GORACE=""
-GOROOT="/opt/software/go-dev-tools/go/go1.7.1"
-GOTOOLDIR="/opt/software/go-dev-tools/go/go1.7.1/pkg/tool/linux_amd64"
+GOROOT="/opt/software/go-dev-tools/go/go1.7.3"
+GOTOOLDIR="/opt/software/go-dev-tools/go/go1.7.3/pkg/tool/linux_amd64"
 CC="gcc"
 GOGCCFLAGS="-fPIC -m64 -pthread -fmessage-length=0 -fdebug-prefix-map=/tmp/go-build947764430=/tmp/go-build -gno-record-gcc-switches"
 CXX="g++"
@@ -173,7 +171,7 @@ go get -u -v github.com/govend/govend
 Dengan konfigurasi seperti itu, kerjakan berikut ini untuk install:
 
 ~~~bash
-$ source env/go/go1.7.1
+$ source env/go/go1.7.3
 $ cd /opt/software/go-dev-tools/go-3rd-party-tools
 $ source env.sh
 $ ./go-pkg-needed.sh
@@ -233,7 +231,7 @@ $
 Saat menginstall Go, kita akan memperoleh 3 buah file `binary executable`:
 
 ~~~bash
-$ ls /opt/software/go-dev-tools/go/go1.7.1/bin/
+$ ls /opt/software/go-dev-tools/go/go1.7.3/bin/
 total 27496
 drwxr-xr-x 1 bpdp users       24 Sep  8 02:38 .
 drwxr-xr-x 1 bpdp users      230 Sep  8 02:38 ..
@@ -305,7 +303,7 @@ usage: godoc package [name ...]
   -ex
     	show examples in command line mode
   -goroot string
-    	Go root directory (default "/opt/software/go-dev-tools/go/go1.7.1")
+    	Go root directory (default "/opt/software/go-dev-tools/go/go1.7.3")
   -html
     	print HTML in command-line mode
   -http string

@@ -65,7 +65,7 @@ Untuk menjalankan kode sumber di atas, ikuti langkah-langkah berikut:
 $ go run aplikasi.go 
 Halo bpdp
 Home anda di /home/bpdp
-Anda menggunakan Go di /home/bpdp/software/go-dev-tools/go/go1.7.1
+Anda menggunakan Go di /home/bpdp/software/go-dev-tools/go/go1.7.3
 ~~~
 
 ### Mengkompilasi Menjadi *Binary Executable*
@@ -81,7 +81,7 @@ drwxr-xr-x 1 bpdp users     288 Aug 15 11:24 ..
 $ ./aplikasi 
 Halo bpdp
 Home anda di /home/bpdp
-Anda menggunakan Go di /opt/software/go-dev-tools/go/go1.7.1
+Anda menggunakan Go di /opt/software/go-dev-tools/go/go1.7.3
 $ file aplikasi
 aplikasi: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, not stripped
 $
@@ -111,7 +111,7 @@ drwxr-xr-x 1 bpdp users 32 Sep 12 23:07 src
 $ cat env.sh 
 export GOPATH=`pwd`
 export PATH=$PATH:$GOPATH/bin
-$ source ~/env/go/go1.7.1 
+$ source ~/env/go/go1.7.3
 $ source env.sh 
 $ 
 ~~~
@@ -417,7 +417,7 @@ Konsep *pointer* sebenarnya sudah ada pada bahasa pemrograman lain, khususnya C/
 
 #### Pernyataan `switch`
 
-#### Defer
+### Defer
 
 Defer digunakan untuk mengekesekusi suatu perintah sebelum suatu fungsi berakhir. Jika berada pada suatu fungsi, baris kode sumber yang di-defer akan dikerjakan sebelum menemui akhir (*return*). Kegunaan utama dari *defer* ini adalah untuk keperluan pembersihan (*cleanup*). Saat kita membuat kode sumber Go, sering kali dalam setiap operasi terdapat beberapa hal yang harus kita akhiri dengan kondisi tertentu, misalnya jika kita membuka file maka kita harus menutup file jika kita sudah selesai melakukan operasi dengan file tersebut. *Defer* mempermudah kita untuk memastikan bahwa pekerjaan-pekerjaan pembersihan tersebut selalu bisa dilakukan.
 
